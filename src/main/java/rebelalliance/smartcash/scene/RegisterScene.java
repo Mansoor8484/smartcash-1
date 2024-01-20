@@ -1,5 +1,6 @@
 package rebelalliance.smartcash.scene;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import rebelalliance.smartcash.SmartCash;
