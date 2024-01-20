@@ -11,18 +11,9 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox
-    alignment="CENTER"
-    maxHeight="-Infinity"
-    maxWidth="-Infinity"
-    minHeight="-Infinity"
-    minWidth="-Infinity"
-    prefHeight="371.0"
-    prefWidth="478.0"
-    xmlns="http://javafx.com/javafx/21"
-    xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="rebelalliance.smartcash.scene.RegisterController"
->
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="371.0" prefWidth="478.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="rebelalliance.smartcash.scene.register.RegisterController">
     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Register">
         <font>
             <Font name="System Bold" size="24.0" />
@@ -43,37 +34,27 @@
             </font>
         </Text>
     </TextFlow>
-    <VBox
-        alignment="CENTER"
-        maxHeight="-Infinity"
-        maxWidth="-Infinity"
-        prefHeight="0.0"
-        prefWidth="350.0"
-        spacing="5.0"
-    >
+    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="350.0"
+          spacing="5.0">
         <opaqueInsets>
             <Insets />
         </opaqueInsets>
         <VBox.margin>
             <Insets top="20.0" />
         </VBox.margin>
-        <TextField fx:id="emailInput" promptText="Email">
+        <TextField fx:id="emailInput" onKeyPressed="#onEmailChange" promptText="Email">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
         </TextField>
-        <PasswordField fx:id="passwordInput" promptText="Password" />
+        <PasswordField fx:id="passwordInput" onKeyPressed="#onPasswordChange" promptText="Password" />
         <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="238.0">
             <VBox.margin>
                 <Insets top="10.0" />
             </VBox.margin>
-            <Button
-                alignment="CENTER_RIGHT"
-                mnemonicParsing="false"
-                onAction="#onRegisterClick"
-                text="Register"
-                textAlignment="CENTER"
-            />
+            <Button fx:id="registerButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onRegisterClick"
+                    text="Register" textAlignment="CENTER" />
         </HBox>
+        <VBox fx:id="errors" alignment="TOP_RIGHT" minHeight="-Infinity" prefHeight="25.0" prefWidth="350.0" />
     </VBox>
 </VBox>

@@ -1,4 +1,4 @@
-package rebelalliance.smartcash.scene;
+package rebelalliance.smartcash.scene.register;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
