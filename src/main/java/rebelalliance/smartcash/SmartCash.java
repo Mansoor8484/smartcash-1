@@ -4,12 +4,8 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class SmartCash extends Application {
-    SceneManager sceneManager;
-
     @Override
     public void start(Stage stage) {
-        this.sceneManager = new SceneManager(stage);
-
         // Window setup.
         stage.setTitle("SmartCash");
         stage.setWidth(1200);
@@ -18,6 +14,7 @@ public class SmartCash extends Application {
 
         // Show.
         // TODO: Change default scene.
+        SceneManager sceneManager = new SceneManager(stage);
         sceneManager.setScene("register");
         stage.show();
     }

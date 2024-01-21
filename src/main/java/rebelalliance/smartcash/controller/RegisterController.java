@@ -1,17 +1,16 @@
-package rebelalliance.smartcash.scene;
+package rebelalliance.smartcash.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import rebelalliance.smartcash.util.EmailUtil;
 
 import java.util.Random;
 
-public class RegisterController {
+public class RegisterController extends BaseController {
     Random random = new Random();
 
     public TextField emailInput;
