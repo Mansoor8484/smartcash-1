@@ -2,7 +2,7 @@ package rebelalliance.smartcash;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import rebelalliance.smartcash.scene.RegisterScene;
+import rebelalliance.smartcash.scene.register.RegisterScene;
 
 import java.io.IOException;
 
