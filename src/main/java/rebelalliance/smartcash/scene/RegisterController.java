@@ -1,4 +1,4 @@
-package rebelalliance.smartcash.scene.register;
+package rebelalliance.smartcash.scene;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,11 +26,11 @@ public class RegisterController {
         return errorText;
     }
 
-    public void onEmailChange(KeyEvent keyEvent) {
+    public void onEmailChange() {
         this.registerButton.setDisable(false);
     }
 
-    public void onPasswordChange(KeyEvent keyEvent) {
+    public void onPasswordChange() {
         this.registerButton.setDisable(false);
     }
 

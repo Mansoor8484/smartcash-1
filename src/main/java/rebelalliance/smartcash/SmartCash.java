@@ -2,13 +2,14 @@ package rebelalliance.smartcash;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import rebelalliance.smartcash.scene.register.RegisterScene;
-
-import java.io.IOException;
 
 public class SmartCash extends Application {
+    SceneManager sceneManager;
+
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
+        this.sceneManager = new SceneManager(stage);
+
         // Window setup.
         stage.setTitle("SmartCash");
         stage.setWidth(1200);
@@ -16,7 +17,8 @@ public class SmartCash extends Application {
         stage.setResizable(false);
 
         // Show.
-        stage.setScene(new RegisterScene().getScene());
+        // TODO: Change default scene.
+        sceneManager.setScene("register");
         stage.show();
     }
 

@@ -13,7 +13,7 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
       prefHeight="371.0" prefWidth="478.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="rebelalliance.smartcash.scene.register.RegisterController">
+      fx:controller="rebelalliance.smartcash.scene.RegisterController">
     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Register">
         <font>
             <Font name="System Bold" size="24.0" />

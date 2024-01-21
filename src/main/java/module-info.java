@@ -6,4 +6,5 @@ module rebelalliance.smartcash {
 
     // Scenes.
     opens rebelalliance.smartcash.scene.register to javafx.fxml;
+    opens rebelalliance.smartcash.scene to javafx.fxml;
 }
