@@ -14,7 +14,7 @@ public class Account {
     private Ledger ledger;
 
     private String name;
-    private UUID uuid;
+    private final UUID uuid;
 
     private Date creation;
 
@@ -41,6 +41,7 @@ public class Account {
     }
 
     public double getBalance(Date dateFrom, Date dateTo) {
+        // TODO: Improve this or run on all accounts at the same time, not just one.
         double runningBalance = 0.0;
         for(LedgerItem ledgerItem : this.ledger.getLedger()) {
             if(ledgerItem.getDate().after(dateTo)) {
@@ -74,6 +75,7 @@ public class Account {
     }
 
     public double getBalanceFrom(Date dateFrom) {
+        // TODO: Implement.
         throw new NotImplementedException();
     }
 

@@ -8,9 +8,9 @@ public class TransactionsController extends BaseController {
         Ledger ledger = this.sceneManager.getLedger();
         Transaction transaction = new Transaction(
                 100.0,
-                ledger.getAccounts().get(0),
-                ledger.getAccounts().get(1),
-                ledger.getCategories().get(0)
+                ledger.getAccount("Test Account 1"),
+                ledger.getAccount("Test Account 2"),
+                ledger.getCategory("Test Category")
         );
         this.sceneManager.getLedger().add(transaction);
 

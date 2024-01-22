@@ -17,6 +17,10 @@ public class Category {
         this.subcategories = subcategories;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public List<Category> getSubcategories() {
         return this.subcategories;
     }

@@ -38,6 +38,15 @@ public class Ledger {
         return accounts;
     }
 
+    public Account getAccount(String name) {
+        for(Account account : this.accounts) {
+            if(account.getName().equals(name)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
     }
@@ -53,6 +62,15 @@ public class Ledger {
 
     public List<Category> getCategories() {
         return categories;
+    }
+
+    public Category getCategory(String name) {
+        for(Category category : this.categories) {
+            if(category.getName().equals(name)) {
+                return category;
+            }
+        }
+        return null;
     }
 
     public void setCategories(List<Category> categories) {
