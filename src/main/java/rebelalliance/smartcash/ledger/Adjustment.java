@@ -1,6 +1,7 @@
 package rebelalliance.smartcash.ledger;
 
 import rebelalliance.smartcash.account.Account;
+import rebelalliance.smartcash.util.DateUtil;
 
 import java.util.Date;
 
@@ -25,5 +26,9 @@ public class Adjustment extends LedgerItem {
 
     public Date getDate() {
         return this.date;
+    }
+
+    public String toString() {
+        return DateUtil.format(this.date) + ": Set " + this.accountTo + " to $" + this.amount + ".";
     }
 }

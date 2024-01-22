@@ -3,6 +3,7 @@ package rebelalliance.smartcash.ledger.transaction;
 import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.ledger.Category;
 import rebelalliance.smartcash.ledger.LedgerItem;
+import rebelalliance.smartcash.util.DateUtil;
 
 import java.util.Date;
 
@@ -53,5 +54,9 @@ public class Transaction extends LedgerItem {
 
     public void setComplete(boolean complete) {
         isComplete = complete;
+    }
+
+    public String toString() {
+        return DateUtil.format(this.date) + ": $" + this.amount + " from " + this.accountFrom + " to " + this.accountTo + ".";
     }
 }

@@ -1,6 +1,7 @@
 package rebelalliance.smartcash.ledger;
 
 import rebelalliance.smartcash.account.Account;
+import rebelalliance.smartcash.ledger.transaction.Transaction;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -21,13 +22,16 @@ public class Ledger {
         this.ledger = ledgerItems;
     }
 
+    public void sort() {
+        this.ledger.sort(Comparator.comparing(LedgerItem::getDate));
+    }
+
     public List<LedgerItem> getLedger() {
         return this.ledger;
     }
 
     public void add(LedgerItem ledgerItem) {
         this.ledger.add(ledgerItem);
-        this.ledger.sort(Comparator.comparing(LedgerItem::getDate));
     }
 
     public void remove(LedgerItem ledgerItem) {
@@ -86,6 +90,8 @@ public class Ledger {
     }
 
     public String toString() {
+        this.sort();
+
         StringBuilder result = new StringBuilder();
         double total = 0.0;
 
@@ -97,8 +103,18 @@ public class Ledger {
             String entry = account.getName() + ": $" + balance;
             result.append(entry).append("\n");
         }
+        result.append("----------------------------------------\n");
+        result.append("Total: $").append(total).append("\n");
         result.append("========================================\n");
-        result.append("Total: $").append(total);
+        for(LedgerItem ledgerItem : this.ledger) {
+            if(ledgerItem instanceof Adjustment adjustment) {
+                result.append(adjustment).append("\n");
+            }
+            if(ledgerItem instanceof Transaction transaction) {
+                result.append(transaction).append("\n");
+            }
+        }
+        result.append("========================================\n");
 
         return result.toString();
     }

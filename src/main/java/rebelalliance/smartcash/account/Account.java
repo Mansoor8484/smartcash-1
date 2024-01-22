@@ -90,4 +90,8 @@ public class Account {
     public Date getCreation() {
         return creation;
     }
+
+    public String toString() {
+        return this.name;
+    }
 }
