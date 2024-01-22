@@ -66,7 +66,7 @@ public class Account {
                 }
             }
         }
-        return runningBalance;
+        return MathUtil.round(runningBalance, 2);
     }
 
     public double getBalance() {
