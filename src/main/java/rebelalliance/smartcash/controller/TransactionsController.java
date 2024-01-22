@@ -25,12 +25,7 @@ public class TransactionsController extends BaseController implements IControlle
 
         for(LedgerItem ledgerItem : this.sceneManager.getLedger().getLedger()) {
             Text text = new Text();
-            if(ledgerItem instanceof Transaction transaction) {
-                text.setText(transaction.toString());
-            }
-            if(ledgerItem instanceof Adjustment adjustment) {
-                text.setText(adjustment.toString());
-            }
+            text.setText(ledgerItem.toString());
             vBox.getChildren().add(text);
         }
     }
@@ -40,7 +35,6 @@ public class TransactionsController extends BaseController implements IControlle
         Transaction transaction = new Transaction(
                 100.0,
                 ledger.getAccount("Test Account 1"),
-                ledger.getAccount("Test Account 2"),
                 ledger.getCategory("Test Category")
         );
         this.sceneManager.getLedger().add(transaction);

@@ -5,6 +5,7 @@ import rebelalliance.smartcash.ledger.Adjustment;
 import rebelalliance.smartcash.ledger.Ledger;
 import rebelalliance.smartcash.ledger.LedgerItem;
 import rebelalliance.smartcash.ledger.transaction.Transaction;
+import rebelalliance.smartcash.ledger.Transfer;
 import rebelalliance.smartcash.util.MathUtil;
 
 import java.util.Date;
@@ -55,14 +56,21 @@ public class Account {
             if(ledgerItem instanceof Transaction transaction) {
                 if(transaction.getAccountFrom().equals(this)) {
                     runningBalance -= transaction.getAmount();
-                }else if(transaction.getAccountTo().equals(this)) {
-                    runningBalance += transaction.getAmount();
+                }
+            }
+
+            // Handle transfers.
+            if(ledgerItem instanceof Transfer transfer) {
+                if(transfer.getAccountFrom().equals(this)) {
+                    runningBalance -= transfer.getAmount();
+                }else if(transfer.getAccountTo().equals(this)) {
+                    runningBalance += transfer.getAmount();
                 }
             }
 
             // Handle adjustments.
             if(ledgerItem instanceof Adjustment adjustment) {
-                if(adjustment.getAccountTo().equals(this)) {
+                if(adjustment.getAccountFrom().equals(this)) {
                     runningBalance = adjustment.getAmount();
                 }
             }

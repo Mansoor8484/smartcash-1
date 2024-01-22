@@ -4,17 +4,16 @@ import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.ledger.Category;
 import rebelalliance.smartcash.ledger.LedgerItem;
 import rebelalliance.smartcash.util.DateUtil;
+import rebelalliance.smartcash.util.NumberUtil;
 
 import java.util.Date;
 
 public class Transaction extends LedgerItem {
     protected Category category;
-    protected Account accountFrom;
     protected boolean isComplete;
 
-    public Transaction(double amount, Account accountFrom, Account accountTo, Category category) {
+    public Transaction(double amount, Account accountFrom, Category category) {
         this.amount = amount;
-        this.accountTo = accountTo;
         this.date = new Date();
 
         this.accountFrom = accountFrom;
@@ -22,9 +21,8 @@ public class Transaction extends LedgerItem {
         this.isComplete = true;
     }
 
-    public Transaction(double amount, Account accountFrom, Account accountTo, Category category, Date date) {
+    public Transaction(double amount, Account accountFrom, Category category, Date date) {
         this.amount = amount;
-        this.accountTo = accountTo;
         this.date = date;
 
         this.category = category;
@@ -49,14 +47,14 @@ public class Transaction extends LedgerItem {
     }
 
     public boolean isComplete() {
-        return isComplete;
+        return this.isComplete;
     }
 
     public void setComplete(boolean complete) {
-        isComplete = complete;
+        this.isComplete = complete;
     }
 
     public String toString() {
-        return DateUtil.format(this.date) + ": $" + this.amount + " from " + this.accountFrom + " to " + this.accountTo + ".";
+        return DateUtil.format(this.date) + ": " + NumberUtil.formatAsAmount(this.amount) + " from " + this.accountFrom + " (" + this.category + ")";
     }
 }

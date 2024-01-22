@@ -9,14 +9,14 @@ import java.util.Date;
 public class RecurringTransaction extends Transaction {
     protected Frequency frequency;
 
-    public RecurringTransaction(double amount, Account to, Account from, Category category, Frequency frequency) {
-        super(amount, to, from, category);
+    public RecurringTransaction(double amount, Account to, Category category, Frequency frequency) {
+        super(amount, to, category);
 
         this.frequency = frequency;
     }
 
-    public RecurringTransaction(double amount, Account to, Account from, Category category, Date date, Frequency frequency) {
-        super(amount, to, from, category);
+    public RecurringTransaction(double amount, Account to, Category category, Date date, Frequency frequency) {
+        super(amount, to, category);
 
         this.frequency = frequency;
     }

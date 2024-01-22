@@ -10,6 +10,7 @@ import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.ledger.Adjustment;
 import rebelalliance.smartcash.ledger.Category;
 import rebelalliance.smartcash.ledger.Ledger;
+import rebelalliance.smartcash.ledger.Transfer;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -35,8 +36,10 @@ public class SceneManager {
         this.ledger.addAccount(account1);
         this.ledger.addAccount(account2);
         this.ledger.addCategory(category);
-        Adjustment adjustment1 = new Adjustment(account1, 532.24, "Initial deposit.");
-        this.ledger.add(adjustment1);
+        Adjustment adjustment = new Adjustment(account1, 532.24, "Initial deposit.");
+        this.ledger.add(adjustment);
+        Transfer transfer = new Transfer(100, account1, account2);
+        this.ledger.add(transfer);
     }
 
     public void setScene(SCScene path) {
