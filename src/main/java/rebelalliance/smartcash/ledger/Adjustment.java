@@ -9,17 +9,17 @@ public class Adjustment extends LedgerItem {
 
     public Adjustment(Account account, double amount, String description) {
         this.accountTo = account;
-
         this.description = description;
         this.amount = amount;
+
         this.date = new Date();
     }
 
     public Adjustment(Account account, double amount, String description, Date date) {
         this.accountTo = account;
-
         this.description = description;
         this.amount = amount;
+
         this.date = date;
     }
 

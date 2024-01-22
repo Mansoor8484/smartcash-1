@@ -5,4 +5,5 @@ module rebelalliance.smartcash {
     opens rebelalliance.smartcash to javafx.graphics;
 
     opens rebelalliance.smartcash.controller to javafx.fxml;
+    opens rebelalliance.smartcash.scene to javafx.graphics;
 }

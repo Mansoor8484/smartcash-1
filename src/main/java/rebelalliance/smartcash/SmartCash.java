@@ -3,6 +3,7 @@ package rebelalliance.smartcash;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import rebelalliance.smartcash.scene.SCScene;
+import rebelalliance.smartcash.scene.SceneManager;
 
 public class SmartCash extends Application {
     @Override

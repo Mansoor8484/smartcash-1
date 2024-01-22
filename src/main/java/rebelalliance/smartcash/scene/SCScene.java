@@ -1,6 +1,5 @@
 package rebelalliance.smartcash.scene;
 
-
 public enum SCScene {
     OVERVIEW("overview"),
     REGISTER("register"),

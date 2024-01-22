@@ -1,6 +1,6 @@
 package rebelalliance.smartcash.controller;
 
-import rebelalliance.smartcash.SceneManager;
+import rebelalliance.smartcash.scene.SceneManager;
 
 public class BaseController {
     SceneManager sceneManager;
