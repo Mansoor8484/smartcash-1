@@ -58,6 +58,7 @@ public class SceneManager {
         }
 
         this.stage.setScene(scene);
+        this.stage.setTitle(path.getTitle() + " - SmartCash");
     }
 
     public Ledger getLedger() {

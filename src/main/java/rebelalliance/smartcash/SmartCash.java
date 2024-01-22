@@ -9,7 +9,6 @@ public class SmartCash extends Application {
     @Override
     public void start(Stage stage) {
         // Window setup.
-        stage.setTitle("SmartCash");
         stage.setWidth(1200);
         stage.setHeight(800);
         stage.setResizable(false);
