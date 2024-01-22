@@ -1,5 +1,6 @@
 package rebelalliance.smartcash.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -7,6 +8,7 @@ import rebelalliance.smartcash.ledger.Adjustment;
 import rebelalliance.smartcash.ledger.Ledger;
 import rebelalliance.smartcash.ledger.LedgerItem;
 import rebelalliance.smartcash.ledger.transaction.Transaction;
+import rebelalliance.smartcash.scene.SCScene;
 
 public class TransactionsController extends BaseController implements IController {
     @FXML
@@ -43,8 +45,10 @@ public class TransactionsController extends BaseController implements IControlle
         );
         this.sceneManager.getLedger().add(transaction);
 
-        System.out.println(this.sceneManager.getLedger());
-
         this.update();
+    }
+
+    public void testGoToOverview(ActionEvent actionEvent) {
+        this.sceneManager.setScene(SCScene.OVERVIEW);
     }
 }

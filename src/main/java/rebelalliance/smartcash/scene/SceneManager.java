@@ -18,6 +18,7 @@ public class SceneManager {
     Stage stage;
 
     private final HashMap<SCScene, Scene> scenes = new HashMap<>();
+    private final HashMap<SCScene, BaseController> controllers = new HashMap<>();
     private final Ledger ledger;
 
     public SceneManager(Stage stage) {
@@ -52,9 +53,12 @@ public class SceneManager {
                 baseController.init();
 
                 scenes.put(path, scene);
+                controllers.put(path, baseController);
             }catch(IOException e) {
                 e.printStackTrace();
             }
+        }else {
+            controllers.get(path).update();
         }
 
         this.stage.setScene(scene);
