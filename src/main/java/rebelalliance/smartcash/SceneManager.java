@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import rebelalliance.smartcash.controller.BaseController;
+import rebelalliance.smartcash.scene.SCScene;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,14 +13,14 @@ import java.util.HashMap;
 public class SceneManager {
     Stage stage;
 
-    private final HashMap<String, Scene> scenes = new HashMap<>();
+    private final HashMap<SCScene, Scene> scenes = new HashMap<>();
 
     public SceneManager(Stage stage) {
         this.stage = stage;
     }
 
-    public void setScene(String path) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(path + ".fxml"));
+    public void setScene(SCScene path) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path.getPath() + ".fxml"));
 
         Scene scene = scenes.get(path);
         if(scene == null) {
