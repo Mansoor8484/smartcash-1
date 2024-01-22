@@ -1,13 +1,14 @@
 package rebelalliance.smartcash.account;
 
-import rebelalliance.smartcash.ledger.ICalculable;
+import rebelalliance.smartcash.ledger.Ledger;
 
 import java.util.Date;
 import java.util.UUID;
 
-public class Account implements ICalculable {
+public class Account {
+    private Ledger ledger;
+
     private String name;
-    private double balance;
     private UUID uuid;
 
     private Date creation;
@@ -31,6 +32,10 @@ public class Account implements ICalculable {
 
     public String getName() {
         return this.name;
+    }
+
+    public void setLedger(Ledger ledger) {
+        this.ledger = ledger;
     }
 
     public void setName(String name) {
