@@ -1,6 +1,11 @@
 package rebelalliance.smartcash.account;
 
+import rebelalliance.smartcash.exception.NotImplementedException;
+import rebelalliance.smartcash.ledger.Adjustment;
 import rebelalliance.smartcash.ledger.Ledger;
+import rebelalliance.smartcash.ledger.LedgerItem;
+import rebelalliance.smartcash.ledger.transaction.Transaction;
+import rebelalliance.smartcash.util.MathUtil;
 
 import java.util.Date;
 import java.util.UUID;
@@ -15,19 +20,12 @@ public class Account {
 
     public Account(String name) {
         this.name = name;
-        this.balance = 0.0;
         this.uuid = UUID.randomUUID();
     }
 
     public Account(String name, UUID uuid) {
         this.name = name;
-        this.balance = 0.0;
         this.uuid = uuid;
-    }
-
-    @Override
-    public void calculate() {
-        // TODO: Implement.
     }
 
     public String getName() {
@@ -42,8 +40,45 @@ public class Account {
         this.name = name;
     }
 
+    public double getBalance(Date dateFrom, Date dateTo) {
+        double runningBalance = 0.0;
+        for(LedgerItem ledgerItem : this.ledger.getLedger()) {
+            if(ledgerItem.getDate().after(dateTo)) {
+                break;
+            }
+            if(ledgerItem.getDate().before(dateFrom)) {
+                continue;
+            }
+
+            // Handle transactions.
+            if(ledgerItem instanceof Transaction transaction) {
+                if(transaction.getAccountFrom().equals(this)) {
+                    runningBalance -= transaction.getAmount();
+                }else if(transaction.getAccountTo().equals(this)) {
+                    runningBalance += transaction.getAmount();
+                }
+            }
+
+            // Handle adjustments.
+            if(ledgerItem instanceof Adjustment adjustment) {
+                if(adjustment.getAccountTo().equals(this)) {
+                    runningBalance = adjustment.getAmount();
+                }
+            }
+        }
+        return runningBalance;
+    }
+
     public double getBalance() {
-        return this.balance;
+        return this.getBalance(new Date(0), new Date());
+    }
+
+    public double getBalanceFrom(Date dateFrom) {
+        throw new NotImplementedException();
+    }
+
+    public double getBalanceTo(Date dateTo) {
+        return this.getBalance(new Date(0), dateTo);
     }
 
     public UUID getUuid() {

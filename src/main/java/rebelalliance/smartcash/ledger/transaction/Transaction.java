@@ -11,7 +11,7 @@ public class Transaction extends LedgerItem {
     protected Account accountFrom;
     protected boolean isComplete;
 
-    public Transaction(double amount, Account accountTo, Account accountFrom, Category category) {
+    public Transaction(double amount, Account accountFrom, Account accountTo, Category category) {
         this.amount = amount;
         this.accountTo = accountTo;
         this.date = new Date();
@@ -21,7 +21,7 @@ public class Transaction extends LedgerItem {
         this.isComplete = true;
     }
 
-    public Transaction(double amount, Account accountTo, Account accountFrom, Category category, Date date) {
+    public Transaction(double amount, Account accountFrom, Account accountTo, Category category, Date date) {
         this.amount = amount;
         this.accountTo = accountTo;
         this.date = date;
@@ -45,14 +45,6 @@ public class Transaction extends LedgerItem {
 
     public void setAccountFrom(Account accountFrom) {
         this.accountFrom = accountFrom;
-    }
-
-    public Account getFrom() {
-        return this.accountFrom;
-    }
-
-    public void setFrom(Account from) {
-        this.accountFrom = from;
     }
 
     public boolean isComplete() {

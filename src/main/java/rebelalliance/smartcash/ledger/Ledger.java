@@ -1,6 +1,9 @@
 package rebelalliance.smartcash.ledger;
 
-import java.util.Collections;
+import rebelalliance.smartcash.account.Account;
+
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Ledger {
@@ -24,6 +27,7 @@ public class Ledger {
 
     public void add(LedgerItem ledgerItem) {
         this.ledger.add(ledgerItem);
+        this.ledger.sort(Comparator.comparing(LedgerItem::getDate));
     }
 
     public void remove(LedgerItem ledgerItem) {
@@ -61,5 +65,23 @@ public class Ledger {
 
     public void removeCategory(Category category) {
         this.categories.remove(category);
+    }
+
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        double total = 0.0;
+
+        result.append("Ledger\n");
+        result.append("========================================\n");
+        for(Account account : this.accounts) {
+            double balance = account.getBalance();
+            total += balance;
+            String entry = account.getName() + ": $" + balance;
+            result.append(entry).append("\n");
+        }
+        result.append("========================================\n");
+        result.append("Total: $").append(total);
+
+        return result.toString();
     }
 }
