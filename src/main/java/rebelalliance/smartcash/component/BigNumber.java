@@ -33,6 +33,6 @@ public class BigNumber extends VBox {
     public void setAmount(double amount) {
         double rounded = MathUtil.round(amount, 2);
 
-        this.amount.setText("$" + NumberUtil.format(rounded));
+        this.amount.setText(NumberUtil.format(rounded));
     }
 }
