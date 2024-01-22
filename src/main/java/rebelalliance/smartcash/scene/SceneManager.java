@@ -39,7 +39,7 @@ public class SceneManager {
     }
 
     public void setScene(SCScene path) {
-        FXMLLoader loader = new FXMLLoader(SmartCash.class.getResource(path.getPath() + ".fxml"));
+        FXMLLoader loader = new FXMLLoader(SmartCash.class.getResource("fxml/" + path.getPath() + ".fxml"));
 
         Scene scene = scenes.get(path);
         if(scene == null) {
