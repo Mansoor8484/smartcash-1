@@ -49,6 +49,7 @@ public class SceneManager {
 
                 BaseController baseController = loader.getController();
                 baseController.setSceneManager(this);
+                baseController.init();
 
                 scenes.put(path, scene);
             }catch(IOException e) {

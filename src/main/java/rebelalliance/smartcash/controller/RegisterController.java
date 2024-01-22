@@ -10,14 +10,26 @@ import rebelalliance.smartcash.util.EmailUtil;
 
 import java.util.Random;
 
-public class RegisterController extends BaseController {
+public class RegisterController extends BaseController implements IController {
     Random random = new Random();
 
-    public TextField emailInput;
-    public PasswordField passwordInput;
-    public VBox errors;
-    public Button registerButton;
+    @FXML
+    private TextField emailInput;
+    @FXML
+    private PasswordField passwordInput;
+    @FXML
+    private VBox errors;
+    @FXML
+    private Button registerButton;
 
+    @Override
+    public void init() {
+    }
+
+    @Override
+    public void update() {
+    }
+ 
     private Text getErrorText(String text) {
         Text errorText = new Text(text);
         errorText.setStyle("-fx-fill: #ff0000");
