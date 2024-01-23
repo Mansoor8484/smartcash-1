@@ -11,7 +11,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="1200.0" spacing="5.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rebelalliance.smartcash.controller.scene.transactions.TransactionsController">
+<VBox prefHeight="400.0" prefWidth="1200.0" spacing="5.0" xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="rebelalliance.smartcash.controller.scene.transactions.TransactionsController">
     <HBox alignment="BASELINE_CENTER" fillHeight="false" prefHeight="0.0" prefWidth="600.0" spacing="5.0">
         <VBox.margin>
             <Insets left="5.0" right="5.0" top="5.0" />
@@ -40,9 +42,11 @@
                 </font>
             </Text>
             <VBox fx:id="accountList" prefHeight="0.0" prefWidth="120.0" spacing="3.0">
-                <CheckBox layoutX="10.0" layoutY="26.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="727.0" text="CheckBox" />
+                <CheckBox layoutX="10.0" layoutY="26.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="727.0"
+                          text="CheckBox" />
             </VBox>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="727.0" text="+Account" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="727.0"
+                    text="+Account" />
         </VBox>
         <VBox alignment="TOP_CENTER" layoutX="900.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Show Categories">
@@ -51,11 +55,14 @@
                 </font>
             </Text>
             <VBox fx:id="categoryList" prefHeight="0.0" prefWidth="100.0" spacing="3.0">
-                <CheckBox layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="727.0" text="CheckBox" />
+                <CheckBox layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="727.0"
+                          text="CheckBox" />
             </VBox>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="0.0" prefWidth="0.0" />
-            <CheckBox fx:id="showAdjustments" mnemonicParsing="false" prefHeight="17.0" prefWidth="727.0" selected="true" text="Adjustments" />
-            <CheckBox fx:id="showTransfers" layoutX="10.0" layoutY="88.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="727.0" selected="true" text="Transfers" />
+            <CheckBox fx:id="showAdjustments" mnemonicParsing="false" prefHeight="17.0" prefWidth="727.0"
+                      selected="true" text="Adjustments" />
+            <CheckBox fx:id="showTransfers" layoutX="10.0" layoutY="88.0" mnemonicParsing="false" prefHeight="17.0"
+                      prefWidth="727.0" selected="true" text="Transfers" />
             <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="727.0" text="+Category" />
         </VBox>
         <VBox.margin>

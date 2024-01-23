@@ -6,12 +6,13 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import rebelalliance.smartcash.account.Account;
+import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.ledger.Category;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class TransactionModalController {
+public class TransactionModalController extends BaseController {
     Stage stage;
 
     boolean shouldSave = false;

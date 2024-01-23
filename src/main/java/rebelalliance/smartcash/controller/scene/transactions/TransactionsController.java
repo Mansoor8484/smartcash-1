@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import rebelalliance.smartcash.Modal;
 import rebelalliance.smartcash.SmartCash;
 import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.controller.BaseController;
@@ -166,36 +167,25 @@ public class TransactionsController extends BaseController implements IControlle
 
     @FXML
     public void addTransaction() {
-        try {
-            FXMLLoader loader = new FXMLLoader(SmartCash.class.getResource("fxml/modal/transaction.fxml"));
-            Parent parent = loader.load();
-            Stage stage = new Stage();
-            stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("New Transaction");
-            stage.setScene(new Scene(parent));
-            stage.setResizable(false);
+        Modal transactionModal = new Modal("New Transaction", "transaction");
+        TransactionModalController transactionModalController = (TransactionModalController) transactionModal.getController();
+        transactionModalController.setStage(transactionModal.getStage());
+        transactionModalController.setAccountOptions(this.sceneManager.getLedger().getAccounts());
+        transactionModalController.setCategoryOptions(this.sceneManager.getLedger().getCategories());
+        transactionModalController.init();
 
-            TransactionModalController transactionModalController = loader.getController();
-            transactionModalController.setStage(stage);
-            transactionModalController.setAccountOptions(this.sceneManager.getLedger().getAccounts());
-            transactionModalController.setCategoryOptions(this.sceneManager.getLedger().getCategories());
-            transactionModalController.init();
-
-            stage.showAndWait();
-            if(transactionModalController.shouldSave()) {
-                Transaction transaction = new Transaction(
-                        transactionModalController.getAmount(),
-                        transactionModalController.getAccountFrom(),
-                        transactionModalController.getCategory(),
-                        transactionModalController.getDate()
-                );
-                transaction.setNotes(transactionModalController.getNotes());
-                this.sceneManager.getLedger().add(transaction);
-            }
-            this.update();
-        }catch(Exception e) {
-            e.printStackTrace();
+        transactionModal.showAndWait();
+        if(transactionModalController.shouldSave()) {
+            Transaction transaction = new Transaction(
+                    transactionModalController.getAmount(),
+                    transactionModalController.getAccountFrom(),
+                    transactionModalController.getCategory(),
+                    transactionModalController.getDate()
+            );
+            transaction.setNotes(transactionModalController.getNotes());
+            this.sceneManager.getLedger().add(transaction);
         }
+        this.update();
     }
 
     public void testGoToOverview(ActionEvent actionEvent) {
