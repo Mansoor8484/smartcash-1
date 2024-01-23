@@ -18,6 +18,7 @@ import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.controller.IController;
 import rebelalliance.smartcash.controller.modal.TransactionModalController;
 import rebelalliance.smartcash.ledger.Adjustment;
+import rebelalliance.smartcash.ledger.Category;
 import rebelalliance.smartcash.ledger.LedgerItem;
 import rebelalliance.smartcash.ledger.Transfer;
 import rebelalliance.smartcash.ledger.transaction.Transaction;
@@ -41,12 +42,20 @@ public class TransactionsController extends BaseController implements IControlle
     @FXML
     private TableColumn<TransactionTableItem, String> notesColumn;
     @FXML
-    private VBox accountCheckBoxes;
+    private VBox accountList;
+    @FXML
+    private VBox categoryList;
+    @FXML
+    private CheckBox showAdjustments;
+    @FXML
+    private CheckBox showTransfers;
 
     HashMap<Account, Boolean> accountDisplay = new HashMap<>();
+    HashMap<Category, Boolean> categoryDisplay = new HashMap<>();
 
     @Override
     public void init() {
+        // Table.
         this.dateColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(
                 cellData.getValue().getDate()
         ));
@@ -63,11 +72,19 @@ public class TransactionsController extends BaseController implements IControlle
                 cellData.getValue().getNotes()
         ));
 
+        // Accounts.
         for(Account account : this.sceneManager.getLedger().getAccounts()) {
             this.accountDisplay.put(account, true);
         }
 
-        update();
+        // Categories.
+        for(Category category : this.sceneManager.getLedger().getCategories()) {
+            this.categoryDisplay.put(category, true);
+        }
+        this.showAdjustments.setOnAction(event -> this.update());
+        this.showTransfers.setOnAction(event -> this.update());
+
+        this.update();
     }
 
 
@@ -81,15 +98,24 @@ public class TransactionsController extends BaseController implements IControlle
                 if(!this.accountDisplay.get(transaction.getAccountFrom())) {
                     continue;
                 }
+                if(!this.categoryDisplay.get(transaction.getCategory())) {
+                    continue;
+                }
                 this.table.getItems().add(new TransactionTableItem(transaction));
             }
             if(ledgerItem instanceof Adjustment adjustment) {
+                if(!this.showAdjustments.isSelected()) {
+                    continue;
+                }
                 if(!this.accountDisplay.get(adjustment.getAccountFrom())) {
                     continue;
                 }
                 this.table.getItems().add(new TransactionTableItem(adjustment));
             }
             if(ledgerItem instanceof Transfer transfer) {
+                if(!this.showTransfers.isSelected()) {
+                    continue;
+                }
                 if(this.accountDisplay.get(transfer.getAccountFrom())) {
                     this.table.getItems().add(new TransactionTableItem(
                             DateUtil.format(transfer.getDate()),
@@ -112,16 +138,29 @@ public class TransactionsController extends BaseController implements IControlle
         }
 
         // Account checkboxes.
-        this.accountCheckBoxes.getChildren().clear();
+        this.accountList.getChildren().clear();
         for(Account account : this.sceneManager.getLedger().getAccounts()) {
             CheckBox checkBox = new CheckBox();
             checkBox.setText(account.getName());
             checkBox.setSelected(this.accountDisplay.get(account));
             checkBox.setOnAction(event -> {
                 this.accountDisplay.put(account, checkBox.isSelected());
-                update();
+                this.update();
             });
-            this.accountCheckBoxes.getChildren().add(checkBox);
+            this.accountList.getChildren().add(checkBox);
+        }
+
+        // Category checkboxes.
+        this.categoryList.getChildren().clear();
+        for(Category category : this.sceneManager.getLedger().getCategories()) {
+            CheckBox checkBox = new CheckBox();
+            checkBox.setText(category.getName());
+            checkBox.setSelected(this.categoryDisplay.get(category));
+            checkBox.setOnAction(event -> {
+                this.categoryDisplay.put(category, checkBox.isSelected());
+                this.update();
+            });
+            this.categoryList.getChildren().add(checkBox);
         }
     }
 
