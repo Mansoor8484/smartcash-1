@@ -55,7 +55,7 @@ public class Account {
             // Handle transactions.
             if(ledgerItem instanceof Transaction transaction) {
                 if(transaction.getAccountFrom().equals(this)) {
-                    runningBalance -= transaction.getAmount();
+                    runningBalance += transaction.getAmount();
                 }
             }
 
