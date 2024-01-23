@@ -6,6 +6,7 @@ import rebelalliance.smartcash.ledger.LedgerItem;
 import rebelalliance.smartcash.util.DateUtil;
 import rebelalliance.smartcash.util.NumberUtil;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Transaction extends LedgerItem {
@@ -14,14 +15,14 @@ public class Transaction extends LedgerItem {
 
     public Transaction(double amount, Account accountFrom, Category category) {
         this.amount = amount;
-        this.date = new Date();
+        this.date = LocalDate.now();
 
         this.accountFrom = accountFrom;
         this.category = category;
         this.isComplete = true;
     }
 
-    public Transaction(double amount, Account accountFrom, Category category, Date date) {
+    public Transaction(double amount, Account accountFrom, Category category, LocalDate date) {
         this.amount = amount;
         this.date = date;
 

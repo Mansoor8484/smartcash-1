@@ -10,11 +10,13 @@ public class EmailUtil {
 
     /**
      * Checks if the given email is valid. <br/>
-     * <a href="https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address">Uses the HTML spec.</a>
      *
      * @param email The email to check.
      *
      * @return <code>true</code> if the email is valid, <code>false</code> otherwise.
+     *
+     * @see <a
+     * href="https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address">https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address</a>
      */
     public static boolean isValidEmail(String email) {
         return EMAIL_PATTERN.matcher(email).matches();

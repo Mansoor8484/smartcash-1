@@ -8,6 +8,7 @@ import rebelalliance.smartcash.ledger.transaction.Transaction;
 import rebelalliance.smartcash.ledger.Transfer;
 import rebelalliance.smartcash.util.MathUtil;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -41,14 +42,14 @@ public class Account {
         this.name = name;
     }
 
-    public double getBalance(Date dateFrom, Date dateTo) {
+    public double getBalance(LocalDate dateFrom, LocalDate dateTo) {
         // TODO: Improve this or run on all accounts at the same time, not just one.
         double runningBalance = 0.0;
         for(LedgerItem ledgerItem : this.ledger.getLedger()) {
-            if(ledgerItem.getDate().after(dateTo)) {
+            if(ledgerItem.getDate().isAfter(dateTo)) {
                 break;
             }
-            if(ledgerItem.getDate().before(dateFrom)) {
+            if(ledgerItem.getDate().isBefore(dateFrom)) {
                 continue;
             }
 
@@ -79,16 +80,19 @@ public class Account {
     }
 
     public double getBalance() {
-        return this.getBalance(new Date(0), new Date());
+        return this.getBalance(
+                LocalDate.of(1970, 1, 1),
+                LocalDate.now()
+        );
     }
 
-    public double getBalanceFrom(Date dateFrom) {
+    public double getBalanceFrom(LocalDate dateFrom) {
         // TODO: Implement.
         throw new NotImplementedException();
     }
 
-    public double getBalanceTo(Date dateTo) {
-        return this.getBalance(new Date(0), dateTo);
+    public double getBalanceTo(LocalDate dateTo) {
+        return this.getBalance(LocalDate.of(1970, 1, 1), dateTo);
     }
 
     public UUID getUuid() {

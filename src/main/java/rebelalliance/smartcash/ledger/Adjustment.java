@@ -3,27 +3,23 @@ package rebelalliance.smartcash.ledger;
 import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.util.DateUtil;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Adjustment extends LedgerItem {
-    protected final Date date;
-
     public Adjustment(Account account, double amount, String description) {
         this.accountFrom = account;
         this.amount = amount;
         this.notes = description;
-        this.date = new Date();
+
+        this.date = LocalDate.now();
     }
 
-    public Adjustment(Account account, double amount, String description, Date date) {
+    public Adjustment(Account account, double amount, String description, LocalDate date) {
         this.accountFrom = account;
         this.amount = amount;
         this.notes = description;
-        this.date = date;
-    }
 
-    public Date getDate() {
-        return this.date;
+        this.date = date;
     }
 
     public String toString() {

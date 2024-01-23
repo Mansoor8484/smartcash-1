@@ -4,6 +4,7 @@ import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.ledger.transaction.Transaction;
 import rebelalliance.smartcash.util.DateUtil;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -36,31 +37,31 @@ public class Ledger {
                 this.getAccount("Savings"),
                 10000,
                 "Initial deposit.",
-                DateUtil.parse("2024-01-01")
+                LocalDate.parse("2024-01-01")
         ));
         this.ledger.add(new Adjustment(
                 this.getAccount("Checking"),
                 0,
                 "Initial deposit.",
-                DateUtil.parse("2024-01-01")
+                LocalDate.parse("2024-01-01")
         ));
         this.ledger.add(new Transaction(
                 500,
                 this.getAccount("Checking"),
                 this.getCategory("Income"),
-                DateUtil.parse("2024-01-02")
+                LocalDate.parse("2024-01-02")
         ));
         this.ledger.add(new Transfer(
                 200,
                 this.getAccount("Checking"),
                 this.getAccount("Savings"),
-                DateUtil.parse("2024-01-03")
+                LocalDate.parse("2024-01-03")
         ));
         Transaction transactionWithDescription = new Transaction(
                 -10,
                 this.getAccount("Checking"),
                 this.getCategory("Food"),
-                DateUtil.parse("2024-01-04")
+                LocalDate.parse("2024-01-04")
         );
         transactionWithDescription.setNotes("Bought a sandwich.");
         this.ledger.add(transactionWithDescription);

@@ -9,8 +9,6 @@ import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.ledger.Category;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 public class TransactionModalController {
@@ -42,8 +40,8 @@ public class TransactionModalController {
         return shouldSave;
     }
 
-    public Date getDate() {
-        return Date.from(this.datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+    public LocalDate getDate() {
+        return this.datePicker.getValue();
     }
 
     public double getAmount() {

@@ -31,7 +31,7 @@ public class RegisterController extends BaseController implements IController {
     @Override
     public void update() {
     }
- 
+
     private Text getErrorText(String text) {
         Text errorText = new Text(text);
         errorText.setStyle("-fx-fill: #ff0000");

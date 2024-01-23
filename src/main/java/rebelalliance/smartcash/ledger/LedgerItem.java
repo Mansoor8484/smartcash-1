@@ -2,13 +2,13 @@ package rebelalliance.smartcash.ledger;
 
 import rebelalliance.smartcash.account.Account;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class LedgerItem {
     protected Account accountFrom;
     protected double amount;
     protected String notes;
-    protected Date date;
+    protected LocalDate date;
 
     public Account getAccountFrom() {
         return this.accountFrom;
@@ -34,11 +34,11 @@ public class LedgerItem {
         this.notes = notes;
     }
 
-    public Date getDate() {
-        return date;
+    public LocalDate getDate() {
+        return this.date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }

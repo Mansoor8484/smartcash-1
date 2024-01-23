@@ -4,7 +4,7 @@ import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.ledger.Category;
 import rebelalliance.smartcash.ledger.transaction.Transaction;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class RecurringTransaction extends Transaction {
     protected Frequency frequency;
@@ -15,8 +15,8 @@ public class RecurringTransaction extends Transaction {
         this.frequency = frequency;
     }
 
-    public RecurringTransaction(double amount, Account to, Category category, Date date, Frequency frequency) {
-        super(amount, to, category);
+    public RecurringTransaction(double amount, Account to, Category category, LocalDate date, Frequency frequency) {
+        super(amount, to, category, date);
 
         this.frequency = frequency;
     }

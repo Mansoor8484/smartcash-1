@@ -4,7 +4,7 @@ import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.util.DateUtil;
 import rebelalliance.smartcash.util.NumberUtil;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Transfer extends LedgerItem {
     protected final Account accountTo;
@@ -14,10 +14,10 @@ public class Transfer extends LedgerItem {
         this.accountFrom = accountFrom;
         this.accountTo = accountTo;
 
-        this.date = new Date();
+        this.date = LocalDate.now();
     }
 
-    public Transfer(double amount, Account accountFrom, Account accountTo, Date date) {
+    public Transfer(double amount, Account accountFrom, Account accountTo, LocalDate date) {
         this.amount = amount;
         this.accountFrom = accountFrom;
         this.accountTo = accountTo;

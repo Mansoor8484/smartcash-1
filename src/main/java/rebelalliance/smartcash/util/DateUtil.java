@@ -1,20 +1,22 @@
 package rebelalliance.smartcash.util;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
+/**
+ * Utility class for dates.
+ */
 public class DateUtil {
-    private static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public static Date parse(String date) {
-        try {
-            return FORMAT.parse(date);
-        }catch(Exception e) {
-            return null;
-        }
-    }
-
-    public static String format(Date date) {
-        return FORMAT.format(date);
+    /**
+     * Formats a date as a string in <code>yyyy-MM-dd</code> format.
+     *
+     * @param date The date to format.
+     *
+     * @return The formatted date.
+     */
+    public static String format(LocalDate date) {
+        return date.format(FORMAT);
     }
 }
