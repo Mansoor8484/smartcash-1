@@ -52,11 +52,17 @@ public class Ledger {
                 this.getCategory("Income"),
                 DateUtil.parse("2024-01-02")
         ));
+        this.ledger.add(new Transfer(
+                200,
+                this.getAccount("Checking"),
+                this.getAccount("Savings"),
+                DateUtil.parse("2024-01-03")
+        ));
         Transaction transactionWithDescription = new Transaction(
                 -10,
                 this.getAccount("Checking"),
                 this.getCategory("Food"),
-                DateUtil.parse("2024-01-03")
+                DateUtil.parse("2024-01-04")
         );
         transactionWithDescription.setDescription("Bought a sandwich.");
         this.ledger.add(transactionWithDescription);

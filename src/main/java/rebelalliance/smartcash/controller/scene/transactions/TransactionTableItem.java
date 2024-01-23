@@ -28,6 +28,14 @@ class TransactionTableItem {
         this.notes = adjustment.getDescription();
     }
 
+    public TransactionTableItem(String date, String amount, String account, String category, String notes) {
+        this.date = date;
+        this.amount = amount;
+        this.account = account;
+        this.category = category;
+        this.notes = notes;
+    }
+
     public String getDate() {
         return date;
     }

@@ -16,8 +16,11 @@ import rebelalliance.smartcash.controller.IController;
 import rebelalliance.smartcash.controller.modal.TransactionModalController;
 import rebelalliance.smartcash.ledger.Adjustment;
 import rebelalliance.smartcash.ledger.LedgerItem;
+import rebelalliance.smartcash.ledger.Transfer;
 import rebelalliance.smartcash.ledger.transaction.Transaction;
 import rebelalliance.smartcash.scene.SCScene;
+import rebelalliance.smartcash.util.DateUtil;
+import rebelalliance.smartcash.util.NumberUtil;
 
 public class TransactionsController extends BaseController implements IController {
     @FXML
@@ -65,6 +68,22 @@ public class TransactionsController extends BaseController implements IControlle
             }
             if(ledgerItem instanceof Adjustment adjustment) {
                 this.table.getItems().add(new TransactionTableItem(adjustment));
+            }
+            if(ledgerItem instanceof Transfer transfer) {
+                this.table.getItems().add(new TransactionTableItem(
+                        DateUtil.format(transfer.getDate()),
+                        NumberUtil.formatAsAmount(-transfer.getAmount()),
+                        transfer.getAccountFrom().toString(),
+                        "Transfer",
+                        transfer.getDescription()
+                ));
+                this.table.getItems().add(new TransactionTableItem(
+                        DateUtil.format(transfer.getDate()),
+                        NumberUtil.formatAsAmount(transfer.getAmount()),
+                        transfer.getAccountTo().toString(),
+                        "Transfer",
+                        transfer.getDescription()
+                ));
             }
         }
     }
