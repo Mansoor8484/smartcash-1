@@ -1,12 +1,13 @@
-package rebelalliance.smartcash.controller;
+package rebelalliance.smartcash.controller.scene;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.component.BigNumber;
+import rebelalliance.smartcash.controller.BaseController;
+import rebelalliance.smartcash.controller.IController;
 import rebelalliance.smartcash.scene.SCScene;
 
 import java.util.List;
