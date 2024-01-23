@@ -11,14 +11,14 @@ public class Adjustment extends LedgerItem {
     public Adjustment(Account account, double amount, String description) {
         this.accountFrom = account;
         this.amount = amount;
-        this.description = description;
+        this.notes = description;
         this.date = new Date();
     }
 
     public Adjustment(Account account, double amount, String description, Date date) {
         this.accountFrom = account;
         this.amount = amount;
-        this.description = description;
+        this.notes = description;
         this.date = date;
     }
 

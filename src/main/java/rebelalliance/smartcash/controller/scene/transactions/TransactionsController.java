@@ -122,7 +122,7 @@ public class TransactionsController extends BaseController implements IControlle
                             NumberUtil.formatAsAmount(-transfer.getAmount()),
                             transfer.getAccountFrom().toString(),
                             "Transfer",
-                            transfer.getDescription()
+                            transfer.getNotes()
                     ));
                 }
                 if(this.accountDisplay.get(transfer.getAccountTo())) {
@@ -131,7 +131,7 @@ public class TransactionsController extends BaseController implements IControlle
                             NumberUtil.formatAsAmount(transfer.getAmount()),
                             transfer.getAccountTo().toString(),
                             "Transfer",
-                            transfer.getDescription()
+                            transfer.getNotes()
                     ));
                 }
             }
@@ -175,21 +175,21 @@ public class TransactionsController extends BaseController implements IControlle
             stage.setScene(new Scene(parent));
             stage.setResizable(false);
 
-            TransactionModalController controller = loader.getController();
-            controller.setStage(stage);
-            controller.setAccountOptions(this.sceneManager.getLedger().getAccounts());
-            controller.setCategoryOptions(this.sceneManager.getLedger().getCategories());
+            TransactionModalController transactionModalController = loader.getController();
+            transactionModalController.setStage(stage);
+            transactionModalController.setAccountOptions(this.sceneManager.getLedger().getAccounts());
+            transactionModalController.setCategoryOptions(this.sceneManager.getLedger().getCategories());
 
             stage.showAndWait();
-            if(controller.shouldSave()) {
+            if(transactionModalController.shouldSave()) {
                 Transaction transaction = new Transaction(
-                        controller.getAmount(),
-                        controller.getAccountFrom(),
-                        controller.getCategory()
+                        transactionModalController.getAmount(),
+                        transactionModalController.getAccountFrom(),
+                        transactionModalController.getCategory()
                 );
+                transaction.setNotes(transactionModalController.getNotes());
                 this.sceneManager.getLedger().add(transaction);
             }
-
             this.update();
         }catch(Exception e) {
             e.printStackTrace();

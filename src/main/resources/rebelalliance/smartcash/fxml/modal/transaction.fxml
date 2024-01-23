@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="140.0" prefWidth="300.0" spacing="5.0" xmlns="http://javafx.com/javafx/21"
+      prefHeight="170.0" prefWidth="300.0" spacing="5.0" xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="rebelalliance.smartcash.controller.modal.TransactionModalController">
     <padding>
@@ -37,5 +37,6 @@
         <ComboBox fx:id="categoryInput" prefHeight="25.0" prefWidth="727.0" promptText="Category"
                   GridPane.columnIndex="2" GridPane.rowIndex="2" />
     </GridPane>
+    <TextField fx:id="notesInput" promptText="Notes..." />
     <Button mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="727.0" text="Add" />
 </VBox>

@@ -62,7 +62,7 @@ public class Ledger {
                 this.getCategory("Food"),
                 DateUtil.parse("2024-01-04")
         );
-        transactionWithDescription.setDescription("Bought a sandwich.");
+        transactionWithDescription.setNotes("Bought a sandwich.");
         this.ledger.add(transactionWithDescription);
     }
 

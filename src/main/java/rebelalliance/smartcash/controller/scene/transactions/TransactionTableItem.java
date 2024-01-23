@@ -17,7 +17,7 @@ class TransactionTableItem {
         this.amount = NumberUtil.formatAsAmount(transaction.getAmount());
         this.account = transaction.getAccountFrom().getName();
         this.category = transaction.getCategory().getName();
-        this.notes = transaction.getDescription();
+        this.notes = transaction.getNotes();
     }
 
     public TransactionTableItem(Adjustment adjustment) {
@@ -25,7 +25,7 @@ class TransactionTableItem {
         this.amount = NumberUtil.formatAsAmount(adjustment.getAmount());
         this.account = adjustment.getAccountFrom().getName();
         this.category = "Adjustment";
-        this.notes = adjustment.getDescription();
+        this.notes = adjustment.getNotes();
     }
 
     public TransactionTableItem(String date, String amount, String account, String category, String notes) {

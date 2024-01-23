@@ -20,6 +20,8 @@ public class TransactionModalController {
     private ComboBox<Account> accountFromInput;
     @FXML
     private ComboBox<Category> categoryInput;
+    @FXML
+    private TextField notesInput;
 
     public void save() {
         shouldSave = true;
@@ -40,6 +42,10 @@ public class TransactionModalController {
 
     public Category getCategory() {
         return categoryInput.getValue();
+    }
+
+    public String getNotes() {
+        return notesInput.getText();
     }
 
     public void setStage(Stage stage) {

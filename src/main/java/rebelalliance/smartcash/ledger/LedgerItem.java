@@ -7,7 +7,7 @@ import java.util.Date;
 public class LedgerItem {
     protected Account accountFrom;
     protected double amount;
-    protected String description;
+    protected String notes;
     protected Date date;
 
     public Account getAccountFrom() {
@@ -26,12 +26,12 @@ public class LedgerItem {
         this.amount = amount;
     }
 
-    public String getDescription() {
-        return description;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public Date getDate() {
