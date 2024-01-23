@@ -6,11 +6,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import rebelalliance.smartcash.SmartCash;
+import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.controller.IController;
 import rebelalliance.smartcash.controller.modal.TransactionModalController;
@@ -21,6 +24,8 @@ import rebelalliance.smartcash.ledger.transaction.Transaction;
 import rebelalliance.smartcash.scene.SCScene;
 import rebelalliance.smartcash.util.DateUtil;
 import rebelalliance.smartcash.util.NumberUtil;
+
+import java.util.HashMap;
 
 public class TransactionsController extends BaseController implements IController {
     @FXML
@@ -35,7 +40,10 @@ public class TransactionsController extends BaseController implements IControlle
     private TableColumn<TransactionTableItem, String> categoryColumn;
     @FXML
     private TableColumn<TransactionTableItem, String> notesColumn;
+    @FXML
+    private VBox accountCheckBoxes;
 
+    HashMap<Account, Boolean> accountDisplay = new HashMap<>();
 
     @Override
     public void init() {
@@ -55,36 +63,65 @@ public class TransactionsController extends BaseController implements IControlle
                 cellData.getValue().getNotes()
         ));
 
-        this.update();
+        for(Account account : this.sceneManager.getLedger().getAccounts()) {
+            this.accountDisplay.put(account, true);
+        }
+
+        update();
     }
+
 
     @Override
     public void update() {
         this.table.getItems().clear();
 
+        // Table.
         for(LedgerItem ledgerItem : this.sceneManager.getLedger().getLedger()) {
             if(ledgerItem instanceof Transaction transaction) {
+                if(!this.accountDisplay.get(transaction.getAccountFrom())) {
+                    continue;
+                }
                 this.table.getItems().add(new TransactionTableItem(transaction));
             }
             if(ledgerItem instanceof Adjustment adjustment) {
+                if(!this.accountDisplay.get(adjustment.getAccountFrom())) {
+                    continue;
+                }
                 this.table.getItems().add(new TransactionTableItem(adjustment));
             }
             if(ledgerItem instanceof Transfer transfer) {
-                this.table.getItems().add(new TransactionTableItem(
-                        DateUtil.format(transfer.getDate()),
-                        NumberUtil.formatAsAmount(-transfer.getAmount()),
-                        transfer.getAccountFrom().toString(),
-                        "Transfer",
-                        transfer.getDescription()
-                ));
-                this.table.getItems().add(new TransactionTableItem(
-                        DateUtil.format(transfer.getDate()),
-                        NumberUtil.formatAsAmount(transfer.getAmount()),
-                        transfer.getAccountTo().toString(),
-                        "Transfer",
-                        transfer.getDescription()
-                ));
+                if(this.accountDisplay.get(transfer.getAccountFrom())) {
+                    this.table.getItems().add(new TransactionTableItem(
+                            DateUtil.format(transfer.getDate()),
+                            NumberUtil.formatAsAmount(-transfer.getAmount()),
+                            transfer.getAccountFrom().toString(),
+                            "Transfer",
+                            transfer.getDescription()
+                    ));
+                }
+                if(this.accountDisplay.get(transfer.getAccountTo())) {
+                    this.table.getItems().add(new TransactionTableItem(
+                            DateUtil.format(transfer.getDate()),
+                            NumberUtil.formatAsAmount(transfer.getAmount()),
+                            transfer.getAccountTo().toString(),
+                            "Transfer",
+                            transfer.getDescription()
+                    ));
+                }
             }
+        }
+
+        // Account checkboxes.
+        this.accountCheckBoxes.getChildren().clear();
+        for(Account account : this.sceneManager.getLedger().getAccounts()) {
+            CheckBox checkBox = new CheckBox();
+            checkBox.setText(account.getName());
+            checkBox.setSelected(this.accountDisplay.get(account));
+            checkBox.setOnAction(event -> {
+                this.accountDisplay.put(account, checkBox.isSelected());
+                update();
+            });
+            this.accountCheckBoxes.getChildren().add(checkBox);
         }
     }
 
