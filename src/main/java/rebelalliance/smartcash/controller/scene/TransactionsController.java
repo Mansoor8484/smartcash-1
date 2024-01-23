@@ -1,10 +1,15 @@
 package rebelalliance.smartcash.controller.scene;
 
+import javafx.beans.property.ReadOnlyDoubleWrapper;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -16,28 +21,48 @@ import rebelalliance.smartcash.controller.modal.TransactionModalController;
 import rebelalliance.smartcash.ledger.LedgerItem;
 import rebelalliance.smartcash.ledger.transaction.Transaction;
 import rebelalliance.smartcash.scene.SCScene;
+import rebelalliance.smartcash.util.DateUtil;
+import rebelalliance.smartcash.util.NumberUtil;
 
 public class TransactionsController extends BaseController implements IController {
     @FXML
-    private VBox vBox;
+    private TableView<LedgerItem> table;
+    @FXML
+    private TableColumn<Transaction, String> dateColumn;
+    @FXML
+    private TableColumn<Transaction, String> amountColumn;
+    @FXML
+    private TableColumn<Transaction, String> accountColumn;
+    @FXML
+    private TableColumn<Transaction, String> categoryColumn;
+    @FXML
+    private TableColumn<Transaction, String> notesColumn;
+
 
     @Override
     public void init() {
+        this.dateColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(DateUtil.format(cellData.getValue().getDate())));
+        this.amountColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(NumberUtil.formatAsAmount(cellData.getValue().getAmount())));
+        this.accountColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAccountFrom().toString()));
+        this.categoryColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getCategory().toString()));
+        this.notesColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getDescription()));
+
         this.update();
     }
 
     @Override
     public void update() {
-        vBox.getChildren().clear();
+        this.table.getItems().clear();
 
         for(LedgerItem ledgerItem : this.sceneManager.getLedger().getLedger()) {
-            Text text = new Text();
-            text.setText(ledgerItem.toString());
-            vBox.getChildren().add(text);
+            if(ledgerItem instanceof Transaction transaction) {
+                this.table.getItems().add(transaction);
+            }
         }
     }
 
-    public void addTestTransaction() {
+    @FXML
+    public void addTransaction() {
         try {
             FXMLLoader loader = new FXMLLoader(SmartCash.class.getResource("fxml/modal/transaction.fxml"));
             Parent parent = loader.load();

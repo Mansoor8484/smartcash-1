@@ -28,9 +28,9 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
-        <Label text="Amount" GridPane.halignment="RIGHT" />
-        <Label text="Select From" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-        <TextField fx:id="amountInput" promptText="\$4.99" GridPane.columnIndex="2" />
+        <Label text="Amount (+/-)" GridPane.halignment="RIGHT" />
+        <Label text="Account" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+        <TextField fx:id="amountInput" promptText="4.99" GridPane.columnIndex="2" />
         <ComboBox fx:id="accountFromInput" prefHeight="25.0" prefWidth="727.0" promptText="Account From"
                   GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
         <Label text="Category" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
