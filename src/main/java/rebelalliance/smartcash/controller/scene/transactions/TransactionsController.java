@@ -179,13 +179,15 @@ public class TransactionsController extends BaseController implements IControlle
             transactionModalController.setStage(stage);
             transactionModalController.setAccountOptions(this.sceneManager.getLedger().getAccounts());
             transactionModalController.setCategoryOptions(this.sceneManager.getLedger().getCategories());
+            transactionModalController.init();
 
             stage.showAndWait();
             if(transactionModalController.shouldSave()) {
                 Transaction transaction = new Transaction(
                         transactionModalController.getAmount(),
                         transactionModalController.getAccountFrom(),
-                        transactionModalController.getCategory()
+                        transactionModalController.getCategory(),
+                        transactionModalController.getDate()
                 );
                 transaction.setNotes(transactionModalController.getNotes());
                 this.sceneManager.getLedger().add(transaction);

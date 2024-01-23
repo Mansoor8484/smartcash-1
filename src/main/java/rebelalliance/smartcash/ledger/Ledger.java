@@ -80,6 +80,7 @@ public class Ledger {
 
     public void add(LedgerItem ledgerItem) {
         this.ledger.add(ledgerItem);
+        this.ledger.sort(Comparator.comparing(LedgerItem::getDate));
     }
 
     public void remove(LedgerItem ledgerItem) {

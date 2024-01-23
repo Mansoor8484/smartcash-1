@@ -2,11 +2,15 @@ package rebelalliance.smartcash.controller.modal;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.ledger.Category;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 public class TransactionModalController {
@@ -14,6 +18,8 @@ public class TransactionModalController {
 
     boolean shouldSave = false;
 
+    @FXML
+    private DatePicker datePicker;
     @FXML
     private TextField amountInput;
     @FXML
@@ -23,6 +29,10 @@ public class TransactionModalController {
     @FXML
     private TextField notesInput;
 
+    public void init() {
+        this.datePicker.setValue(LocalDate.now());
+    }
+
     public void save() {
         shouldSave = true;
         stage.close();
@@ -30,6 +40,10 @@ public class TransactionModalController {
 
     public boolean shouldSave() {
         return shouldSave;
+    }
+
+    public Date getDate() {
+        return Date.from(this.datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
     public double getAmount() {
