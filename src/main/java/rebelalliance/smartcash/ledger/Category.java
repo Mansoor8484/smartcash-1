@@ -37,4 +37,8 @@ public class Category {
         this.subcategories.clear();
         this.subcategories.addAll(subcategories);
     }
+
+    public String toString() {
+        return this.name;
+    }
 }

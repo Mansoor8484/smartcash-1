@@ -5,17 +5,17 @@ import rebelalliance.smartcash.account.Account;
 import java.util.Date;
 
 public class LedgerItem {
-    protected Account accountTo;
+    protected Account accountFrom;
     protected double amount;
     protected String description;
     protected Date date;
 
-    public Account getAccountTo() {
-        return accountTo;
+    public Account getAccountFrom() {
+        return this.accountFrom;
     }
 
-    public void setAccountTo(Account accountTo) {
-        this.accountTo = accountTo;
+    public void setAccountFrom(Account accountFrom) {
+        this.accountFrom = accountFrom;
     }
 
     public double getAmount() {

@@ -1,4 +1,4 @@
-package rebelalliance.smartcash.controller;
+package rebelalliance.smartcash.controller.scene;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,6 +6,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import rebelalliance.smartcash.controller.BaseController;
+import rebelalliance.smartcash.controller.IController;
 import rebelalliance.smartcash.util.EmailUtil;
 
 import java.util.Random;

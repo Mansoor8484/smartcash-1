@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="rebelalliance.smartcash.controller.scene.OverviewController">
+    <VBox fx:id="accountsBox" layoutX="14.0" layoutY="14.0" prefHeight="400.0" prefWidth="300.0" />
+    <Button layoutX="481.0" layoutY="27.0" mnemonicParsing="false" onAction="#testGoToTransactions"
+            text="Go to Transactions" />
+    <PieChart fx:id="pieChart" layoutX="244.0" layoutY="164.0" prefHeight="273.0" prefWidth="369.0" title="a" />
+</AnchorPane>

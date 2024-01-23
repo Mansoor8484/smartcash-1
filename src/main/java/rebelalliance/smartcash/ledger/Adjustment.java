@@ -9,18 +9,16 @@ public class Adjustment extends LedgerItem {
     protected final Date date;
 
     public Adjustment(Account account, double amount, String description) {
-        this.accountTo = account;
-        this.description = description;
+        this.accountFrom = account;
         this.amount = amount;
-
+        this.description = description;
         this.date = new Date();
     }
 
     public Adjustment(Account account, double amount, String description, Date date) {
-        this.accountTo = account;
-        this.description = description;
+        this.accountFrom = account;
         this.amount = amount;
-
+        this.description = description;
         this.date = date;
     }
 
@@ -29,6 +27,6 @@ public class Adjustment extends LedgerItem {
     }
 
     public String toString() {
-        return DateUtil.format(this.date) + ": Set " + this.accountTo + " to $" + this.amount + ".";
+        return DateUtil.format(this.date) + ": Set " + this.accountFrom + " to $" + this.amount + ".";
     }
 }
