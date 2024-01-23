@@ -63,7 +63,8 @@
                       selected="true" text="Adjustments" />
             <CheckBox fx:id="showTransfers" layoutX="10.0" layoutY="88.0" mnemonicParsing="false" prefHeight="17.0"
                       prefWidth="727.0" selected="true" text="Transfers" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="727.0" text="+Category" />
+            <Button onAction="#addCategory" mnemonicParsing="false" prefHeight="25.0" prefWidth="727.0"
+                    text="+Category" />
         </VBox>
         <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" />
