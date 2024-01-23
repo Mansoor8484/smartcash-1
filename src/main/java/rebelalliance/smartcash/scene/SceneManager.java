@@ -27,19 +27,6 @@ public class SceneManager {
 
         // TODO: Move this.
         this.ledger = new Ledger();
-
-        // Test code.
-        // TODO: Remove this.
-        Account account1 = new Account("Test Account 1");
-        Account account2 = new Account("Test Account 2");
-        Category category = new Category("Test Category");
-        this.ledger.addAccount(account1);
-        this.ledger.addAccount(account2);
-        this.ledger.addCategory(category);
-        Adjustment adjustment = new Adjustment(account1, 532.24, "Initial deposit.");
-        this.ledger.add(adjustment);
-        Transfer transfer = new Transfer(100, account1, account2);
-        this.ledger.add(transfer);
     }
 
     public void setScene(SCScene path) {

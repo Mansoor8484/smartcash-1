@@ -2,9 +2,12 @@ package rebelalliance.smartcash.ledger;
 
 import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.ledger.transaction.Transaction;
+import rebelalliance.smartcash.util.DateUtil;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 public class Ledger {
@@ -16,6 +19,47 @@ public class Ledger {
         this.ledger = new ArrayList<>();
         this.accounts = new ArrayList<>();
         this.categories = new ArrayList<>();
+
+        // Add default accounts.
+        this.addAccount(new Account("Checking"));
+        this.addAccount(new Account("Savings"));
+
+        // Add default categories.
+        this.addCategory(new Category("Bill"));
+        this.addCategory(new Category("Entertainment"));
+        this.addCategory(new Category("Food"));
+        this.addCategory(new Category("Income"));
+        this.addCategory(new Category("Subscription"));
+        this.addCategory(new Category("Travel"));
+
+        // TODO: Remove this.
+        // Add default ledger items at test code.
+        this.ledger.add(new Adjustment(
+                this.getAccount("Savings"),
+                10000,
+                "Initial deposit.",
+                DateUtil.parse("2024-01-01")
+        ));
+        this.ledger.add(new Adjustment(
+                this.getAccount("Checking"),
+                0,
+                "Initial deposit.",
+                DateUtil.parse("2024-01-01")
+        ));
+        this.ledger.add(new Transaction(
+                500,
+                this.getAccount("Checking"),
+                this.getCategory("Income"),
+                DateUtil.parse("2024-01-02")
+        ));
+        Transaction transactionWithDescription = new Transaction(
+                -10,
+                this.getAccount("Checking"),
+                this.getCategory("Food"),
+                DateUtil.parse("2024-01-03")
+        );
+        transactionWithDescription.setDescription("Bought a sandwich.");
+        this.ledger.add(transactionWithDescription);
     }
 
     public Ledger(List<LedgerItem> ledgerItems) {
