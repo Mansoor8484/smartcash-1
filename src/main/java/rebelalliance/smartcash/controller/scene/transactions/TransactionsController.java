@@ -17,6 +17,7 @@ import rebelalliance.smartcash.SmartCash;
 import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.controller.IController;
+import rebelalliance.smartcash.controller.modal.AccountCreationModalController;
 import rebelalliance.smartcash.controller.modal.TransactionModalController;
 import rebelalliance.smartcash.ledger.Adjustment;
 import rebelalliance.smartcash.ledger.Category;
@@ -184,6 +185,21 @@ public class TransactionsController extends BaseController implements IControlle
             );
             transaction.setNotes(transactionModalController.getNotes());
             this.sceneManager.getLedger().add(transaction);
+        }
+        this.update();
+    }
+
+    @FXML
+    public void addAccount() {
+        Modal accountModal = new Modal("New Account", "create-account");
+        AccountCreationModalController accountModalController = (AccountCreationModalController) accountModal.getController();
+        accountModalController.setStage(accountModal.getStage());
+
+        accountModal.showAndWait();
+        if(accountModalController.shouldSave()) {
+            Account account = new Account(accountModalController.getAccountName());
+            this.sceneManager.getLedger().addAccount(account);
+            this.accountDisplay.put(account, true);
         }
         this.update();
     }

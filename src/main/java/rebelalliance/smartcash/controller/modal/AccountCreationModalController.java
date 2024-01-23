@@ -3,8 +3,9 @@ package rebelalliance.smartcash.controller.modal;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import rebelalliance.smartcash.controller.BaseController;
 
-public class AccountCreationModalController {
+public class AccountCreationModalController extends BaseController {
     Stage stage;
 
     @FXML
