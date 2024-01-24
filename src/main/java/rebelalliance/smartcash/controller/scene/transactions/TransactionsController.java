@@ -18,6 +18,7 @@ import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.controller.IController;
 import rebelalliance.smartcash.controller.modal.AccountCreationModalController;
+import rebelalliance.smartcash.controller.modal.AdjustmentModalController;
 import rebelalliance.smartcash.controller.modal.CategoryCreationModalController;
 import rebelalliance.smartcash.controller.modal.TransactionModalController;
 import rebelalliance.smartcash.ledger.Adjustment;
@@ -169,7 +170,7 @@ public class TransactionsController extends BaseController implements IControlle
 
     @FXML
     public void addTransaction() {
-        Modal transactionModal = new Modal("New Transaction", "transaction");
+        Modal transactionModal = new Modal("New Transaction", "create-transaction");
         TransactionModalController transactionModalController = (TransactionModalController) transactionModal.getController();
         transactionModalController.setStage(transactionModal.getStage());
         transactionModalController.setAccountOptions(this.sceneManager.getLedger().getAccounts());
@@ -186,6 +187,28 @@ public class TransactionsController extends BaseController implements IControlle
             );
             transaction.setNotes(transactionModalController.getNotes());
             this.sceneManager.getLedger().add(transaction);
+        }
+        this.update();
+    }
+
+    @FXML
+    public void addAdjustment() {
+        Modal adjustmentModal = new Modal("New Adjustment", "create-adjustment");
+        AdjustmentModalController adjustmentModalController = (AdjustmentModalController) adjustmentModal.getController();
+        adjustmentModalController.setStage(adjustmentModal.getStage());
+        adjustmentModalController.setAccountOptions(this.sceneManager.getLedger().getAccounts());
+        adjustmentModalController.init();
+
+        adjustmentModal.showAndWait();
+        if(adjustmentModalController.shouldSave()) {
+            Adjustment adjustment = new Adjustment(
+                    adjustmentModalController.getAccountFrom(),
+                    adjustmentModalController.getAmount(),
+                    adjustmentModalController.getNotes(),
+                    adjustmentModalController.getDate()
+            );
+            adjustment.setNotes(adjustmentModalController.getNotes());
+            this.sceneManager.getLedger().add(adjustment);
         }
         this.update();
     }

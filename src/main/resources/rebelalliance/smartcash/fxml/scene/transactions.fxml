@@ -20,6 +20,8 @@
         </VBox.margin>
         <Button mnemonicParsing="false" onAction="#testGoToOverview" text="Go to Overview" />
         <Button mnemonicParsing="false" onMouseClicked="#addTransaction" text="Add Transaction" />
+        <Button layoutX="534.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#addAdjustment"
+                text="Add Adjustment" />
         <Button mnemonicParsing="false" text="Recurring Transactions" />
     </HBox>
     <HBox alignment="CENTER" prefHeight="727.0" prefWidth="600.0" spacing="15.0">
@@ -45,7 +47,7 @@
                 <CheckBox layoutX="10.0" layoutY="26.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="727.0"
                           text="CheckBox" />
             </VBox>
-            <Button onAction="#addAccount" mnemonicParsing="false" prefHeight="25.0" prefWidth="727.0"
+            <Button mnemonicParsing="false" onAction="#addAccount" prefHeight="25.0" prefWidth="727.0"
                     text="+Account" />
         </VBox>
         <VBox alignment="TOP_CENTER" layoutX="900.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
@@ -63,7 +65,7 @@
                       selected="true" text="Adjustments" />
             <CheckBox fx:id="showTransfers" layoutX="10.0" layoutY="88.0" mnemonicParsing="false" prefHeight="17.0"
                       prefWidth="727.0" selected="true" text="Transfers" />
-            <Button onAction="#addCategory" mnemonicParsing="false" prefHeight="25.0" prefWidth="727.0"
+            <Button mnemonicParsing="false" onAction="#addCategory" prefHeight="25.0" prefWidth="727.0"
                     text="+Category" />
         </VBox>
         <VBox.margin>
