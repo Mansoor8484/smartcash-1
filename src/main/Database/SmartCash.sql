@@ -1,81 +1,81 @@
 CREATE DATABASE Smart_Cash_database;
-go
---Table:USER
-CREATE TABLE User(
-    UserID    int,
-    FirstName   char(20),
-    LastName    char(20),
-    Address     char(30),
-    City        char(20),
+
+--Table:USERS
+CREATE TABLE Users(
+    UserID    int PRIMARY KEY,
+    FirstName   varchar(20),
+    LastName    varchar(20),
+    Address     varchar(30),
+    City        varchar(20),
     State       char(2),
     ZipCode     int,
     CellPhone   VarChar(10),
-    Email       Varchar(30),
+    Email       Varchar(30) Unique,
     DOB         date,
-    --primary Key:
-    constraint UserID_proceed_pk Primary key(UserID)
 );
 
---Table: ACCOUNT
-CREATE TABLE Account(
-    AccountID   int,
+--Table: ACCOUNTS
+CREATE TABLE Accounts(
+    AccountID   int primary key,
     UserID      int,
-    Balance     decimal(4,2),
+    Balance     decimal(10,2),
     RoutingNumber   int,
     AccountNumber   int,
-    --primary key:
-    constraint Account_accountID_pk Primary key(AccountID)
     --foreign key:
-    constraint Account_UserID_fk foreign key (UserID) references User(UserID)
+    Foreign Key (UserID) References Users(UserID)
         on update cascade
         on delete no action
 );
---Table: BUDGET
-CREATE TABLE Budget(
-    BudgetID    int,
+--Table: BUDGETS
+CREATE TABLE Budgets(
+    BudgetID    int primary key,
     UserID      int,
     Category    Char(20),
     PlannedAmount   Decimal(4,2),
     ActualAmount    Decimal(4,2),
-    --primary Key:
-    constraint BudgetID_proceed_pk Primary key(BudgetID)
-);
-
---Table: USERAUTHENTICATION
-CREATE TABLE UserAuthentication(
-    UserID      int,
-    Email       varchar(30),
-    UserName    char(30),
-    HashedPassword      char(30),
-    Salt        char(30)
-    --key figure it out (primary/foreign)
-);
-
---Table: PAYMENT METHOD
-CREATE TABLE PaymentMethod(
-    PaymentMethodID     int,
-    UserID              int,
-    PaymentToken        int,
-    PaymentType         char(40),
-    ExpiryDate          Date,
-    --Primary Key:
-    constraint PaymentMethodID_proceed_pk Primary Key(PaymentMethodID)
-    --Foreign Key:
-    constraint PaymentMethod_UserID_fk foreign Key (UserID) references User(UserID)
+    --foreign key:
+    Foreign key (UserID) References Users(UserID)
         on update cascade
         on delete no action
 );
 
---Table: TRANSACTION
-CREATE TABLE Transaction(
-    TransactionID       int,
+--Table: USERAUTHENTICATION
+CREATE TABLE UserAuthentication(
+    UserID      int primary key,
+    Email       varchar(30),
+    UserName    char(30),
+    HashedPassword      varchar(100), --this can be adjusted as needed.
+    Salt        varchar(50), --this can be adjusted as needed. 
+    --foreign key:
+    Foreign key (UserID) references Users(UserID)
+        on update cascade
+        on delete no action
+);
+
+--Table: PAYMENT METHOD
+CREATE TABLE PaymentMethods(
+    PaymentMethodID     int primary key,
+    UserID              int,
+    PaymentToken        int,
+    PaymentType         char(40),
+    ExpiryDate          Date,
+    --Foreign Key:
+    Foreign key (UserID) references Users(UserID)
+        on update Cascade
+        on delete no action
+);
+
+--Table: TRANSACTIONS
+CREATE TABLE Transactions(
+    TransactionID       int primary key,
     AccountID           int,
-    Amount              decimal(4,2),
+    Amount              decimal(10,2),
     PendingStatus       boolean,
     TransactionDate     date,
     PostDate            date
-    --Primary Key:
-    constraint TransactionID_proceed_pk Primary Key (transactionID)
+
     --Foreign Key: 
-    constraint Transaction_AccountID_fk foreign key (AccountID) references Account(AccountID)
+    foreign key (accountID) references Accounts(AccountID)
+    on updat    e Cascade
+        on delete no action
 );
