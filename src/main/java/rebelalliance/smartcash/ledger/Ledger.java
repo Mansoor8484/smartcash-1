@@ -105,7 +105,12 @@ public class Ledger {
         this.accounts = accounts;
     }
 
-    public void addAccount(Account account) {
+    public void addAccount(Account account) throws IllegalArgumentException {
+        Account existingAccount = this.getAccount(account.getName());
+        if(existingAccount != null) {
+            throw new IllegalArgumentException("Account already exists.");
+        }
+
         account.setLedger(this);
         this.accounts.add(account);
     }
@@ -132,6 +137,11 @@ public class Ledger {
     }
 
     public void addCategory(Category category) {
+        Category existingCategory = this.getCategory(category.getName());
+        if(existingCategory != null) {
+            throw new IllegalArgumentException("Category already exists.");
+        }
+
         this.categories.add(category);
     }
 

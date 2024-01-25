@@ -18,6 +18,11 @@ public class AccountCreationModalController extends BaseController {
         stage.close();
     }
 
+    public void reject() {
+        shouldSave = false;
+        this.accountNameInput.setText("");
+    }
+
     public String getAccountName() {
         return accountNameInput.getText();
     }

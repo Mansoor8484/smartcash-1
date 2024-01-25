@@ -18,6 +18,11 @@ public class CategoryCreationModalController extends BaseController {
         stage.close();
     }
 
+    public void reject() {
+        shouldSave = false;
+        this.categoryNameInput.setText("");
+    }
+
     public String getCategoryName() {
         return categoryNameInput.getText();
     }

@@ -224,11 +224,18 @@ public class TransactionsController extends BaseController implements IControlle
 
     @FXML
     public void addAccount() {
-        Modal accountModal = new Modal("New Account", "create-account");
-        AccountCreationModalController accountModalController = (AccountCreationModalController) accountModal.getController();
-        accountModalController.setStage(accountModal.getStage());
+        Account existingAccount;
+        AccountCreationModalController accountModalController;
 
-        accountModal.showAndWait();
+        do {
+            Modal accountModal = new Modal("New Account", "create-account");
+            accountModalController = (AccountCreationModalController) accountModal.getController();
+            accountModalController.setStage(accountModal.getStage());
+
+            accountModal.showAndWait();
+            existingAccount = this.sceneManager.getLedger().getAccount(accountModalController.getAccountName());
+        }while(existingAccount != null);
+
         if(accountModalController.shouldSave()) {
             Account account = new Account(accountModalController.getAccountName());
             this.sceneManager.getLedger().addAccount(account);
@@ -239,11 +246,18 @@ public class TransactionsController extends BaseController implements IControlle
 
     @FXML
     public void addCategory() {
-        Modal accountModal = new Modal("New Category", "create-category");
-        CategoryCreationModalController accountModalController = (CategoryCreationModalController) accountModal.getController();
-        accountModalController.setStage(accountModal.getStage());
+        Category existingCategory;
+        CategoryCreationModalController accountModalController;
 
-        accountModal.showAndWait();
+        do {
+            Modal accountModal = new Modal("New Category", "create-category");
+            accountModalController = (CategoryCreationModalController) accountModal.getController();
+            accountModalController.setStage(accountModal.getStage());
+
+            accountModal.showAndWait();
+            existingCategory = this.sceneManager.getLedger().getCategory(accountModalController.getCategoryName());
+        }while(existingCategory != null);
+
         if(accountModalController.shouldSave()) {
             Category category = new Category(accountModalController.getCategoryName());
             this.sceneManager.getLedger().addCategory(category);
