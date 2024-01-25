@@ -76,6 +76,6 @@ CREATE TABLE Transactions(
 
     --Foreign Key: 
     foreign key (accountID) references Accounts(AccountID)
-    on updat    e Cascade
+        on update Cascade
         on delete no action
 );
