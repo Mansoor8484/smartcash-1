@@ -13,3 +13,5 @@ Our software, SmartCash, provides a comprehensive overview of budget management 
 1 - In order to get started, you must first create an account. You can do so by selecting the "create account" button.
 
 2 - After creating an account, log in with the same username and password.
+
+3- Upon login, explore the many different tabs and play with the differnt tools
