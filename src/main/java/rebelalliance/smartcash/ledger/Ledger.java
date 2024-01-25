@@ -137,6 +137,13 @@ public class Ledger {
     }
 
     public void addCategory(Category category) {
+        if(category.getName().equals("Adjustment")) {
+            throw new IllegalArgumentException("Adjustment is a protected category name.");
+        }
+        if(category.getName().equals("Transfer")) {
+            throw new IllegalArgumentException("Transfer is a protected category name.");
+        }
+
         Category existingCategory = this.getCategory(category.getName());
         if(existingCategory != null) {
             throw new IllegalArgumentException("Category already exists.");

@@ -256,7 +256,10 @@ public class TransactionsController extends BaseController implements IControlle
 
             accountModal.showAndWait();
             existingCategory = this.sceneManager.getLedger().getCategory(accountModalController.getCategoryName());
-        }while(existingCategory != null);
+        }while(existingCategory != null
+                || accountModalController.getCategoryName().equals("Transfer")
+                || accountModalController.getCategoryName().equals("Adjustment")
+        );
 
         if(accountModalController.shouldSave()) {
             Category category = new Category(accountModalController.getCategoryName());
