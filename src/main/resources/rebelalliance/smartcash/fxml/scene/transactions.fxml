@@ -62,9 +62,9 @@
             </VBox>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="0.0" prefWidth="0.0" />
             <CheckBox fx:id="showAdjustments" mnemonicParsing="false" prefHeight="17.0" prefWidth="727.0"
-                      selected="true" text="Adjustments" />
+                      selected="true" text="Adjustment" />
             <CheckBox fx:id="showTransfers" layoutX="10.0" layoutY="88.0" mnemonicParsing="false" prefHeight="17.0"
-                      prefWidth="727.0" selected="true" text="Transfers" />
+                      prefWidth="727.0" selected="true" text="Transfer" />
             <Button mnemonicParsing="false" onAction="#addCategory" prefHeight="25.0" prefWidth="727.0"
                     text="+Category" />
         </VBox>
