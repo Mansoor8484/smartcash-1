@@ -94,32 +94,8 @@ public class TransactionsController extends BaseController implements IControlle
     @Override
     public void update() {
         this.updateTable();
-
-        // Account checkboxes.
-        this.accountList.getChildren().clear();
-        for(Account account : this.sceneManager.getLedger().getAccounts()) {
-            CheckBox checkBox = new CheckBox();
-            checkBox.setText(account.getName());
-            checkBox.setSelected(this.accountDisplay.get(account));
-            checkBox.setOnAction(event -> {
-                this.accountDisplay.put(account, checkBox.isSelected());
-                this.update();
-            });
-            this.accountList.getChildren().add(checkBox);
-        }
-
-        // Category checkboxes.
-        this.categoryList.getChildren().clear();
-        for(Category category : this.sceneManager.getLedger().getCategories()) {
-            CheckBox checkBox = new CheckBox();
-            checkBox.setText(category.getName());
-            checkBox.setSelected(this.categoryDisplay.get(category));
-            checkBox.setOnAction(event -> {
-                this.categoryDisplay.put(category, checkBox.isSelected());
-                this.update();
-            });
-            this.categoryList.getChildren().add(checkBox);
-        }
+        this.updateAccounts();
+        this.updateCategories();
     }
 
     public void updateTable() {
@@ -168,6 +144,36 @@ public class TransactionsController extends BaseController implements IControlle
                     ));
                 }
             }
+        }
+    }
+
+    public void updateAccounts() {
+        // Account checkboxes.
+        this.accountList.getChildren().clear();
+        for(Account account : this.sceneManager.getLedger().getAccounts()) {
+            CheckBox checkBox = new CheckBox();
+            checkBox.setText(account.getName());
+            checkBox.setSelected(this.accountDisplay.get(account));
+            checkBox.setOnAction(event -> {
+                this.accountDisplay.put(account, checkBox.isSelected());
+                this.update();
+            });
+            this.accountList.getChildren().add(checkBox);
+        }
+    }
+
+    public void updateCategories() {
+        // Category checkboxes.
+        this.categoryList.getChildren().clear();
+        for(Category category : this.sceneManager.getLedger().getCategories()) {
+            CheckBox checkBox = new CheckBox();
+            checkBox.setText(category.getName());
+            checkBox.setSelected(this.categoryDisplay.get(category));
+            checkBox.setOnAction(event -> {
+                this.categoryDisplay.put(category, checkBox.isSelected());
+                this.update();
+            });
+            this.categoryList.getChildren().add(checkBox);
         }
     }
 
@@ -228,7 +234,7 @@ public class TransactionsController extends BaseController implements IControlle
             this.sceneManager.getLedger().addAccount(account);
             this.accountDisplay.put(account, true);
         }
-        this.update();
+        this.updateAccounts();
     }
 
     @FXML
@@ -243,7 +249,7 @@ public class TransactionsController extends BaseController implements IControlle
             this.sceneManager.getLedger().addCategory(category);
             this.categoryDisplay.put(category, true);
         }
-        this.update();
+        this.updateCategories();
     }
 
     public void testGoToOverview(ActionEvent actionEvent) {
