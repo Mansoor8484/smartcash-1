@@ -227,17 +227,19 @@ public class TransactionsController extends BaseController implements IControlle
         Account existingAccount;
         AccountCreationModalController accountModalController;
 
+        String newAccountName;
         do {
             Modal accountModal = new Modal("New Account", "create-account");
             accountModalController = (AccountCreationModalController) accountModal.getController();
             accountModalController.setStage(accountModal.getStage());
 
             accountModal.showAndWait();
-            existingAccount = this.sceneManager.getLedger().getAccount(accountModalController.getAccountName());
+            newAccountName = accountModalController.getAccountName().trim();
+            existingAccount = this.sceneManager.getLedger().getAccount(newAccountName);
         }while(existingAccount != null);
 
         if(accountModalController.shouldSave()) {
-            Account account = new Account(accountModalController.getAccountName());
+            Account account = new Account(newAccountName);
             this.sceneManager.getLedger().addAccount(account);
             this.accountDisplay.put(account, true);
         }
@@ -249,20 +251,22 @@ public class TransactionsController extends BaseController implements IControlle
         Category existingCategory;
         CategoryCreationModalController accountModalController;
 
+        String newCategoryName;
         do {
             Modal accountModal = new Modal("New Category", "create-category");
             accountModalController = (CategoryCreationModalController) accountModal.getController();
             accountModalController.setStage(accountModal.getStage());
 
             accountModal.showAndWait();
-            existingCategory = this.sceneManager.getLedger().getCategory(accountModalController.getCategoryName());
+            newCategoryName = accountModalController.getCategoryName().trim();
+            existingCategory = this.sceneManager.getLedger().getCategory(newCategoryName);
         }while(existingCategory != null
                 || accountModalController.getCategoryName().equals("Transfer")
                 || accountModalController.getCategoryName().equals("Adjustment")
         );
 
         if(accountModalController.shouldSave()) {
-            Category category = new Category(accountModalController.getCategoryName());
+            Category category = new Category(newCategoryName);
             this.sceneManager.getLedger().addCategory(category);
             this.categoryDisplay.put(category, true);
         }
