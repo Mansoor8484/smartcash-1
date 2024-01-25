@@ -11,7 +11,7 @@ public class SmartCash extends Application {
         // Window setup.
         stage.setWidth(1200);
         stage.setHeight(800);
-        stage.setResizable(false);
+        stage.setResizable(true);
 
         // Show.
         // TODO: Change default scene.
