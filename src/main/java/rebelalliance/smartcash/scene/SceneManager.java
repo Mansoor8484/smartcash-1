@@ -5,12 +5,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import rebelalliance.smartcash.SmartCash;
-import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.controller.BaseController;
-import rebelalliance.smartcash.ledger.Adjustment;
-import rebelalliance.smartcash.ledger.Category;
 import rebelalliance.smartcash.ledger.Ledger;
-import rebelalliance.smartcash.ledger.Transfer;
 
 import java.io.IOException;
 import java.util.HashMap;

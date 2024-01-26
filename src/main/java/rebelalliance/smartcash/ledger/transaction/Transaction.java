@@ -7,7 +7,6 @@ import rebelalliance.smartcash.util.DateUtil;
 import rebelalliance.smartcash.util.NumberUtil;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Transaction extends LedgerItem {
     protected Category category;
