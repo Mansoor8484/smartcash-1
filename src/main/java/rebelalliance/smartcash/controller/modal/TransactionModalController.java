@@ -33,6 +33,16 @@ public class TransactionModalController extends BaseController {
     }
 
     public void save() {
+        if(amountInput.getText().isEmpty()) {
+            return;
+        }
+        if(accountFromInput.getValue() == null) {
+            return;
+        }
+        if(categoryInput.getValue() == null) {
+            return;
+        }
+
         shouldSave = true;
         stage.close();
     }

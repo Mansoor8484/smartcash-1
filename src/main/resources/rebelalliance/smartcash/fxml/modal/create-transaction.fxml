@@ -36,9 +36,9 @@
         <Label text="Category" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
         <DatePicker fx:id="datePicker" prefHeight="25.0" prefWidth="727.0" GridPane.columnIndex="2" />
         <TextField fx:id="amountInput" promptText="4.99" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-        <ComboBox fx:id="accountFromInput" prefHeight="25.0" prefWidth="727.0" promptText="Account From"
+        <ComboBox fx:id="accountFromInput" prefHeight="25.0" prefWidth="727.0" promptText="Select account..."
                   GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
-        <ComboBox fx:id="categoryInput" prefHeight="25.0" prefWidth="727.0" promptText="Category"
+        <ComboBox fx:id="categoryInput" prefHeight="25.0" prefWidth="727.0" promptText="Select category..."
                   GridPane.columnIndex="2" GridPane.rowIndex="3" />
     </GridPane>
     <TextField fx:id="notesInput" promptText="Notes..." />

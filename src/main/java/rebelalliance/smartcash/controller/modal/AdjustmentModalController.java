@@ -30,6 +30,12 @@ public class AdjustmentModalController extends BaseController {
     }
 
     public void save() {
+        if(amountInput.getText().isEmpty()) {
+            return;
+        }
+        if(accountFromInput.getValue() == null) {
+            return;
+        }
         shouldSave = true;
         stage.close();
     }
