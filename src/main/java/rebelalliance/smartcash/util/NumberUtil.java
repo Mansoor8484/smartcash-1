@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
  */
 public class NumberUtil {
     private static final DecimalFormat DF = new DecimalFormat("$#,##0.00;-$#");
+    private static final String AMOUNT_REGEX = "^-?\\d*(.\\d{1,2})?$";
 
     /**
      * Format a number as a currency.
@@ -17,5 +18,9 @@ public class NumberUtil {
      */
     public static String formatAsAmount(double number) {
         return DF.format(number);
+    }
+
+    public static boolean stringIsAmount(String amount) {
+        return amount.matches(AMOUNT_REGEX);
     }
 }

@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.controller.BaseController;
+import rebelalliance.smartcash.util.NumberUtil;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -36,6 +37,10 @@ public class AdjustmentModalController extends BaseController {
         if(accountFromInput.getValue() == null) {
             return;
         }
+        if(!NumberUtil.stringIsAmount(amountInput.getText())) {
+            return;
+        }
+
         shouldSave = true;
         stage.close();
     }

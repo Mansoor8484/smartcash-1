@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.ledger.Category;
+import rebelalliance.smartcash.util.NumberUtil;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -40,6 +41,9 @@ public class TransactionModalController extends BaseController {
             return;
         }
         if(categoryInput.getValue() == null) {
+            return;
+        }
+        if(!NumberUtil.stringIsAmount(amountInput.getText())) {
             return;
         }
 
