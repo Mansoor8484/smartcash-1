@@ -14,6 +14,10 @@ public class AccountCreationModalController extends BaseController {
     private boolean shouldSave = false;
 
     public void save() {
+        if(accountNameInput.getText().trim().isEmpty()) {
+            return;
+        }
+
         shouldSave = true;
         stage.close();
     }

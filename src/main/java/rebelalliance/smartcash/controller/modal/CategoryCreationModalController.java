@@ -14,6 +14,10 @@ public class CategoryCreationModalController extends BaseController {
     private boolean shouldSave = false;
 
     public void save() {
+        if(categoryNameInput.getText().trim().isEmpty()) {
+            return;
+        }
+
         shouldSave = true;
         stage.close();
     }
