@@ -2,14 +2,23 @@ package rebelalliance.smartcash.controller.scene;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.layout.VBox;
 import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.component.BigNumber;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.controller.IController;
 import rebelalliance.smartcash.scene.SCScene;
+import rebelalliance.smartcash.statistic.LedgerStats;
+import rebelalliance.smartcash.util.ArrayUtil;
+import rebelalliance.smartcash.util.DateUtil;
 
+import java.lang.reflect.Array;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class OverviewController extends BaseController implements IController {
@@ -17,9 +26,15 @@ public class OverviewController extends BaseController implements IController {
     private VBox accountsBox;
     @FXML
     private PieChart pieChart;
+    @FXML
+    private LineChart<String, Double> accountsWeekOverWeek;
+
+    private LedgerStats ledgerStats;
 
     @Override
     public void init() {
+        this.ledgerStats = new LedgerStats(this.sceneManager.getLedger());
+
         this.update();
     }
 
@@ -45,6 +60,33 @@ public class OverviewController extends BaseController implements IController {
             this.pieChart.getData().add(new PieChart.Data(account.toString(), balance));
         }
         this.pieChart.setLabelsVisible(true);
+
+        // TODO: Reduce this call.
+        this.ledgerStats.generateOffsets();
+
+        // Line graph.
+        HashMap<Account, XYChart.Series<String, Double>> data = new HashMap<>();
+        for(Account account : accounts) {
+            XYChart.Series<String, Double> series = new XYChart.Series<>();
+            series.setName(account.toString());
+
+            data.put(account, series);
+        }
+
+        HashMap<LocalDate, HashMap<Account, Double>> dayOverDay = this.ledgerStats.getBalanceDayOverDay();
+        LocalDate[] dates = ArrayUtil.reverse(dayOverDay.keySet().toArray(new LocalDate[0]));
+        for(LocalDate date : dates) {
+            HashMap<Account, Double> dayBalances = dayOverDay.get(date);
+            for(Account account : dayBalances.keySet()) {
+                XYChart.Series<String, Double> series = data.get(account);
+                series.getData().add(new XYChart.Data<>(DateUtil.format(date), dayBalances.get(account)));
+            }
+        }
+
+        this.accountsWeekOverWeek.getData().clear();
+        for(Account account : data.keySet()) {
+            this.accountsWeekOverWeek.getData().add(data.get(account));
+        }
     }
 
     public void testGoToTransactions(ActionEvent actionEvent) {

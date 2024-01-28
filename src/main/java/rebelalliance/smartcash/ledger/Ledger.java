@@ -34,7 +34,7 @@ public class Ledger {
         // Add default ledger items at test code.
         this.ledger.add(new Adjustment(
                 this.getAccount("Savings"),
-                10000,
+                1000,
                 "Initial deposit.",
                 LocalDate.parse("2024-01-01")
         ));
@@ -42,7 +42,7 @@ public class Ledger {
                 this.getAccount("Checking"),
                 0,
                 "Initial deposit.",
-                LocalDate.parse("2024-01-01")
+                LocalDate.parse("2024-01-02")
         ));
         this.ledger.add(new Transaction(
                 500,
