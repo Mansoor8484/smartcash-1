@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
@@ -18,7 +17,7 @@
               title="Account Make Up" />
     <LineChart fx:id="accountsWeekOverWeek" layoutX="480.0" layoutY="164.0" prefHeight="281.0" prefWidth="352.0">
         <xAxis>
-            <CategoryAxis side="BOTTOM" />
+            <NumberAxis fx:id="lineChartXAxis" side="BOTTOM" />
         </xAxis>
         <yAxis>
             <NumberAxis side="LEFT" />
