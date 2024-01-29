@@ -9,93 +9,87 @@ import rebelalliance.smartcash.ledger.transaction.Transaction;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class LedgerStats {
     Ledger ledger;
 
-    private HashMap<LocalDate, HashMap<Account, Offset>> offsets = new HashMap<>();
+    private final SortedMap<LocalDate, HashMap<Account, List<Offset>>> offsets = new TreeMap<>();
 
     public LedgerStats(Ledger ledger) {
         this.ledger = ledger;
     }
 
-    HashMap<Account, Offset> getDayOffsets(LocalDate date) {
+    HashMap<Account, List<Offset>> getDayOffsets(LocalDate date) {
         return this.offsets.get(date);
     }
 
-    public HashMap<LocalDate, HashMap<Account, Offset>> generateOffsets() {
+    public void generateOffsets() {
+        this.ledger.sort();
+        this.offsets.clear();
+
         // Generate a list of offsets for each date in the ledger.
         for(LedgerItem ledgerItem : this.ledger.getLedger()) {
             if(!this.offsets.containsKey(ledgerItem.getDate())) {
                 this.offsets.put(ledgerItem.getDate(), new HashMap<>());
             }
-            HashMap<Account, Offset> dayOffsets = this.getDayOffsets(ledgerItem.getDate());
 
-            // Add account "from" offset if it doesn't exist.
+            Offset offset;
+            HashMap<Account, List<Offset>> dayOffsets = this.offsets.get(ledgerItem.getDate());
+
             if(!dayOffsets.containsKey(ledgerItem.getAccountFrom())) {
-                dayOffsets.put(ledgerItem.getAccountFrom(), new Offset());
+                dayOffsets.put(ledgerItem.getAccountFrom(), new java.util.ArrayList<>());
             }
+            List<Offset> fromOffsets = dayOffsets.get(ledgerItem.getAccountFrom());
 
-            if(ledgerItem instanceof Adjustment adjustment) {
-                Offset offset = dayOffsets.get(adjustment.getAccountFrom());
-
-                double original = ledgerItem.getAccountFrom().getBalanceTo(ledgerItem.getDate().minusDays(1));
-                double difference = adjustment.getAmount() - original;
-                offset.offsetOffset(difference);
-
-                continue;
-            }
-
-            if(ledgerItem instanceof Transaction transaction) {
-                Offset offset = dayOffsets.get(transaction.getAccountFrom());
-                offset.offsetOffset(transaction.getAmount());
-                continue;
-            }
-
-            if(ledgerItem instanceof Transfer transfer) {
-                // Add account "to" offset if it doesn't exist.
+            if(ledgerItem instanceof Adjustment) {
+                offset = new Offset(ledgerItem.getAmount(), OffsetType.ADJUSTMENT);
+                fromOffsets.add(offset);
+            }else if(ledgerItem instanceof Transaction) {
+                offset = new Offset(ledgerItem.getAmount(), OffsetType.LOCAL);
+                fromOffsets.add(offset);
+            }else if(ledgerItem instanceof Transfer transfer) {
                 if(!dayOffsets.containsKey(transfer.getAccountTo())) {
-                    dayOffsets.put(transfer.getAccountTo(), new Offset());
+                    dayOffsets.put(transfer.getAccountTo(), new java.util.ArrayList<>());
                 }
+                List<Offset> toOffsets = dayOffsets.get(transfer.getAccountTo());
 
-                Offset offsetFrom = dayOffsets.get(transfer.getAccountFrom());
-                offsetFrom.offsetOffset(-transfer.getAmount());
+                offset = new Offset(transfer.getAmount(), OffsetType.LOCAL);
+                toOffsets.add(offset);
 
-                Offset offsetTo = dayOffsets.get(transfer.getAccountTo());
-                offsetTo.offsetOffset(transfer.getAmount());
+                offset = new Offset(-transfer.getAmount(), OffsetType.LOCAL);
+                fromOffsets.add(offset);
             }
         }
-
-        return this.offsets;
     }
 
-    public HashMap<LocalDate, HashMap<Account, Double>> getBalanceDayOverDay() {
-        HashMap<LocalDate, HashMap<Account, Double>> balanceDayOverDay = new HashMap<>();
+    public SortedMap<LocalDate, HashMap<Account, Double>> getBalanceDayOverDay() {
+        this.generateOffsets();
+
+        SortedMap<LocalDate, HashMap<Account, Double>> balanceDayOverDay = new TreeMap<>();
 
         HashMap<Account, Double> runningBalances = new HashMap<>();
-
-        LocalDate[] dates = this.offsets.keySet().stream().sorted().toArray(LocalDate[]::new);
-        for(LocalDate date : dates) {
-            if(!balanceDayOverDay.containsKey(date)) {
-                balanceDayOverDay.put(date, new HashMap<>());
-            }
-            for(Account account : this.offsets.get(date).keySet()) {
+        for(LocalDate date : this.offsets.keySet()) {
+            HashMap<Account, List<Offset>> dayOffsets = this.getDayOffsets(date);
+            for(Account account : dayOffsets.keySet()) {
                 if(!runningBalances.containsKey(account)) {
                     runningBalances.put(account, 0.0);
                 }
-                double runningBalance = runningBalances.get(account);
-                double dayOffset = this.offsets.get(date).get(account).getOffset();
-                runningBalance += dayOffset;
-                runningBalances.put(account, runningBalance);
+                double totalOffset = 0;
+                for(Offset offset : dayOffsets.get(account)) {
+                    if(offset.offsetType() == OffsetType.LOCAL) {
+                        totalOffset += offset.offset();
+                    }else if(offset.offsetType() == OffsetType.ADJUSTMENT) {
+                        totalOffset += offset.getAdjustmentOffset(runningBalances.get(account));
+                    }
+                }
+                runningBalances.put(account, runningBalances.get(account) + totalOffset);
             }
-
             balanceDayOverDay.put(date, new HashMap<>(runningBalances));
         }
 
         return balanceDayOverDay;
-    }
-
-    public HashMap<LocalDate, HashMap<Account, Offset>> getOffsets() {
-        return this.offsets;
     }
 }

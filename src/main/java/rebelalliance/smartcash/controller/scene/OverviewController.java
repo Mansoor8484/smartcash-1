@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.SortedMap;
 
 public class OverviewController extends BaseController implements IController {
     @FXML
@@ -61,9 +62,6 @@ public class OverviewController extends BaseController implements IController {
         }
         this.pieChart.setLabelsVisible(true);
 
-        // TODO: Reduce this call.
-        this.ledgerStats.generateOffsets();
-
         // Line graph.
         HashMap<Account, XYChart.Series<String, Double>> data = new HashMap<>();
         for(Account account : accounts) {
@@ -73,9 +71,9 @@ public class OverviewController extends BaseController implements IController {
             data.put(account, series);
         }
 
-        HashMap<LocalDate, HashMap<Account, Double>> dayOverDay = this.ledgerStats.getBalanceDayOverDay();
-        LocalDate[] dates = ArrayUtil.reverse(dayOverDay.keySet().toArray(new LocalDate[0]));
-        for(LocalDate date : dates) {
+        SortedMap<LocalDate, HashMap<Account, Double>> dayOverDay = this.ledgerStats.getBalanceDayOverDay();
+
+        for(LocalDate date : dayOverDay.keySet()) {
             HashMap<Account, Double> dayBalances = dayOverDay.get(date);
             for(Account account : dayBalances.keySet()) {
                 XYChart.Series<String, Double> series = data.get(account);
@@ -84,9 +82,7 @@ public class OverviewController extends BaseController implements IController {
         }
 
         this.accountsWeekOverWeek.getData().clear();
-        for(Account account : data.keySet()) {
-            this.accountsWeekOverWeek.getData().add(data.get(account));
-        }
+        this.accountsWeekOverWeek.getData().setAll(data.values());
     }
 
     public void testGoToTransactions(ActionEvent actionEvent) {
