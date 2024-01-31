@@ -9,6 +9,7 @@ import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.component.BigNumber;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.controller.IController;
+import rebelalliance.smartcash.ledger.Category;
 import rebelalliance.smartcash.scene.SCScene;
 import rebelalliance.smartcash.statistic.LedgerStats;
 import rebelalliance.smartcash.util.DateUtil;
@@ -29,7 +30,7 @@ public class OverviewController extends BaseController implements IController {
     @FXML
     private NumberAxis lineChartXAxis;
     @FXML
-    private Text debugCategorySpend;
+    private PieChart spendPieChart;
 
     private LedgerStats ledgerStats;
 
@@ -95,7 +96,15 @@ public class OverviewController extends BaseController implements IController {
         this.lineChartXAxis.setUpperBound(this.sceneManager.getLedger().getLedger().get(this.sceneManager.getLedger().getLedger().size() - 1).getDate().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toEpochSecond());
 
         // Category Spend
-        debugCategorySpend.setText(this.ledgerStats.getCategorySpend().toString());
+        this.spendPieChart.getData().clear();
+        HashMap<Category, Double> categorySpend = this.ledgerStats.getCategorySpend(LocalDate.now().minusDays(7), LocalDate.now());
+        for(Category category : categorySpend.keySet()) {
+            double amount = categorySpend.get(category);
+            if(amount == 0) {
+                continue;
+            }
+            this.spendPieChart.getData().add(new PieChart.Data(category.toString(), amount));
+        }
     }
 
     public void testGoToTransactions(ActionEvent actionEvent) {

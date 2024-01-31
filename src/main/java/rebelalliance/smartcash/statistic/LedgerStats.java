@@ -93,18 +93,21 @@ public class LedgerStats {
     public HashMap<Category, Double> getCategorySpend(LocalDate start, LocalDate end) {
         HashMap<Category, Double> categorySpend = new HashMap<>();
         for(LedgerItem ledgerItem : this.ledger.getLedger()) {
-            System.out.println(ledgerItem);
             if(ledgerItem instanceof Adjustment || ledgerItem instanceof Transfer) {
                 continue;
             }
             Transaction transaction = (Transaction) ledgerItem;
+            double amount = transaction.getAmount();
+            if(amount > 0) {
+                continue;
+            }
             if(ledgerItem.getDate().isBefore(start) || ledgerItem.getDate().isAfter(end)) {
                 continue;
             }
             if(!categorySpend.containsKey(transaction.getCategory())) {
                 categorySpend.put(transaction.getCategory(), 0.0);
             }
-            categorySpend.put(transaction.getCategory(), categorySpend.get(transaction.getCategory()) + transaction.getAmount());
+            categorySpend.put(transaction.getCategory(), categorySpend.get(transaction.getCategory()) + amount);
         }
         return categorySpend;
     }
