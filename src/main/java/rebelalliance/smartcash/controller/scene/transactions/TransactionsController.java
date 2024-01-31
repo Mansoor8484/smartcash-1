@@ -207,7 +207,6 @@ public class TransactionsController extends BaseController implements IControlle
             Adjustment adjustment = new Adjustment(
                     adjustmentModalController.getAccountFrom(),
                     adjustmentModalController.getAmount(),
-                    adjustmentModalController.getNotes(),
                     adjustmentModalController.getDate()
             );
             adjustment.setNotes(adjustmentModalController.getNotes());

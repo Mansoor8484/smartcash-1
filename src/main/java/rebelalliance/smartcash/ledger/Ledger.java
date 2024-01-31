@@ -1,9 +1,9 @@
 package rebelalliance.smartcash.ledger;
 
 import rebelalliance.smartcash.account.Account;
+import rebelalliance.smartcash.file.SampleData;
 import rebelalliance.smartcash.ledger.transaction.Transaction;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -22,48 +22,10 @@ public class Ledger {
         this.addAccount(new Account("Checking"));
         this.addAccount(new Account("Savings"));
 
-        // Add default categories.
-        this.addCategory(new Category("Bill"));
-        this.addCategory(new Category("Entertainment"));
-        this.addCategory(new Category("Food"));
-        this.addCategory(new Category("Income"));
-        this.addCategory(new Category("Subscription"));
-        this.addCategory(new Category("Travel"));
-
         // TODO: Remove this.
-        // Add default ledger items at test code.
-        this.ledger.add(new Adjustment(
-                this.getAccount("Savings"),
-                1000,
-                "Initial deposit.",
-                LocalDate.parse("2024-01-01")
-        ));
-        this.ledger.add(new Adjustment(
-                this.getAccount("Checking"),
-                0,
-                "Initial deposit.",
-                LocalDate.parse("2024-01-02")
-        ));
-        this.ledger.add(new Transaction(
-                500,
-                this.getAccount("Checking"),
-                this.getCategory("Income"),
-                LocalDate.parse("2024-01-02")
-        ));
-        this.ledger.add(new Transfer(
-                200,
-                this.getAccount("Checking"),
-                this.getAccount("Savings"),
-                LocalDate.parse("2024-01-03")
-        ));
-        Transaction transactionWithDescription = new Transaction(
-                -10,
-                this.getAccount("Checking"),
-                this.getCategory("Food"),
-                LocalDate.parse("2024-01-04")
-        );
-        transactionWithDescription.setNotes("Bought a sandwich.");
-        this.ledger.add(transactionWithDescription);
+        // Load sample data.
+        SampleData sampleData = new SampleData("sample.csv", this);
+        sampleData.loadSampleData();
     }
 
     public Ledger(List<LedgerItem> ledgerItems) {
