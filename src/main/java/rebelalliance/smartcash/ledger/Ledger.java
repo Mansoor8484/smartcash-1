@@ -67,13 +67,16 @@ public class Ledger {
     }
 
     public void addAccount(Account account) throws IllegalArgumentException {
-        Account existingAccount = this.getAccount(account.getName());
-        if(existingAccount != null) {
+        if(this.accountExists(account.getName())) {
             throw new IllegalArgumentException("Account already exists.");
         }
 
         account.setLedger(this);
         this.accounts.add(account);
+    }
+
+    public boolean accountExists(String name) {
+        return this.getAccount(name) != null;
     }
 
     public void removeAccount(Account account) {
@@ -105,12 +108,15 @@ public class Ledger {
             throw new IllegalArgumentException("Transfer is a protected category name.");
         }
 
-        Category existingCategory = this.getCategory(category.getName());
-        if(existingCategory != null) {
+        if(this.categoryExists(category.getName())) {
             throw new IllegalArgumentException("Category already exists.");
         }
 
         this.categories.add(category);
+    }
+
+    public boolean categoryExists(String name) {
+        return this.getCategory(name) != null;
     }
 
     public void removeCategory(Category category) {

@@ -46,11 +46,11 @@ public class SampleData {
             }
 
             // Create the account if it doesn't exist.
-            if(this.ledger.getAccount(accountString) == null) {
+            if(!this.ledger.accountExists(accountString)) {
                 this.ledger.addAccount(new Account(accountString));
             }
             // Create the category if it doesn't exist.
-            if(this.ledger.getCategory(categoryString) == null) {
+            if(!this.ledger.categoryExists(categoryString)) {
                 if(!categoryString.equals("Adjustment") && !categoryString.equals("Transfer")) {
                     this.ledger.addCategory(new Category(categoryString));
                 }
@@ -65,6 +65,7 @@ public class SampleData {
                 continue;
             }
             if(categoryString.equals("Transfer")) {
+                assert notes != null;
                 String toAccountString = notes.replaceAll("to ", "");
                 if(ledger.getAccount(toAccountString) == null) {
                     this.ledger.addAccount(new Account(toAccountString));
