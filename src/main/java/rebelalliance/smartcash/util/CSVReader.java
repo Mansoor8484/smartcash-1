@@ -15,10 +15,6 @@ public class CSVReader {
             String line;
             while((line = reader.readLine()) != null) {
                 String[] values = line.split(",");
-                if(values.length == 4) {
-                    values = Arrays.copyOf(values, 5);
-                    values[4] = "";
-                }
                 data.add(new ArrayList<>(Arrays.asList(values)));
             }
         }catch(Exception e) {

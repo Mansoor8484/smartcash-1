@@ -40,7 +40,10 @@ public class SampleData {
             double amount = Double.parseDouble(row.get(1).replaceAll("\\$", ""));
             String accountString = row.get(2);
             String categoryString = row.get(3);
-            String notes = row.get(4);
+            String notes = null;
+            if(row.size() == 5) {
+                notes = row.get(4);
+            }
 
             // Create the account if it doesn't exist.
             if(this.ledger.getAccount(accountString) == null) {
