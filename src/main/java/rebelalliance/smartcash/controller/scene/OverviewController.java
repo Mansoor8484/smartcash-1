@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import rebelalliance.smartcash.account.Account;
 import rebelalliance.smartcash.component.BigNumber;
 import rebelalliance.smartcash.controller.BaseController;
@@ -27,6 +28,8 @@ public class OverviewController extends BaseController implements IController {
     private LineChart<Number, Number> accountsWeekOverWeek;
     @FXML
     private NumberAxis lineChartXAxis;
+    @FXML
+    private Text debugCategorySpend;
 
     private LedgerStats ledgerStats;
 
@@ -90,6 +93,9 @@ public class OverviewController extends BaseController implements IController {
 
         this.lineChartXAxis.setLowerBound(this.sceneManager.getLedger().getLedger().get(0).getDate().minusDays(1).atStartOfDay(ZoneId.systemDefault()).toEpochSecond());
         this.lineChartXAxis.setUpperBound(this.sceneManager.getLedger().getLedger().get(this.sceneManager.getLedger().getLedger().size() - 1).getDate().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toEpochSecond());
+
+        // Category Spend
+        debugCategorySpend.setText(this.ledgerStats.getCategorySpend().toString());
     }
 
     public void testGoToTransactions(ActionEvent actionEvent) {

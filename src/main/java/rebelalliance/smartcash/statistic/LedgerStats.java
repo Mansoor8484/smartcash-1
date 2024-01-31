@@ -1,10 +1,7 @@
 package rebelalliance.smartcash.statistic;
 
 import rebelalliance.smartcash.account.Account;
-import rebelalliance.smartcash.ledger.Adjustment;
-import rebelalliance.smartcash.ledger.Ledger;
-import rebelalliance.smartcash.ledger.LedgerItem;
-import rebelalliance.smartcash.ledger.Transfer;
+import rebelalliance.smartcash.ledger.*;
 import rebelalliance.smartcash.ledger.transaction.Transaction;
 
 import java.time.LocalDate;
@@ -48,7 +45,7 @@ public class LedgerStats {
                 offset = new Offset(ledgerItem.getAmount(), OffsetType.ADJUSTMENT);
                 fromOffsets.add(offset);
             }else if(ledgerItem instanceof Transaction) {
-                offset = new Offset(ledgerItem.getAmount(), OffsetType.LOCAL);
+                offset = new Offset(ledgerItem.getAmount(), OffsetType.TRANSACTION);
                 fromOffsets.add(offset);
             }else if(ledgerItem instanceof Transfer transfer) {
                 if(!dayOffsets.containsKey(transfer.getAccountTo())) {
@@ -56,10 +53,10 @@ public class LedgerStats {
                 }
                 List<Offset> toOffsets = dayOffsets.get(transfer.getAccountTo());
 
-                offset = new Offset(transfer.getAmount(), OffsetType.LOCAL);
+                offset = new Offset(transfer.getAmount(), OffsetType.TRANSFER);
                 toOffsets.add(offset);
 
-                offset = new Offset(-transfer.getAmount(), OffsetType.LOCAL);
+                offset = new Offset(-transfer.getAmount(), OffsetType.TRANSFER);
                 fromOffsets.add(offset);
             }
         }
@@ -79,7 +76,7 @@ public class LedgerStats {
                 }
                 double totalOffset = 0;
                 for(Offset offset : dayOffsets.get(account)) {
-                    if(offset.offsetType() == OffsetType.LOCAL) {
+                    if(offset.offsetType() == OffsetType.TRANSACTION || offset.offsetType() == OffsetType.TRANSFER) {
                         totalOffset += offset.offset();
                     }else if(offset.offsetType() == OffsetType.ADJUSTMENT) {
                         totalOffset += offset.getAdjustmentOffset(runningBalances.get(account));
@@ -91,5 +88,28 @@ public class LedgerStats {
         }
 
         return balanceDayOverDay;
+    }
+
+    public HashMap<Category, Double> getCategorySpend(LocalDate start, LocalDate end) {
+        HashMap<Category, Double> categorySpend = new HashMap<>();
+        for(LedgerItem ledgerItem : this.ledger.getLedger()) {
+            System.out.println(ledgerItem);
+            if(ledgerItem instanceof Adjustment || ledgerItem instanceof Transfer) {
+                continue;
+            }
+            Transaction transaction = (Transaction) ledgerItem;
+            if(ledgerItem.getDate().isBefore(start) || ledgerItem.getDate().isAfter(end)) {
+                continue;
+            }
+            if(!categorySpend.containsKey(transaction.getCategory())) {
+                categorySpend.put(transaction.getCategory(), 0.0);
+            }
+            categorySpend.put(transaction.getCategory(), categorySpend.get(transaction.getCategory()) + transaction.getAmount());
+        }
+        return categorySpend;
+    }
+
+    public HashMap<Category, Double> getCategorySpend() {
+        return this.getCategorySpend(this.ledger.getLedger().get(0).getDate(), LocalDate.now());
     }
 }
