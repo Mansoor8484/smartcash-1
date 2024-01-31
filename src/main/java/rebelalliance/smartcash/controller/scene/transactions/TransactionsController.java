@@ -24,7 +24,9 @@ import rebelalliance.smartcash.scene.SCScene;
 import rebelalliance.smartcash.util.DateUtil;
 import rebelalliance.smartcash.util.NumberUtil;
 
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 
 public class TransactionsController extends BaseController implements IController {
     @FXML
@@ -142,9 +144,10 @@ public class TransactionsController extends BaseController implements IControlle
     }
 
     public void updateAccounts() {
-        // Account checkboxes.
         this.accountList.getChildren().clear();
-        for(Account account : this.sceneManager.getLedger().getAccounts()) {
+        List<Account> accounts = this.sceneManager.getLedger().getAccounts();
+        accounts.sort(Comparator.comparing(Account::toString));
+        for(Account account : accounts) {
             CheckBox checkBox = new CheckBox();
             checkBox.setText(account.getName());
             checkBox.setSelected(this.accountDisplay.get(account));
@@ -157,9 +160,10 @@ public class TransactionsController extends BaseController implements IControlle
     }
 
     public void updateCategories() {
-        // Category checkboxes.
         this.categoryList.getChildren().clear();
-        for(Category category : this.sceneManager.getLedger().getCategories()) {
+        List<Category> categories = this.sceneManager.getLedger().getCategories();
+        categories.sort(Comparator.comparing(Category::toString));
+        for(Category category : categories) {
             CheckBox checkBox = new CheckBox();
             checkBox.setText(category.getName());
             checkBox.setSelected(this.categoryDisplay.get(category));
