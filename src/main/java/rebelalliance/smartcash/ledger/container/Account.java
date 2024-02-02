@@ -1,17 +1,17 @@
-package rebelalliance.smartcash.account;
+package rebelalliance.smartcash.ledger.container;
 
 import rebelalliance.smartcash.exception.NotImplementedException;
-import rebelalliance.smartcash.ledger.Adjustment;
 import rebelalliance.smartcash.ledger.Ledger;
-import rebelalliance.smartcash.ledger.LedgerItem;
-import rebelalliance.smartcash.ledger.transaction.Transaction;
-import rebelalliance.smartcash.ledger.Transfer;
+import rebelalliance.smartcash.ledger.item.Adjustment;
+import rebelalliance.smartcash.ledger.item.LedgerItem;
+import rebelalliance.smartcash.ledger.item.transaction.Transaction;
+import rebelalliance.smartcash.ledger.item.Transfer;
 import rebelalliance.smartcash.util.MathUtil;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Account {
+public class Account implements IArchivable {
     private Ledger ledger;
 
     private String name;

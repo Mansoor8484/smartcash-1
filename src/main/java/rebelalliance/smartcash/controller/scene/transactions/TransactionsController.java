@@ -5,21 +5,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
 import rebelalliance.smartcash.Modal;
-import rebelalliance.smartcash.account.Account;
+import rebelalliance.smartcash.component.menuitem.ArchiveMenuItem;
+import rebelalliance.smartcash.ledger.container.Account;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.controller.IController;
 import rebelalliance.smartcash.controller.modal.AccountCreationModalController;
 import rebelalliance.smartcash.controller.modal.AdjustmentModalController;
 import rebelalliance.smartcash.controller.modal.CategoryCreationModalController;
 import rebelalliance.smartcash.controller.modal.TransactionModalController;
-import rebelalliance.smartcash.ledger.Adjustment;
-import rebelalliance.smartcash.ledger.Category;
-import rebelalliance.smartcash.ledger.LedgerItem;
-import rebelalliance.smartcash.ledger.Transfer;
-import rebelalliance.smartcash.ledger.transaction.Transaction;
+import rebelalliance.smartcash.ledger.item.Adjustment;
+import rebelalliance.smartcash.ledger.container.Category;
+import rebelalliance.smartcash.ledger.item.LedgerItem;
+import rebelalliance.smartcash.ledger.item.Transfer;
+import rebelalliance.smartcash.ledger.item.transaction.Transaction;
 import rebelalliance.smartcash.scene.SCScene;
 import rebelalliance.smartcash.util.DateUtil;
 import rebelalliance.smartcash.util.NumberUtil;
@@ -168,13 +168,10 @@ public class TransactionsController extends BaseController implements IControlle
 
             ContextMenu contextMenu = new ContextMenu();
             contextMenu.getItems().add(new MenuItem("Edit"));
-            MenuItem archiveMenuItem = new MenuItem("Archive");
-            archiveMenuItem.setOnAction(event -> {
-                account.setArchived(true);
+            contextMenu.getItems().add(new ArchiveMenuItem(account, () -> {
                 this.updateAccounts();
                 this.updateTable();
-            });
-            contextMenu.getItems().add(archiveMenuItem);
+            }));
             checkBox.setContextMenu(contextMenu);
 
             this.accountList.getChildren().add(checkBox);
@@ -200,13 +197,10 @@ public class TransactionsController extends BaseController implements IControlle
 
             ContextMenu contextMenu = new ContextMenu();
             contextMenu.getItems().add(new MenuItem("Edit"));
-            MenuItem archiveMenuItem = new MenuItem("Archive");
-            archiveMenuItem.setOnAction(event -> {
-                category.setArchived(true);
+            contextMenu.getItems().add(new ArchiveMenuItem(category, () -> {
                 this.updateCategories();
                 this.updateTable();
-            });
-            contextMenu.getItems().add(archiveMenuItem);
+            }));
             checkBox.setContextMenu(contextMenu);
 
             this.categoryList.getChildren().add(checkBox);

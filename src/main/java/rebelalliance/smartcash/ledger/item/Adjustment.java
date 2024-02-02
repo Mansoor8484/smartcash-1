@@ -1,6 +1,6 @@
-package rebelalliance.smartcash.ledger;
+package rebelalliance.smartcash.ledger.item;
 
-import rebelalliance.smartcash.account.Account;
+import rebelalliance.smartcash.ledger.container.Account;
 import rebelalliance.smartcash.util.DateUtil;
 
 import java.time.LocalDate;

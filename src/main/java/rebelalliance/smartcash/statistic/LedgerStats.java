@@ -1,8 +1,12 @@
 package rebelalliance.smartcash.statistic;
 
-import rebelalliance.smartcash.account.Account;
+import rebelalliance.smartcash.ledger.container.Account;
 import rebelalliance.smartcash.ledger.*;
-import rebelalliance.smartcash.ledger.transaction.Transaction;
+import rebelalliance.smartcash.ledger.container.Category;
+import rebelalliance.smartcash.ledger.item.Adjustment;
+import rebelalliance.smartcash.ledger.item.LedgerItem;
+import rebelalliance.smartcash.ledger.item.Transfer;
+import rebelalliance.smartcash.ledger.item.transaction.Transaction;
 
 import java.time.LocalDate;
 import java.util.HashMap;

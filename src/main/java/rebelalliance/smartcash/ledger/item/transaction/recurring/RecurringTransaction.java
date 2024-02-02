@@ -1,8 +1,8 @@
-package rebelalliance.smartcash.ledger.transaction.recurring;
+package rebelalliance.smartcash.ledger.item.transaction.recurring;
 
-import rebelalliance.smartcash.account.Account;
-import rebelalliance.smartcash.ledger.Category;
-import rebelalliance.smartcash.ledger.transaction.Transaction;
+import rebelalliance.smartcash.ledger.container.Account;
+import rebelalliance.smartcash.ledger.container.Category;
+import rebelalliance.smartcash.ledger.item.transaction.Transaction;
 
 import java.time.LocalDate;
 

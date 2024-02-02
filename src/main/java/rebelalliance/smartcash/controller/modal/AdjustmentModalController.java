@@ -5,7 +5,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import rebelalliance.smartcash.account.Account;
+import rebelalliance.smartcash.ledger.container.Account;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.util.NumberUtil;
 

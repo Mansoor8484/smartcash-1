@@ -1,4 +1,4 @@
-package rebelalliance.smartcash.ledger.transaction.recurring;
+package rebelalliance.smartcash.ledger.item.transaction.recurring;
 
 public enum Frequency {
     DAILY,

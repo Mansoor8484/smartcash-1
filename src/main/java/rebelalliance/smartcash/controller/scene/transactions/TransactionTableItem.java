@@ -1,7 +1,7 @@
 package rebelalliance.smartcash.controller.scene.transactions;
 
-import rebelalliance.smartcash.ledger.Adjustment;
-import rebelalliance.smartcash.ledger.transaction.Transaction;
+import rebelalliance.smartcash.ledger.item.Adjustment;
+import rebelalliance.smartcash.ledger.item.transaction.Transaction;
 import rebelalliance.smartcash.util.DateUtil;
 import rebelalliance.smartcash.util.NumberUtil;
 

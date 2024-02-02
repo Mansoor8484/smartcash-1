@@ -1,9 +1,9 @@
-package rebelalliance.smartcash.ledger;
+package rebelalliance.smartcash.ledger.container;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Category {
+public class Category implements IArchivable {
     private final String name;
     private final List<Category> subcategories;
     private boolean isArchived;
