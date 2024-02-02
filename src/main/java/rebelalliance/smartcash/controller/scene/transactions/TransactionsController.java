@@ -3,9 +3,9 @@ package rebelalliance.smartcash.controller.scene.transactions;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Cursor;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
 import rebelalliance.smartcash.Modal;
 import rebelalliance.smartcash.account.Account;
@@ -103,6 +103,9 @@ public class TransactionsController extends BaseController implements IControlle
                 continue;
             }
             if(ledgerItem instanceof Transaction transaction) {
+                if(transaction.getCategory().isArchived()) {
+                    continue;
+                }
                 if(!this.accountDisplay.get(transaction.getAccountFrom())) {
                     continue;
                 }
@@ -161,6 +164,19 @@ public class TransactionsController extends BaseController implements IControlle
                 this.accountDisplay.put(account, checkBox.isSelected());
                 this.update();
             });
+            checkBox.setCursor(Cursor.HAND);
+
+            ContextMenu contextMenu = new ContextMenu();
+            contextMenu.getItems().add(new MenuItem("Edit"));
+            MenuItem archiveMenuItem = new MenuItem("Archive");
+            archiveMenuItem.setOnAction(event -> {
+                account.setArchived(true);
+                this.updateAccounts();
+                this.updateTable();
+            });
+            contextMenu.getItems().add(archiveMenuItem);
+            checkBox.setContextMenu(contextMenu);
+
             this.accountList.getChildren().add(checkBox);
         }
     }
@@ -180,6 +196,19 @@ public class TransactionsController extends BaseController implements IControlle
                 this.categoryDisplay.put(category, checkBox.isSelected());
                 this.update();
             });
+            checkBox.setCursor(Cursor.HAND);
+
+            ContextMenu contextMenu = new ContextMenu();
+            contextMenu.getItems().add(new MenuItem("Edit"));
+            MenuItem archiveMenuItem = new MenuItem("Archive");
+            archiveMenuItem.setOnAction(event -> {
+                category.setArchived(true);
+                this.updateCategories();
+                this.updateTable();
+            });
+            contextMenu.getItems().add(archiveMenuItem);
+            checkBox.setContextMenu(contextMenu);
+
             this.categoryList.getChildren().add(checkBox);
         }
     }
