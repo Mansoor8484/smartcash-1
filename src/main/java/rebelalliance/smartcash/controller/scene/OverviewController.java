@@ -37,11 +37,13 @@ public class OverviewController extends BaseController implements IController {
     private LedgerStats ledgerStats;
 
     private HashMap<Account, Boolean> accountCompositionDisplay;
+    private HashMap<Account, Boolean> historicalAccountDisplay;
 
     @Override
     public void init() {
         this.ledgerStats = new LedgerStats(this.sceneManager.getLedger());
         this.accountCompositionDisplay = new HashMap<>();
+        this.historicalAccountDisplay = new HashMap<>();
 
         this.historicalLineChartXAxis.setForceZeroInRange(false);
         this.historicalLineChartXAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(this.historicalLineChartXAxis) {
@@ -61,7 +63,7 @@ public class OverviewController extends BaseController implements IController {
     public void update() {
         this.updateAccountDisplay();
         this.updateCompositionPieChart();
-        this.updateLineGraph();
+        this.updateHistoricalLineChart();
         this.updateSpendPieChart();
     }
 
@@ -81,7 +83,7 @@ public class OverviewController extends BaseController implements IController {
 
     public void updateCompositionPieChart() {
         this.compositionPieChart.getData().clear();
-        ContextMenu compositionPieChartContextMenu = new ContextMenu();
+        ContextMenu contextMenu = new ContextMenu();
         for(Account account : this.sceneManager.getLedger().getAccounts()) {
             if(!this.accountCompositionDisplay.containsKey(account)) {
                 this.accountCompositionDisplay.put(account, true);
@@ -91,7 +93,7 @@ public class OverviewController extends BaseController implements IController {
                 this.accountCompositionDisplay.put(account, !this.accountCompositionDisplay.get(account));
                 this.updateCompositionPieChart();
             });
-            compositionPieChartContextMenu.getItems().add(menuItem);
+            contextMenu.getItems().add(menuItem);
 
             if(account.isArchived() || !this.accountCompositionDisplay.get(account)) {
                 continue;
@@ -103,16 +105,26 @@ public class OverviewController extends BaseController implements IController {
 
             this.compositionPieChart.getData().add(new PieChart.Data(account.toString(), balance));
         }
-        this.compositionPieChart.setOnContextMenuRequested(event -> compositionPieChartContextMenu.show(this.compositionPieChart, event.getScreenX(), event.getScreenY()));
+        this.compositionPieChart.setOnContextMenuRequested(event -> contextMenu.show(this.compositionPieChart, event.getScreenX(), event.getScreenY()));
         this.compositionPieChart.setCursor(Cursor.HAND);
     }
 
-    public void updateLineGraph() {
+    public void updateHistoricalLineChart() {
+        ContextMenu contextMenu = new ContextMenu();
         this.historicalLineChart.getData().clear();
-
         HashMap<Account, XYChart.Series<Number, Number>> data = new HashMap<>();
         for(Account account : this.sceneManager.getLedger().getAccounts()) {
-            if(account.isArchived()) {
+            if(!this.historicalAccountDisplay.containsKey(account)) {
+                this.historicalAccountDisplay.put(account, true);
+            }
+            MenuItem menuItem = new MenuItem((this.historicalAccountDisplay.get(account) ? "Hide " : "Show ") + account);
+            menuItem.setOnAction(event -> {
+                this.historicalAccountDisplay.put(account, !this.historicalAccountDisplay.get(account));
+                this.updateHistoricalLineChart();
+            });
+            contextMenu.getItems().add(menuItem);
+
+            if(account.isArchived() || !this.historicalAccountDisplay.get(account)) {
                 continue;
             }
             XYChart.Series<Number, Number> series = new XYChart.Series<>();
@@ -124,7 +136,7 @@ public class OverviewController extends BaseController implements IController {
         for(LocalDate date : dayOverDay.keySet()) {
             HashMap<Account, Double> dayBalances = dayOverDay.get(date);
             for(Account account : dayBalances.keySet()) {
-                if(account.isArchived()) {
+                if(account.isArchived() || !this.historicalAccountDisplay.get(account)) {
                     continue;
                 }
                 XYChart.Series<Number, Number> series = data.get(account);
@@ -136,6 +148,8 @@ public class OverviewController extends BaseController implements IController {
         this.historicalLineChartXAxis.setLowerBound(this.sceneManager.getLedger().getLedger().get(0).getDate().minusDays(1).atStartOfDay(ZoneId.systemDefault()).toEpochSecond());
         this.historicalLineChartXAxis.setUpperBound(this.sceneManager.getLedger().getLedger().get(this.sceneManager.getLedger().getLedger().size() - 1).getDate().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toEpochSecond());
 
+        this.historicalLineChart.setOnContextMenuRequested(event -> contextMenu.show(this.historicalLineChart, event.getScreenX(), event.getScreenY()));
+        this.historicalLineChart.setCursor(Cursor.HAND);
     }
 
     public void updateSpendPieChart() {
