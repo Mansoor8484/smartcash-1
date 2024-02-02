@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import rebelalliance.smartcash.Modal;
 import rebelalliance.smartcash.component.menuitem.ArchiveMenuItem;
+import rebelalliance.smartcash.component.menuitem.DeleteMenuItem;
 import rebelalliance.smartcash.ledger.container.Account;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.controller.IController;
@@ -172,6 +173,10 @@ public class TransactionsController extends BaseController implements IControlle
                 this.updateAccounts();
                 this.updateTable();
             }));
+            contextMenu.getItems().add(new DeleteMenuItem(account, () -> {
+                this.updateAccounts();
+                this.updateTable();
+            }));
             checkBox.setContextMenu(contextMenu);
 
             this.accountList.getChildren().add(checkBox);
@@ -198,6 +203,10 @@ public class TransactionsController extends BaseController implements IControlle
             ContextMenu contextMenu = new ContextMenu();
             contextMenu.getItems().add(new MenuItem("Edit"));
             contextMenu.getItems().add(new ArchiveMenuItem(category, () -> {
+                this.updateCategories();
+                this.updateTable();
+            }));
+            contextMenu.getItems().add(new DeleteMenuItem(category, () -> {
                 this.updateCategories();
                 this.updateTable();
             }));

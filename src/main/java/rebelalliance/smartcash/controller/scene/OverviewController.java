@@ -81,6 +81,7 @@ public class OverviewController extends BaseController implements IController {
         this.pieChart.setLabelsVisible(true);
 
         // Line graph.
+        this.accountsWeekOverWeek.getData().clear();
         HashMap<Account, XYChart.Series<Number, Number>> data = new HashMap<>();
         for(Account account : accounts) {
             if(account.isArchived()) {

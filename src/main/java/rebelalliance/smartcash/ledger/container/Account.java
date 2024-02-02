@@ -1,6 +1,7 @@
 package rebelalliance.smartcash.ledger.container;
 
 import rebelalliance.smartcash.exception.NotImplementedException;
+import rebelalliance.smartcash.ledger.IDeletable;
 import rebelalliance.smartcash.ledger.Ledger;
 import rebelalliance.smartcash.ledger.item.Adjustment;
 import rebelalliance.smartcash.ledger.item.LedgerItem;
@@ -11,7 +12,7 @@ import rebelalliance.smartcash.util.MathUtil;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Account implements IArchivable {
+public class Account implements IArchivable, IDeletable {
     private Ledger ledger;
 
     private String name;
@@ -28,6 +29,10 @@ public class Account implements IArchivable {
         this.name = name;
         this.uuid = uuid;
         this.isArchived = false;
+    }
+
+    public void delete() {
+        this.ledger.delete(this);
     }
 
     public String getName() {

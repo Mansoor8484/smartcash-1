@@ -1,9 +1,14 @@
 package rebelalliance.smartcash.ledger.container;
 
+import rebelalliance.smartcash.ledger.IDeletable;
+import rebelalliance.smartcash.ledger.Ledger;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Category implements IArchivable {
+public class Category implements IArchivable, IDeletable {
+    private Ledger ledger;
+
     private final String name;
     private final List<Category> subcategories;
     private boolean isArchived;
@@ -18,6 +23,14 @@ public class Category implements IArchivable {
         this.name = name;
         this.subcategories = subcategories;
         this.isArchived = false;
+    }
+
+    public void delete() {
+        this.ledger.delete(this);
+    }
+
+    public void setLedger(Ledger ledger) {
+        this.ledger = ledger;
     }
 
     public String getName() {

@@ -1,14 +1,22 @@
 package rebelalliance.smartcash.ledger.item;
 
+import rebelalliance.smartcash.ledger.IDeletable;
+import rebelalliance.smartcash.ledger.Ledger;
 import rebelalliance.smartcash.ledger.container.Account;
 
 import java.time.LocalDate;
 
-public class LedgerItem {
+public class LedgerItem implements IDeletable {
     protected Account accountFrom;
     protected double amount;
     protected String notes;
     protected LocalDate date;
+
+    protected Ledger ledger;
+
+    public void delete() {
+        this.ledger.delete(this);
+    }
 
     public Account getAccountFrom() {
         return this.accountFrom;
@@ -40,5 +48,9 @@ public class LedgerItem {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public void setLedger(Ledger ledger) {
+        this.ledger = ledger;
     }
 }

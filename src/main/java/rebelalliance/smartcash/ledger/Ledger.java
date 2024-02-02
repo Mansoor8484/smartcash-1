@@ -5,10 +5,12 @@ import rebelalliance.smartcash.ledger.container.Account;
 import rebelalliance.smartcash.ledger.container.Category;
 import rebelalliance.smartcash.ledger.item.Adjustment;
 import rebelalliance.smartcash.ledger.item.LedgerItem;
+import rebelalliance.smartcash.ledger.item.Transfer;
 import rebelalliance.smartcash.ledger.item.transaction.Transaction;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 public class Ledger {
@@ -44,6 +46,7 @@ public class Ledger {
     }
 
     public void add(LedgerItem ledgerItem) {
+        ledgerItem.setLedger(this);
         this.ledger.add(ledgerItem);
         this.ledger.sort(Comparator.comparing(LedgerItem::getDate));
     }
@@ -82,10 +85,6 @@ public class Ledger {
         return this.getAccount(name) != null;
     }
 
-    public void removeAccount(Account account) {
-        this.accounts.remove(account);
-    }
-
     public List<Category> getCategories() {
         return categories;
     }
@@ -115,6 +114,7 @@ public class Ledger {
             throw new IllegalArgumentException("Category already exists.");
         }
 
+        category.setLedger(this);
         this.categories.add(category);
     }
 
@@ -122,8 +122,42 @@ public class Ledger {
         return this.getCategory(name) != null;
     }
 
-    public void removeCategory(Category category) {
+    public void delete(Account account) {
+        Iterator<LedgerItem> iterator = this.ledger.iterator();
+        while(iterator.hasNext()) {
+            LedgerItem ledgerItem = iterator.next();
+            if(ledgerItem instanceof Transaction || ledgerItem instanceof Adjustment) {
+                if(ledgerItem.getAccountFrom().equals(account)) {
+                    iterator.remove();
+                    continue;
+                }
+            }
+            if(ledgerItem instanceof Transfer transfer) {
+                if(transfer.getAccountFrom().equals(account) || transfer.getAccountTo().equals(account)) {
+                    iterator.remove();
+                }
+            }
+        }
+        this.accounts.remove(account);
+    }
+
+    public void delete(Category category) {
+        Iterator<LedgerItem> iterator = this.ledger.iterator();
+        while(iterator.hasNext()) {
+            LedgerItem ledgerItem = iterator.next();
+            if(!(ledgerItem instanceof Transaction transaction)) {
+                continue;
+            }
+            if(!transaction.getCategory().equals(category)) {
+                continue;
+            }
+            iterator.remove();
+        }
         this.categories.remove(category);
+    }
+
+    public void delete(LedgerItem ledgerItem) {
+        this.ledger.remove(ledgerItem);
     }
 
     public String toString() {
