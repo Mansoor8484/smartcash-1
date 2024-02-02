@@ -103,7 +103,7 @@ public class OverviewController extends BaseController implements IController {
             if(amount == 0) {
                 continue;
             }
-            this.spendPieChart.getData().add(new PieChart.Data(category.toString(), amount));
+            this.spendPieChart.getData().add(new PieChart.Data(category.toString(), Math.abs(amount)));
         }
     }
 
