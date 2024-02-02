@@ -1,6 +1,7 @@
 package rebelalliance.smartcash.controller.scene.transactions;
 
 import rebelalliance.smartcash.ledger.item.Adjustment;
+import rebelalliance.smartcash.ledger.item.LedgerItem;
 import rebelalliance.smartcash.ledger.item.transaction.Transaction;
 import rebelalliance.smartcash.util.DateUtil;
 import rebelalliance.smartcash.util.NumberUtil;
@@ -11,6 +12,8 @@ class TransactionTableItem {
     String account;
     String category;
     String notes;
+
+    LedgerItem ledgerItem;
 
     public TransactionTableItem(Transaction transaction) {
         this.date = DateUtil.format(transaction.getDate());
@@ -54,5 +57,13 @@ class TransactionTableItem {
 
     public String getNotes() {
         return notes;
+    }
+
+    public LedgerItem getLedgerItem() {
+        return ledgerItem;
+    }
+
+    public void setLedgerItem(LedgerItem ledgerItem) {
+        this.ledgerItem = ledgerItem;
     }
 }

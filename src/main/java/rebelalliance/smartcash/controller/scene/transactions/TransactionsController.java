@@ -1,5 +1,6 @@
 package rebelalliance.smartcash.controller.scene.transactions;
 
+import javafx.beans.property.ObjectPropertyBase;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,7 +32,7 @@ import java.util.List;
 
 public class TransactionsController extends BaseController implements IController {
     @FXML
-    private TableView<TransactionTableItem> table;
+    private TableView<TransactionTableItem> transactionsTable;
     @FXML
     private TableColumn<TransactionTableItem, String> dateColumn;
     @FXML
@@ -57,6 +58,21 @@ public class TransactionsController extends BaseController implements IControlle
     @Override
     public void init() {
         // Table.
+        this.transactionsTable.setRowFactory(table -> {
+            final TableRow<TransactionTableItem> row = new TableRow<>();
+            final ContextMenu contextMenu = new ContextMenu();
+            contextMenu.getItems().add(new MenuItem("Edit"));
+            final MenuItem deleteMenuItem = new MenuItem("Delete");
+            deleteMenuItem.setOnAction(event -> {
+                TransactionTableItem item = row.getItem();
+                this.sceneManager.getLedger().remove(item.getLedgerItem());
+                this.updateTable();
+            });
+            contextMenu.getItems().add(deleteMenuItem);
+            row.setContextMenu(contextMenu);
+            return row;
+        });
+
         this.dateColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(
                 cellData.getValue().getDate()
         ));
@@ -96,13 +112,14 @@ public class TransactionsController extends BaseController implements IControlle
     }
 
     public void updateTable() {
-        this.table.getItems().clear();
+        this.transactionsTable.getItems().clear();
 
         // Table.
         for(LedgerItem ledgerItem : this.sceneManager.getLedger().getLedger()) {
             if(ledgerItem.getAccountFrom().isArchived()) {
                 continue;
             }
+
             if(ledgerItem instanceof Transaction transaction) {
                 if(transaction.getCategory().isArchived()) {
                     continue;
@@ -113,7 +130,9 @@ public class TransactionsController extends BaseController implements IControlle
                 if(!this.categoryDisplay.get(transaction.getCategory())) {
                     continue;
                 }
-                this.table.getItems().add(new TransactionTableItem(transaction));
+                TransactionTableItem item = new TransactionTableItem(transaction);
+                item.setLedgerItem(transaction);
+                this.transactionsTable.getItems().add(item);
             }
             if(ledgerItem instanceof Adjustment adjustment) {
                 if(!this.showAdjustments.isSelected()) {
@@ -122,29 +141,35 @@ public class TransactionsController extends BaseController implements IControlle
                 if(!this.accountDisplay.get(adjustment.getAccountFrom())) {
                     continue;
                 }
-                this.table.getItems().add(new TransactionTableItem(adjustment));
+                TransactionTableItem item = new TransactionTableItem(adjustment);
+                item.setLedgerItem(adjustment);
+                this.transactionsTable.getItems().add(item);
             }
             if(ledgerItem instanceof Transfer transfer) {
                 if(!this.showTransfers.isSelected() || transfer.getAccountTo().isArchived()) {
                     continue;
                 }
                 if(this.accountDisplay.get(transfer.getAccountFrom())) {
-                    this.table.getItems().add(new TransactionTableItem(
+                    TransactionTableItem item = new TransactionTableItem(
                             DateUtil.format(transfer.getDate()),
                             NumberUtil.formatAsAmount(-transfer.getAmount()),
                             transfer.getAccountFrom().toString(),
                             "Transfer",
                             transfer.getNotes()
-                    ));
+                    );
+                    item.setLedgerItem(transfer);
+                    this.transactionsTable.getItems().add(item);
                 }
                 if(this.accountDisplay.get(transfer.getAccountTo())) {
-                    this.table.getItems().add(new TransactionTableItem(
+                    TransactionTableItem item = new TransactionTableItem(
                             DateUtil.format(transfer.getDate()),
                             NumberUtil.formatAsAmount(transfer.getAmount()),
                             transfer.getAccountTo().toString(),
                             "Transfer",
                             transfer.getNotes()
-                    ));
+                    );
+                    item.setLedgerItem(transfer);
+                    this.transactionsTable.getItems().add(item);
                 }
             }
         }
