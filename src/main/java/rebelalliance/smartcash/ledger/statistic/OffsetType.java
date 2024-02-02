@@ -1,4 +1,4 @@
-package rebelalliance.smartcash.statistic;
+package rebelalliance.smartcash.ledger.statistic;
 
 public enum OffsetType {
     ADJUSTMENT,

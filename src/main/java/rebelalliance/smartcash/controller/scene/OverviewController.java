@@ -10,7 +10,7 @@ import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.controller.IController;
 import rebelalliance.smartcash.ledger.container.Category;
 import rebelalliance.smartcash.scene.SCScene;
-import rebelalliance.smartcash.statistic.LedgerStats;
+import rebelalliance.smartcash.ledger.statistic.LedgerStats;
 import rebelalliance.smartcash.util.DateUtil;
 
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package rebelalliance.smartcash.statistic;
+package rebelalliance.smartcash.ledger.statistic;
 
 public record Offset(double offset, OffsetType offsetType) {
     public double getAdjustmentOffset(double balance) {

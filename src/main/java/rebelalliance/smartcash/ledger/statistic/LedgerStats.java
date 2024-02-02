@@ -1,4 +1,4 @@
-package rebelalliance.smartcash.statistic;
+package rebelalliance.smartcash.ledger.statistic;
 
 import rebelalliance.smartcash.ledger.container.Account;
 import rebelalliance.smartcash.ledger.*;
