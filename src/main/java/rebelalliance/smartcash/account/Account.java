@@ -9,7 +9,6 @@ import rebelalliance.smartcash.ledger.Transfer;
 import rebelalliance.smartcash.util.MathUtil;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.UUID;
 
 public class Account {
@@ -17,17 +16,18 @@ public class Account {
 
     private String name;
     private final UUID uuid;
-
-    private Date creation;
+    private boolean isArchived;
 
     public Account(String name) {
         this.name = name;
         this.uuid = UUID.randomUUID();
+        this.isArchived = false;
     }
 
     public Account(String name, UUID uuid) {
         this.name = name;
         this.uuid = uuid;
+        this.isArchived = false;
     }
 
     public String getName() {
@@ -99,8 +99,12 @@ public class Account {
         return this.uuid;
     }
 
-    public Date getCreation() {
-        return creation;
+    public boolean isArchived() {
+        return this.isArchived;
+    }
+
+    public void setArchived(boolean isArchived) {
+        this.isArchived = isArchived;
     }
 
     public String toString() {

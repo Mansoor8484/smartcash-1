@@ -99,6 +99,9 @@ public class TransactionsController extends BaseController implements IControlle
 
         // Table.
         for(LedgerItem ledgerItem : this.sceneManager.getLedger().getLedger()) {
+            if(ledgerItem.getAccountFrom().isArchived()) {
+                continue;
+            }
             if(ledgerItem instanceof Transaction transaction) {
                 if(!this.accountDisplay.get(transaction.getAccountFrom())) {
                     continue;
@@ -118,7 +121,7 @@ public class TransactionsController extends BaseController implements IControlle
                 this.table.getItems().add(new TransactionTableItem(adjustment));
             }
             if(ledgerItem instanceof Transfer transfer) {
-                if(!this.showTransfers.isSelected()) {
+                if(!this.showTransfers.isSelected() || transfer.getAccountTo().isArchived()) {
                     continue;
                 }
                 if(this.accountDisplay.get(transfer.getAccountFrom())) {
@@ -148,6 +151,9 @@ public class TransactionsController extends BaseController implements IControlle
         List<Account> accounts = this.sceneManager.getLedger().getAccounts();
         accounts.sort(Comparator.comparing(Account::toString));
         for(Account account : accounts) {
+            if(account.isArchived()) {
+                continue;
+            }
             CheckBox checkBox = new CheckBox();
             checkBox.setText(account.getName());
             checkBox.setSelected(this.accountDisplay.get(account));
@@ -164,6 +170,9 @@ public class TransactionsController extends BaseController implements IControlle
         List<Category> categories = this.sceneManager.getLedger().getCategories();
         categories.sort(Comparator.comparing(Category::toString));
         for(Category category : categories) {
+            if(category.isArchived()) {
+                continue;
+            }
             CheckBox checkBox = new CheckBox();
             checkBox.setText(category.getName());
             checkBox.setSelected(this.categoryDisplay.get(category));

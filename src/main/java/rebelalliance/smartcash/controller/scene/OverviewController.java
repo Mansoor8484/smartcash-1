@@ -58,6 +58,9 @@ public class OverviewController extends BaseController implements IController {
 
         List<Account> accounts = this.sceneManager.getLedger().getAccounts();
         for(Account account : accounts) {
+            if(account.isArchived()) {
+                continue;
+            }
             BigNumber bigNumber = new BigNumber();
             bigNumber.setAccountName(account.toString());
             bigNumber.setAmount(account.getBalance());
@@ -66,6 +69,9 @@ public class OverviewController extends BaseController implements IController {
 
         this.pieChart.getData().clear();
         for(Account account : accounts) {
+            if(account.isArchived()) {
+                continue;
+            }
             double balance = account.getBalance();
             if(balance == 0) {
                 continue;
@@ -78,6 +84,9 @@ public class OverviewController extends BaseController implements IController {
         // Line graph.
         HashMap<Account, XYChart.Series<Number, Number>> data = new HashMap<>();
         for(Account account : accounts) {
+            if(account.isArchived()) {
+                continue;
+            }
             XYChart.Series<Number, Number> series = new XYChart.Series<>();
             series.setName(account.toString());
             data.put(account, series);
@@ -86,6 +95,9 @@ public class OverviewController extends BaseController implements IController {
         for(LocalDate date : dayOverDay.keySet()) {
             HashMap<Account, Double> dayBalances = dayOverDay.get(date);
             for(Account account : dayBalances.keySet()) {
+                if(account.isArchived()) {
+                    continue;
+                }
                 XYChart.Series<Number, Number> series = data.get(account);
                 series.getData().add(new XYChart.Data<>(date.atStartOfDay(ZoneId.systemDefault()).toEpochSecond(), dayBalances.get(account)));
             }
@@ -99,6 +111,9 @@ public class OverviewController extends BaseController implements IController {
         this.spendPieChart.getData().clear();
         HashMap<Category, Double> categorySpend = this.ledgerStats.getCategorySpend(LocalDate.now().minusDays(7), LocalDate.now());
         for(Category category : categorySpend.keySet()) {
+            if(category.isArchived()) {
+                continue;
+            }
             double amount = categorySpend.get(category);
             if(amount == 0) {
                 continue;
