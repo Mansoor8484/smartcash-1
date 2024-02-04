@@ -29,8 +29,8 @@ public class Ledger {
 
         // TODO: Remove this.
         // Load sample data.
-        SampleData sampleData = new SampleData("sample.csv", this);
-        sampleData.loadSampleData();
+        // SampleData sampleData = new SampleData("sample.csv", this);
+        // sampleData.loadSampleData();
     }
 
     public Ledger(List<LedgerItem> ledgerItems) {

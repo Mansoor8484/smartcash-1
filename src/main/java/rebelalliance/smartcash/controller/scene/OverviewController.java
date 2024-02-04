@@ -110,6 +110,10 @@ public class OverviewController extends BaseController implements IController {
     }
 
     public void updateHistoricalLineChart() {
+        if(this.sceneManager.getLedger().getLedger().size() == 0) {
+            return;
+        }
+
         ContextMenu contextMenu = new ContextMenu();
         this.historicalLineChart.getData().clear();
         HashMap<Account, XYChart.Series<Number, Number>> data = new HashMap<>();
