@@ -14,12 +14,12 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Ledger {
-    List<LedgerItem> ledger;
+    List<LedgerItem> ledgerItems;
     List<Account> accounts;
     List<Category> categories;
 
     public Ledger() {
-        this.ledger = new ArrayList<>();
+        this.ledgerItems = new ArrayList<>();
         this.accounts = new ArrayList<>();
         this.categories = new ArrayList<>();
 
@@ -29,30 +29,30 @@ public class Ledger {
 
         // TODO: Remove this.
         // Load sample data.
-        // SampleData sampleData = new SampleData("sample.csv", this);
-        // sampleData.loadSampleData();
+        SampleData sampleData = new SampleData("sample.csv", this);
+        sampleData.loadSampleData();
     }
 
     public Ledger(List<LedgerItem> ledgerItems) {
-        this.ledger = ledgerItems;
+        this.ledgerItems = ledgerItems;
     }
 
     public void sort() {
-        this.ledger.sort(Comparator.comparing(LedgerItem::getDate));
+        this.ledgerItems.sort(Comparator.comparing(LedgerItem::getDate));
     }
 
-    public List<LedgerItem> getLedger() {
-        return this.ledger;
+    public List<LedgerItem> getItems() {
+        return this.ledgerItems;
     }
 
     public void add(LedgerItem ledgerItem) {
         ledgerItem.setLedger(this);
-        this.ledger.add(ledgerItem);
-        this.ledger.sort(Comparator.comparing(LedgerItem::getDate));
+        this.ledgerItems.add(ledgerItem);
+        this.ledgerItems.sort(Comparator.comparing(LedgerItem::getDate));
     }
 
     public void remove(LedgerItem ledgerItem) {
-        this.ledger.remove(ledgerItem);
+        this.ledgerItems.remove(ledgerItem);
     }
 
     public List<Account> getAccounts() {
@@ -123,7 +123,7 @@ public class Ledger {
     }
 
     public void delete(Account account) {
-        Iterator<LedgerItem> iterator = this.ledger.iterator();
+        Iterator<LedgerItem> iterator = this.ledgerItems.iterator();
         while(iterator.hasNext()) {
             LedgerItem ledgerItem = iterator.next();
             if(ledgerItem instanceof Transaction || ledgerItem instanceof Adjustment) {
@@ -142,7 +142,7 @@ public class Ledger {
     }
 
     public void delete(Category category) {
-        Iterator<LedgerItem> iterator = this.ledger.iterator();
+        Iterator<LedgerItem> iterator = this.ledgerItems.iterator();
         while(iterator.hasNext()) {
             LedgerItem ledgerItem = iterator.next();
             if(!(ledgerItem instanceof Transaction transaction)) {
@@ -157,7 +157,7 @@ public class Ledger {
     }
 
     public void delete(LedgerItem ledgerItem) {
-        this.ledger.remove(ledgerItem);
+        this.ledgerItems.remove(ledgerItem);
     }
 
     public String toString() {
@@ -177,7 +177,7 @@ public class Ledger {
         result.append("----------------------------------------\n");
         result.append("Total: $").append(total).append("\n");
         result.append("========================================\n");
-        for(LedgerItem ledgerItem : this.ledger) {
+        for(LedgerItem ledgerItem : this.ledgerItems) {
             if(ledgerItem instanceof Adjustment adjustment) {
                 result.append(adjustment).append("\n");
             }

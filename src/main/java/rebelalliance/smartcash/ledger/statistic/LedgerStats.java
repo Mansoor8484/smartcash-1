@@ -32,7 +32,7 @@ public class LedgerStats {
         this.offsets.clear();
 
         // Generate a list of offsets for each date in the ledger.
-        for(LedgerItem ledgerItem : this.ledger.getLedger()) {
+        for(LedgerItem ledgerItem : this.ledger.getItems()) {
             if(!this.offsets.containsKey(ledgerItem.getDate())) {
                 this.offsets.put(ledgerItem.getDate(), new HashMap<>());
             }
@@ -96,7 +96,7 @@ public class LedgerStats {
 
     public HashMap<Category, Double> getCategorySpend(LocalDate start, LocalDate end) {
         HashMap<Category, Double> categorySpend = new HashMap<>();
-        for(LedgerItem ledgerItem : this.ledger.getLedger()) {
+        for(LedgerItem ledgerItem : this.ledger.getItems()) {
             if(ledgerItem instanceof Adjustment || ledgerItem instanceof Transfer) {
                 continue;
             }
@@ -117,6 +117,6 @@ public class LedgerStats {
     }
 
     public HashMap<Category, Double> getCategorySpend() {
-        return this.getCategorySpend(this.ledger.getLedger().get(0).getDate(), LocalDate.now());
+        return this.getCategorySpend(this.ledger.getItems().get(0).getDate(), LocalDate.now());
     }
 }

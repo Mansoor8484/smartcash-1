@@ -1,6 +1,5 @@
 package rebelalliance.smartcash.controller.scene.transactions;
 
-import javafx.beans.property.ObjectPropertyBase;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -115,7 +114,7 @@ public class TransactionsController extends BaseController implements IControlle
         this.transactionsTable.getItems().clear();
 
         // Table.
-        for(LedgerItem ledgerItem : this.sceneManager.getLedger().getLedger()) {
+        for(LedgerItem ledgerItem : this.sceneManager.getLedger().getItems()) {
             if(ledgerItem.getAccountFrom().isArchived()) {
                 continue;
             }

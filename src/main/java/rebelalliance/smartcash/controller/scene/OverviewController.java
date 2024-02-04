@@ -7,6 +7,7 @@ import javafx.scene.chart.*;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
+import rebelalliance.smartcash.ledger.Ledger;
 import rebelalliance.smartcash.ledger.container.Account;
 import rebelalliance.smartcash.component.BigNumber;
 import rebelalliance.smartcash.controller.BaseController;
@@ -110,17 +111,20 @@ public class OverviewController extends BaseController implements IController {
     }
 
     public void updateHistoricalLineChart() {
-        if(this.sceneManager.getLedger().getLedger().size() == 0) {
+        this.historicalLineChart.getData().clear();
+
+        Ledger ledger = this.sceneManager.getLedger();
+        if(ledger.getItems().size() == 0) {
             return;
         }
 
         ContextMenu contextMenu = new ContextMenu();
-        this.historicalLineChart.getData().clear();
         HashMap<Account, XYChart.Series<Number, Number>> data = new HashMap<>();
-        for(Account account : this.sceneManager.getLedger().getAccounts()) {
+        for(Account account : ledger.getAccounts()) {
             if(!this.historicalAccountDisplay.containsKey(account)) {
                 this.historicalAccountDisplay.put(account, true);
             }
+
             MenuItem menuItem = new MenuItem((this.historicalAccountDisplay.get(account) ? "Hide " : "Show ") + account);
             menuItem.setOnAction(event -> {
                 this.historicalAccountDisplay.put(account, !this.historicalAccountDisplay.get(account));
@@ -149,8 +153,8 @@ public class OverviewController extends BaseController implements IController {
         }
         this.historicalLineChart.getData().setAll(data.values());
 
-        this.historicalLineChartXAxis.setLowerBound(this.sceneManager.getLedger().getLedger().get(0).getDate().minusDays(1).atStartOfDay(ZoneId.systemDefault()).toEpochSecond());
-        this.historicalLineChartXAxis.setUpperBound(this.sceneManager.getLedger().getLedger().get(this.sceneManager.getLedger().getLedger().size() - 1).getDate().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toEpochSecond());
+        this.historicalLineChartXAxis.setLowerBound(ledger.getItems().get(0).getDate().minusDays(1).atStartOfDay(ZoneId.systemDefault()).toEpochSecond());
+        this.historicalLineChartXAxis.setUpperBound(ledger.getItems().get(ledger.getItems().size() - 1).getDate().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toEpochSecond());
 
         this.historicalLineChart.setOnContextMenuRequested(event -> contextMenu.show(this.historicalLineChart, event.getScreenX(), event.getScreenY()));
         this.historicalLineChart.setCursor(Cursor.HAND);

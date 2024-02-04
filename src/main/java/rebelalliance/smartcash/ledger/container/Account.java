@@ -50,7 +50,7 @@ public class Account implements IArchivable, IDeletable {
     public double getBalance(LocalDate dateFrom, LocalDate dateTo) {
         // TODO: Improve this or run on all accounts at the same time, not just one.
         double runningBalance = 0.0;
-        for(LedgerItem ledgerItem : this.ledger.getLedger()) {
+        for(LedgerItem ledgerItem : this.ledger.getItems()) {
             if(ledgerItem.getDate().isAfter(dateTo)) {
                 break;
             }
