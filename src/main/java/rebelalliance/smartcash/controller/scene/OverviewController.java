@@ -7,6 +7,7 @@ import javafx.scene.chart.*;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
+import rebelalliance.smartcash.file.UserPreferences;
 import rebelalliance.smartcash.ledger.Ledger;
 import rebelalliance.smartcash.ledger.container.Account;
 import rebelalliance.smartcash.component.BigNumber;
@@ -19,9 +20,8 @@ import rebelalliance.smartcash.util.DateUtil;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.HashMap;
-import java.util.List;
-import java.util.SortedMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class OverviewController extends BaseController implements IController {
     @FXML
@@ -57,6 +57,19 @@ public class OverviewController extends BaseController implements IController {
         this.historicalLineChartXAxis.setTickUnit(60 * 60 * 24);
         this.historicalLineChartXAxis.setAutoRanging(false);
 
+        // Load user preferences.
+        UserPreferences userPreferences = this.sceneManager.getUserPreferences();
+        if(!userPreferences.containsKey("hiddenAccountCompositionAccounts")) {
+            userPreferences.setString("hiddenAccountCompositionAccounts", "");
+        }
+        String[] hiddenAccountCompositionAccounts = userPreferences.getString("hiddenAccountCompositionAccounts").split(",");
+        for(String accountName : hiddenAccountCompositionAccounts) {
+            Account account = this.sceneManager.getLedger().getAccount(accountName);
+            if(account != null) {
+                this.accountCompositionDisplay.put(account, false);
+            }
+        }
+
         this.update();
     }
 
@@ -89,9 +102,14 @@ public class OverviewController extends BaseController implements IController {
             if(!this.accountCompositionDisplay.containsKey(account)) {
                 this.accountCompositionDisplay.put(account, true);
             }
+
             MenuItem menuItem = new MenuItem((this.accountCompositionDisplay.get(account) ? "Hide " : "Show ") + account);
             menuItem.setOnAction(event -> {
                 this.accountCompositionDisplay.put(account, !this.accountCompositionDisplay.get(account));
+                UserPreferences userPreferences = this.sceneManager.getUserPreferences();
+                String[] savedHiddenAccounts = this.accountCompositionDisplay.keySet().stream()
+                        .filter(accountDisplay -> !this.accountCompositionDisplay.get(accountDisplay)).map(Objects::toString).toArray(String[]::new);
+                userPreferences.setString("hiddenAccountCompositionAccounts", String.join(",", savedHiddenAccounts));
                 this.updateCompositionPieChart();
             });
             contextMenu.getItems().add(menuItem);

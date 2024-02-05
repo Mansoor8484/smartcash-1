@@ -57,6 +57,10 @@ public class SceneManager {
     }
 
     public Ledger getLedger() {
-        return ledger;
+        return this.ledger;
+    }
+
+    public UserPreferences getUserPreferences() {
+        return this.userPreferences;
     }
 }
