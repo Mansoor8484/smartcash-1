@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import rebelalliance.smartcash.SmartCash;
 import rebelalliance.smartcash.controller.BaseController;
-import rebelalliance.smartcash.file.UserPreferences;
+import rebelalliance.smartcash.file.preferences.UserPreferences;
 import rebelalliance.smartcash.ledger.Ledger;
 
 import java.io.IOException;

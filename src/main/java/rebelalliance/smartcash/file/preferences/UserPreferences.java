@@ -1,4 +1,4 @@
-package rebelalliance.smartcash.file;
+package rebelalliance.smartcash.file.preferences;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,34 +34,34 @@ public class UserPreferences {
         }
     }
 
-    public boolean containsKey(String key) {
-        return this.properties.containsKey(key);
+    public boolean containsKey(UserPreference key) {
+        return this.properties.containsKey(key.getKey());
     }
 
-    public String getString(String key) {
-        return this.properties.getProperty(key);
+    public String getString(UserPreference preference) {
+        return this.properties.getProperty(preference.getKey());
     }
 
-    public int getInt(String key) {
-        return Integer.parseInt(this.properties.getProperty(key));
+    public int getInt(UserPreference preference) {
+        return Integer.parseInt(this.properties.getProperty(preference.getKey()));
     }
 
-    public boolean getBoolean(String key) {
-        return Boolean.parseBoolean(this.properties.getProperty(key));
+    public boolean getBoolean(UserPreference preference) {
+        return Boolean.parseBoolean(this.properties.getProperty(preference.getKey()));
     }
 
-    public void setString(String key, String value) {
-        this.properties.setProperty(key, value);
+    public void setString(UserPreference preference, String value) {
+        this.properties.setProperty(preference.getKey(), value);
         this.save();
     }
 
-    public void setInt(String key, int value) {
-        this.properties.setProperty(key, Integer.toString(value));
+    public void setInt(UserPreference preference, int value) {
+        this.properties.setProperty(preference.getKey(), Integer.toString(value));
         this.save();
     }
 
-    public void setBoolean(String key, boolean value) {
-        this.properties.setProperty(key, Boolean.toString(value));
+    public void setBoolean(UserPreference preference, boolean value) {
+        this.properties.setProperty(preference.getKey(), Boolean.toString(value));
         this.save();
     }
 }

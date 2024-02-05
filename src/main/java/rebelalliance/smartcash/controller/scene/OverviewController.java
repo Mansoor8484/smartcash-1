@@ -7,7 +7,7 @@ import javafx.scene.chart.*;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
-import rebelalliance.smartcash.file.UserPreferences;
+import rebelalliance.smartcash.file.preferences.UserPreference;
 import rebelalliance.smartcash.ledger.Ledger;
 import rebelalliance.smartcash.ledger.container.Account;
 import rebelalliance.smartcash.component.BigNumber;
@@ -75,34 +75,45 @@ public class OverviewController extends BaseController implements IController {
         this.updateSpendPieChart();
     }
 
-    public String[] getHiddenContainers(HashMap<Container, Boolean> hashMap) {
-        return hashMap.keySet().stream().filter(account -> !hashMap.get(account)).map(Objects::toString).toArray(String[]::new);
+    public String getHiddenContainers(HashMap<Container, Boolean> hashMap) {
+        Set<Container> keys = hashMap.keySet();
+        String[] hiddenContainers = keys.stream().filter(account -> !hashMap.get(account)).map(Objects::toString).toArray(String[]::new);
+
+        return String.join(",", hiddenContainers);
     }
 
     public void saveUserPreferences() {
-        this.userPreferences.setString("hiddenAccountCompositionAccounts", String.join(",", this.getHiddenContainers(this.accountCompositionDisplay)));
-        this.userPreferences.setString("hiddenHistoricalAccounts", String.join(",", this.getHiddenContainers(this.historicalAccountDisplay)));
-        this.userPreferences.setString("hiddenCategorySpendAccounts", String.join(",", this.getHiddenContainers(this.categorySpendDisplay)));
+        this.userPreferences.setString(
+                UserPreference.OVERVIEW_HIDDEN_COMPOSITION_ACCOUNTS,
+                this.getHiddenContainers(this.accountCompositionDisplay)
+        );
+        this.userPreferences.setString(
+                UserPreference.OVERVIEW_HIDDEN_HISTORICAL_ACCOUNTS,
+                this.getHiddenContainers(this.historicalAccountDisplay)
+        );
+        this.userPreferences.setString(
+                UserPreference.OVERVIEW_HIDDEN_CATEGORY_SPEND_CATEGORIES,
+                this.getHiddenContainers(this.categorySpendDisplay)
+        );
     }
 
-    public void loadDisplayMapUserPreferences(String key, HashMap<Container, Boolean> displayMap) {
-        if(!this.userPreferences.containsKey(key)) {
-            this.userPreferences.setString(key, "");
+    public void loadDisplayMapUserPreferences(UserPreference preference, HashMap<Container, Boolean> displayMap) {
+        if(!this.userPreferences.containsKey(preference)) {
+            this.userPreferences.setString(preference, "");
         }
-        String[] values = this.userPreferences.getString(key).split(",");
+        String[] values = this.userPreferences.getString(preference).split(",");
         for(String container : values) {
             Container account = this.sceneManager.getLedger().getContainer(container);
             if(account != null) {
                 displayMap.put(account, false);
             }
         }
-        System.out.println("Loaded " + displayMap.size() + " hidden accounts for " + key + ".");
     }
 
     public void loadUserPreferences() {
-        this.loadDisplayMapUserPreferences("hiddenAccountCompositionAccounts", this.accountCompositionDisplay);
-        this.loadDisplayMapUserPreferences("hiddenHistoricalAccounts", this.historicalAccountDisplay);
-        this.loadDisplayMapUserPreferences("hiddenCategorySpendAccounts", this.categorySpendDisplay);
+        this.loadDisplayMapUserPreferences(UserPreference.OVERVIEW_HIDDEN_COMPOSITION_ACCOUNTS, this.accountCompositionDisplay);
+        this.loadDisplayMapUserPreferences(UserPreference.OVERVIEW_HIDDEN_HISTORICAL_ACCOUNTS, this.historicalAccountDisplay);
+        this.loadDisplayMapUserPreferences(UserPreference.OVERVIEW_HIDDEN_CATEGORY_SPEND_CATEGORIES, this.categorySpendDisplay);
     }
 
     public void updateAccountDisplay() {
