@@ -41,6 +41,7 @@ public class SceneManager {
 
                 BaseController baseController = loader.getController();
                 baseController.setSceneManager(this);
+                baseController.setUserPreferences(this.userPreferences);
                 baseController.init();
 
                 scenes.put(path, scene);

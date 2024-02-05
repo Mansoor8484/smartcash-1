@@ -44,6 +44,7 @@ public class OverviewController extends BaseController implements IController {
     @Override
     public void init() {
         this.ledgerStats = new LedgerStats(this.sceneManager.getLedger());
+        this.userPreferences = this.sceneManager.getUserPreferences();
 
         this.accountCompositionDisplay = new HashMap<>();
         this.historicalAccountDisplay = new HashMap<>();
@@ -79,19 +80,16 @@ public class OverviewController extends BaseController implements IController {
     }
 
     public void saveUserPreferences() {
-        UserPreferences userPreferences = this.sceneManager.getUserPreferences();
-
-        userPreferences.setString("hiddenAccountCompositionAccounts", String.join(",", this.getHiddenContainers(this.accountCompositionDisplay)));
-        userPreferences.setString("hiddenHistoricalAccounts", String.join(",", this.getHiddenContainers(this.historicalAccountDisplay)));
-        userPreferences.setString("hiddenCategorySpendAccounts", String.join(",", this.getHiddenContainers(this.categorySpendDisplay)));
+        this.userPreferences.setString("hiddenAccountCompositionAccounts", String.join(",", this.getHiddenContainers(this.accountCompositionDisplay)));
+        this.userPreferences.setString("hiddenHistoricalAccounts", String.join(",", this.getHiddenContainers(this.historicalAccountDisplay)));
+        this.userPreferences.setString("hiddenCategorySpendAccounts", String.join(",", this.getHiddenContainers(this.categorySpendDisplay)));
     }
 
     public void loadDisplayMapUserPreferences(String key, HashMap<Container, Boolean> displayMap) {
-        UserPreferences userPreferences = this.sceneManager.getUserPreferences();
-        if(!userPreferences.containsKey(key)) {
-            userPreferences.setString(key, "");
+        if(!this.userPreferences.containsKey(key)) {
+            this.userPreferences.setString(key, "");
         }
-        String[] values = userPreferences.getString(key).split(",");
+        String[] values = this.userPreferences.getString(key).split(",");
         for(String container : values) {
             Container account = this.sceneManager.getLedger().getContainer(container);
             if(account != null) {
