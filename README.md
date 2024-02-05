@@ -5,11 +5,11 @@
 
 # **SmartCash**
 
-Our software, SmartCash, provides a comprehensive overview of budget management tools. Our tool is integrated within a banking application and provides a dynamic environment in which money can be properly allocated into different funds thus allowwing for our users to properly manage their money.
+Our software, SmartCash, provides a comprehensive overview of budget management tools. We have integrated our tool within a banking application to provide a dynamic environment where users can allocate money towards different funds, allowing them to use their money wisely and effectively.
 
 ## **SmartCash Guide**
 1 - In order to get started, you must first create an account. You can do so by selecting the "create account" button.
 
 2 - After creating an account, log in with the same username and password.
 
-3- Upon login, explore the many different tabs and play with the differnt tools
+3- Upon login, explore the many different tabs and play with the different tools
