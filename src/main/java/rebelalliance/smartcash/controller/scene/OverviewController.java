@@ -14,6 +14,7 @@ import rebelalliance.smartcash.component.BigNumber;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.controller.IController;
 import rebelalliance.smartcash.ledger.container.Category;
+import rebelalliance.smartcash.ledger.container.Container;
 import rebelalliance.smartcash.scene.SCScene;
 import rebelalliance.smartcash.ledger.statistic.LedgerStats;
 import rebelalliance.smartcash.util.DateUtil;
@@ -21,7 +22,6 @@ import rebelalliance.smartcash.util.DateUtil;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class OverviewController extends BaseController implements IController {
     @FXML
@@ -37,14 +37,17 @@ public class OverviewController extends BaseController implements IController {
 
     private LedgerStats ledgerStats;
 
-    private HashMap<Account, Boolean> accountCompositionDisplay;
-    private HashMap<Account, Boolean> historicalAccountDisplay;
+    private HashMap<Container, Boolean> accountCompositionDisplay;
+    private HashMap<Container, Boolean> historicalAccountDisplay;
+    private HashMap<Container, Boolean> categorySpendDisplay;
 
     @Override
     public void init() {
         this.ledgerStats = new LedgerStats(this.sceneManager.getLedger());
+
         this.accountCompositionDisplay = new HashMap<>();
         this.historicalAccountDisplay = new HashMap<>();
+        this.categorySpendDisplay = new HashMap<>();
 
         this.historicalLineChartXAxis.setForceZeroInRange(false);
         this.historicalLineChartXAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(this.historicalLineChartXAxis) {
@@ -58,17 +61,7 @@ public class OverviewController extends BaseController implements IController {
         this.historicalLineChartXAxis.setAutoRanging(false);
 
         // Load user preferences.
-        UserPreferences userPreferences = this.sceneManager.getUserPreferences();
-        if(!userPreferences.containsKey("hiddenAccountCompositionAccounts")) {
-            userPreferences.setString("hiddenAccountCompositionAccounts", "");
-        }
-        String[] hiddenAccountCompositionAccounts = userPreferences.getString("hiddenAccountCompositionAccounts").split(",");
-        for(String accountName : hiddenAccountCompositionAccounts) {
-            Account account = this.sceneManager.getLedger().getAccount(accountName);
-            if(account != null) {
-                this.accountCompositionDisplay.put(account, false);
-            }
-        }
+        this.loadUserPreferences();
 
         this.update();
     }
@@ -79,6 +72,39 @@ public class OverviewController extends BaseController implements IController {
         this.updateCompositionPieChart();
         this.updateHistoricalLineChart();
         this.updateSpendPieChart();
+    }
+
+    public String[] getHiddenContainers(HashMap<Container, Boolean> hashMap) {
+        return hashMap.keySet().stream().filter(account -> !hashMap.get(account)).map(Objects::toString).toArray(String[]::new);
+    }
+
+    public void saveUserPreferences() {
+        UserPreferences userPreferences = this.sceneManager.getUserPreferences();
+
+        userPreferences.setString("hiddenAccountCompositionAccounts", String.join(",", this.getHiddenContainers(this.accountCompositionDisplay)));
+        userPreferences.setString("hiddenHistoricalAccounts", String.join(",", this.getHiddenContainers(this.historicalAccountDisplay)));
+        userPreferences.setString("hiddenCategorySpendAccounts", String.join(",", this.getHiddenContainers(this.categorySpendDisplay)));
+    }
+
+    public void loadDisplayMapUserPreferences(String key, HashMap<Container, Boolean> displayMap) {
+        UserPreferences userPreferences = this.sceneManager.getUserPreferences();
+        if(!userPreferences.containsKey(key)) {
+            userPreferences.setString(key, "");
+        }
+        String[] values = userPreferences.getString(key).split(",");
+        for(String container : values) {
+            Container account = this.sceneManager.getLedger().getContainer(container);
+            if(account != null) {
+                displayMap.put(account, false);
+            }
+        }
+        System.out.println("Loaded " + displayMap.size() + " hidden accounts for " + key + ".");
+    }
+
+    public void loadUserPreferences() {
+        this.loadDisplayMapUserPreferences("hiddenAccountCompositionAccounts", this.accountCompositionDisplay);
+        this.loadDisplayMapUserPreferences("hiddenHistoricalAccounts", this.historicalAccountDisplay);
+        this.loadDisplayMapUserPreferences("hiddenCategorySpendAccounts", this.categorySpendDisplay);
     }
 
     public void updateAccountDisplay() {
@@ -97,6 +123,7 @@ public class OverviewController extends BaseController implements IController {
 
     public void updateCompositionPieChart() {
         this.compositionPieChart.getData().clear();
+
         ContextMenu contextMenu = new ContextMenu();
         for(Account account : this.sceneManager.getLedger().getAccounts()) {
             if(!this.accountCompositionDisplay.containsKey(account)) {
@@ -106,11 +133,8 @@ public class OverviewController extends BaseController implements IController {
             MenuItem menuItem = new MenuItem((this.accountCompositionDisplay.get(account) ? "Hide " : "Show ") + account);
             menuItem.setOnAction(event -> {
                 this.accountCompositionDisplay.put(account, !this.accountCompositionDisplay.get(account));
-                UserPreferences userPreferences = this.sceneManager.getUserPreferences();
-                String[] savedHiddenAccounts = this.accountCompositionDisplay.keySet().stream()
-                        .filter(accountDisplay -> !this.accountCompositionDisplay.get(accountDisplay)).map(Objects::toString).toArray(String[]::new);
-                userPreferences.setString("hiddenAccountCompositionAccounts", String.join(",", savedHiddenAccounts));
                 this.updateCompositionPieChart();
+                this.saveUserPreferences();
             });
             contextMenu.getItems().add(menuItem);
 
@@ -147,6 +171,7 @@ public class OverviewController extends BaseController implements IController {
             menuItem.setOnAction(event -> {
                 this.historicalAccountDisplay.put(account, !this.historicalAccountDisplay.get(account));
                 this.updateHistoricalLineChart();
+                this.saveUserPreferences();
             });
             contextMenu.getItems().add(menuItem);
 
@@ -181,17 +206,34 @@ public class OverviewController extends BaseController implements IController {
     public void updateSpendPieChart() {
         this.spendPieChart.getData().clear();
 
+        ContextMenu contextMenu = new ContextMenu();
         HashMap<Category, Double> categorySpend = this.ledgerStats.getCategorySpend(LocalDate.now().minusDays(7), LocalDate.now());
         for(Category category : categorySpend.keySet()) {
-            if(category.isArchived()) {
+            if(!this.categorySpendDisplay.containsKey(category)) {
+                this.categorySpendDisplay.put(category, true);
+            }
+
+            MenuItem menuItem = new MenuItem((this.categorySpendDisplay.get(category) ? "Hide " : "Show ") + category);
+            menuItem.setOnAction(event -> {
+                this.categorySpendDisplay.put(category, !this.categorySpendDisplay.get(category));
+                this.updateSpendPieChart();
+                this.saveUserPreferences();
+            });
+            contextMenu.getItems().add(menuItem);
+
+            // TODO: This doesn't work?
+            if(category.isArchived() || !this.categorySpendDisplay.get(category)) {
                 continue;
             }
             double amount = categorySpend.get(category);
             if(amount == 0) {
                 continue;
             }
+
             this.spendPieChart.getData().add(new PieChart.Data(category.toString(), Math.abs(amount)));
         }
+        this.spendPieChart.setOnContextMenuRequested(event -> contextMenu.show(this.spendPieChart, event.getScreenX(), event.getScreenY()));
+        this.spendPieChart.setCursor(Cursor.HAND);
     }
 
     public void testGoToTransactions(ActionEvent actionEvent) {

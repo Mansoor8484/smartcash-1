@@ -12,7 +12,7 @@ import rebelalliance.smartcash.util.MathUtil;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Account implements IArchivable, IDeletable {
+public class Account extends Container implements IArchivable, IDeletable {
     private Ledger ledger;
 
     private String name;

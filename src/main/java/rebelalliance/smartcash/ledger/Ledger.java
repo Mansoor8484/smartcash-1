@@ -3,6 +3,7 @@ package rebelalliance.smartcash.ledger;
 import rebelalliance.smartcash.file.SampleData;
 import rebelalliance.smartcash.ledger.container.Account;
 import rebelalliance.smartcash.ledger.container.Category;
+import rebelalliance.smartcash.ledger.container.Container;
 import rebelalliance.smartcash.ledger.item.Adjustment;
 import rebelalliance.smartcash.ledger.item.LedgerItem;
 import rebelalliance.smartcash.ledger.item.Transfer;
@@ -53,6 +54,20 @@ public class Ledger {
 
     public void remove(LedgerItem ledgerItem) {
         this.ledgerItems.remove(ledgerItem);
+    }
+
+    public Container getContainer(String name) {
+        for(Account account : this.accounts) {
+            if(account.getName().equals(name)) {
+                return account;
+            }
+        }
+        for(Category category : this.categories) {
+            if(category.getName().equals(name)) {
+                return category;
+            }
+        }
+        return null;
     }
 
     public List<Account> getAccounts() {

@@ -6,7 +6,7 @@ import rebelalliance.smartcash.ledger.Ledger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Category implements IArchivable, IDeletable {
+public class Category extends Container implements IArchivable, IDeletable {
     private Ledger ledger;
 
     private final String name;
