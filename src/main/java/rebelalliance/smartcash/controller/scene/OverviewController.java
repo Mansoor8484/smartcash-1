@@ -82,21 +82,6 @@ public class OverviewController extends BaseController implements IController {
         return String.join(",", hiddenContainers);
     }
 
-    public void saveUserPreferences() {
-        this.userPreferences.setString(
-                UserPreference.OVERVIEW_HIDDEN_COMPOSITION_ACCOUNTS,
-                this.getHiddenContainers(this.accountCompositionDisplay)
-        );
-        this.userPreferences.setString(
-                UserPreference.OVERVIEW_HIDDEN_HISTORICAL_ACCOUNTS,
-                this.getHiddenContainers(this.historicalAccountDisplay)
-        );
-        this.userPreferences.setString(
-                UserPreference.OVERVIEW_HIDDEN_CATEGORY_SPEND_CATEGORIES,
-                this.getHiddenContainers(this.categorySpendDisplay)
-        );
-    }
-
     public void loadDisplayMapUserPreferences(UserPreference preference, HashMap<Container, Boolean> displayMap) {
         this.userPreferences.ensureKey(preference);
 
@@ -142,7 +127,10 @@ public class OverviewController extends BaseController implements IController {
             menuItem.setOnAction(event -> {
                 this.accountCompositionDisplay.put(account, !this.accountCompositionDisplay.get(account));
                 this.updateCompositionPieChart();
-                this.saveUserPreferences();
+                this.userPreferences.setString(
+                        UserPreference.OVERVIEW_HIDDEN_COMPOSITION_ACCOUNTS,
+                        this.getHiddenContainers(this.accountCompositionDisplay)
+                );
             });
             contextMenu.getItems().add(menuItem);
 
@@ -179,7 +167,10 @@ public class OverviewController extends BaseController implements IController {
             menuItem.setOnAction(event -> {
                 this.historicalAccountDisplay.put(account, !this.historicalAccountDisplay.get(account));
                 this.updateHistoricalLineChart();
-                this.saveUserPreferences();
+                this.userPreferences.setString(
+                        UserPreference.OVERVIEW_HIDDEN_HISTORICAL_ACCOUNTS,
+                        this.getHiddenContainers(this.historicalAccountDisplay)
+                );
             });
             contextMenu.getItems().add(menuItem);
 
@@ -225,11 +216,13 @@ public class OverviewController extends BaseController implements IController {
             menuItem.setOnAction(event -> {
                 this.categorySpendDisplay.put(category, !this.categorySpendDisplay.get(category));
                 this.updateSpendPieChart();
-                this.saveUserPreferences();
+                this.userPreferences.setString(
+                        UserPreference.OVERVIEW_HIDDEN_CATEGORY_SPEND_CATEGORIES,
+                        this.getHiddenContainers(this.categorySpendDisplay)
+                );
             });
             contextMenu.getItems().add(menuItem);
 
-            // TODO: This doesn't work?
             if(category.isArchived() || !this.categorySpendDisplay.get(category)) {
                 continue;
             }
