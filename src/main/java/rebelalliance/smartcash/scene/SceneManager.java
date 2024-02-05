@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import rebelalliance.smartcash.SmartCash;
 import rebelalliance.smartcash.controller.BaseController;
+import rebelalliance.smartcash.file.UserPreferences;
 import rebelalliance.smartcash.ledger.Ledger;
 
 import java.io.IOException;
@@ -18,11 +19,15 @@ public class SceneManager {
     private final HashMap<SCScene, BaseController> controllers = new HashMap<>();
     private final Ledger ledger;
 
+    private final UserPreferences userPreferences;
+
     public SceneManager(Stage stage) {
         this.stage = stage;
 
         // TODO: Move this.
         this.ledger = new Ledger();
+
+        this.userPreferences = new UserPreferences("smartcash");
     }
 
     public void setScene(SCScene path) {
