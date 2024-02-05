@@ -98,9 +98,8 @@ public class OverviewController extends BaseController implements IController {
     }
 
     public void loadDisplayMapUserPreferences(UserPreference preference, HashMap<Container, Boolean> displayMap) {
-        if(!this.userPreferences.containsKey(preference)) {
-            this.userPreferences.setString(preference, "");
-        }
+        this.userPreferences.ensureKey(preference);
+
         String[] values = this.userPreferences.getString(preference).split(",");
         for(String container : values) {
             Container account = this.sceneManager.getLedger().getContainer(container);

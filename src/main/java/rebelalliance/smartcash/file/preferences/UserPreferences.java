@@ -38,6 +38,12 @@ public class UserPreferences {
         return this.properties.containsKey(key.getKey());
     }
 
+    public void ensureKey(UserPreference key) {
+        if(!this.containsKey(key)) {
+            this.setString(key, key.getDefaultValue());
+        }
+    }
+
     public String getString(UserPreference preference) {
         return this.properties.getProperty(preference.getKey());
     }
