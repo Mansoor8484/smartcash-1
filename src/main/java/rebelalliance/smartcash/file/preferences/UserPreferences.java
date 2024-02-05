@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.util.Properties;
 
 public class UserPreferences {
-    private String filePath;
+    private final String filePath;
     private Properties properties;
 
     public UserPreferences(String fileName) {

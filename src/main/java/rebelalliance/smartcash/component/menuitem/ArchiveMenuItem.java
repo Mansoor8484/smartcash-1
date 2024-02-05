@@ -1,10 +1,10 @@
 package rebelalliance.smartcash.component.menuitem;
 
 import javafx.scene.control.MenuItem;
-import rebelalliance.smartcash.ledger.container.IArchivable;
+import rebelalliance.smartcash.ledger.container.Container;
 
 public class ArchiveMenuItem extends MenuItem {
-    public ArchiveMenuItem(IArchivable item, Runnable onAction) {
+    public ArchiveMenuItem(Container item, Runnable onAction) {
         super("Archive");
 
         this.setOnAction(e -> {

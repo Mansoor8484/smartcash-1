@@ -9,7 +9,6 @@ public class Adjustment extends LedgerItem {
     public Adjustment(Account account, double amount) {
         this.accountFrom = account;
         this.amount = amount;
-        this.notes = notes;
 
         this.date = LocalDate.now();
     }
@@ -17,7 +16,6 @@ public class Adjustment extends LedgerItem {
     public Adjustment(Account account, double amount, LocalDate date) {
         this.accountFrom = account;
         this.amount = amount;
-        this.notes = notes;
 
         this.date = date;
     }

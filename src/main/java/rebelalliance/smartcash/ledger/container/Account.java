@@ -2,7 +2,6 @@ package rebelalliance.smartcash.ledger.container;
 
 import rebelalliance.smartcash.exception.NotImplementedException;
 import rebelalliance.smartcash.ledger.IDeletable;
-import rebelalliance.smartcash.ledger.Ledger;
 import rebelalliance.smartcash.ledger.item.Adjustment;
 import rebelalliance.smartcash.ledger.item.LedgerItem;
 import rebelalliance.smartcash.ledger.item.transaction.Transaction;
@@ -12,39 +11,18 @@ import rebelalliance.smartcash.util.MathUtil;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Account extends Container implements IArchivable, IDeletable {
-    private Ledger ledger;
-
-    private String name;
-    private final UUID uuid;
-    private boolean isArchived;
-
+public class Account extends Container implements IDeletable {
     public Account(String name) {
-        this.name = name;
-        this.uuid = UUID.randomUUID();
-        this.isArchived = false;
+        super(name);
     }
 
     public Account(String name, UUID uuid) {
-        this.name = name;
-        this.uuid = uuid;
-        this.isArchived = false;
+        super(name, uuid);
     }
 
+    @Override
     public void delete() {
         this.ledger.delete(this);
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setLedger(Ledger ledger) {
-        this.ledger = ledger;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public double getBalance(LocalDate dateFrom, LocalDate dateTo) {
@@ -98,21 +76,5 @@ public class Account extends Container implements IArchivable, IDeletable {
 
     public double getBalanceTo(LocalDate dateTo) {
         return this.getBalance(LocalDate.of(1970, 1, 1), dateTo);
-    }
-
-    public UUID getUuid() {
-        return this.uuid;
-    }
-
-    public boolean isArchived() {
-        return this.isArchived;
-    }
-
-    public void setArchived(boolean isArchived) {
-        this.isArchived = isArchived;
-    }
-
-    public String toString() {
-        return this.name;
     }
 }
