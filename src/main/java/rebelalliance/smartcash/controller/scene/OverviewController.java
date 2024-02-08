@@ -209,7 +209,12 @@ public class OverviewController extends BaseController implements IController {
         this.spendPieChart.getData().clear();
 
         ContextMenu contextMenu = new ContextMenu();
-        HashMap<Category, Double> categorySpend = this.ledgerStats.getCategorySpend(LocalDate.now().minusDays(7), LocalDate.now());
+        // HashMap<Category, Double> categorySpend = this.ledgerStats.getCategorySpend(LocalDate.now().minusDays(7), LocalDate.now());
+        // TODO: Remove this, test code.
+        HashMap<Category, Double> categorySpend = this.ledgerStats.getCategorySpend(
+                this.sceneManager.getLedger().getItems().get(this.sceneManager.getLedger().getItems().size() - 1).getDate().minusDays(7),
+                this.sceneManager.getLedger().getItems().get(this.sceneManager.getLedger().getItems().size() - 1).getDate()
+        );
         for(Category category : categorySpend.keySet()) {
             if(!this.categorySpendDisplay.containsKey(category)) {
                 this.categorySpendDisplay.put(category, true);
