@@ -44,12 +44,15 @@ public class OverviewController extends BaseController implements IController {
     @Override
     public void init() {
         this.ledgerStats = new LedgerStats(this.sceneManager.getLedger());
-        this.userPreferences = this.sceneManager.getUserPreferences();
 
+        // Load user preferences.
+        this.userPreferences = this.sceneManager.getUserPreferences();
         this.accountCompositionDisplay = new HashMap<>();
         this.historicalAccountDisplay = new HashMap<>();
         this.categorySpendDisplay = new HashMap<>();
+        this.loadUserPreferences();
 
+        // Line chart ranging.
         this.historicalLineChartXAxis.setForceZeroInRange(false);
         this.historicalLineChartXAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(this.historicalLineChartXAxis) {
             @Override
@@ -61,8 +64,10 @@ public class OverviewController extends BaseController implements IController {
         this.historicalLineChartXAxis.setTickUnit(60 * 60 * 24);
         this.historicalLineChartXAxis.setAutoRanging(false);
 
-        // Load user preferences.
-        this.loadUserPreferences();
+        // Cursors.
+        this.compositionPieChart.setCursor(Cursor.HAND);
+        this.historicalLineChart.setCursor(Cursor.HAND);
+        this.spendPieChart.setCursor(Cursor.HAND);
 
         this.update();
     }
@@ -145,7 +150,6 @@ public class OverviewController extends BaseController implements IController {
             this.compositionPieChart.getData().add(new PieChart.Data(account.toString(), balance));
         }
         this.compositionPieChart.setOnContextMenuRequested(event -> contextMenu.show(this.compositionPieChart, event.getScreenX(), event.getScreenY()));
-        this.compositionPieChart.setCursor(Cursor.HAND);
     }
 
     public void updateHistoricalLineChart() {
@@ -199,7 +203,6 @@ public class OverviewController extends BaseController implements IController {
         this.historicalLineChartXAxis.setUpperBound(ledger.getItems().get(ledger.getItems().size() - 1).getDate().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toEpochSecond());
 
         this.historicalLineChart.setOnContextMenuRequested(event -> contextMenu.show(this.historicalLineChart, event.getScreenX(), event.getScreenY()));
-        this.historicalLineChart.setCursor(Cursor.HAND);
     }
 
     public void updateSpendPieChart() {
@@ -234,7 +237,6 @@ public class OverviewController extends BaseController implements IController {
             this.spendPieChart.getData().add(new PieChart.Data(category.toString(), Math.abs(amount)));
         }
         this.spendPieChart.setOnContextMenuRequested(event -> contextMenu.show(this.spendPieChart, event.getScreenX(), event.getScreenY()));
-        this.spendPieChart.setCursor(Cursor.HAND);
     }
 
     public void testGoToTransactions(ActionEvent actionEvent) {
