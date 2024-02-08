@@ -3,11 +3,11 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/Mansoor8484/smartcash-1)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/Mansoor8484/smartcash-1)
 
-# **SmartCash**
+# SmartCash
 
-Our software, SmartCash, provides a comprehensive overview of budget management tools. We have integrated our tool within a banking application to provide a dynamic environment where users can allocate money towards different funds, allowing them to use their money wisely and effectively.
+SmartCash provides a comprehensive overview of budget management tools allowing users to properly allocate funds and manage their income. Our developers have integrated tools within a banking application to provide a dynamic environment where users can allocate money towards different funds, allowing them to spend/save their money wisely and effectively.
 
-## **SmartCash Guide**
+## SmartCash Guide
 1 - In order to get started, you must first create an account. You can do so by selecting the "create account" button.
 
 2 - After creating an account, log in with the same username and password.
