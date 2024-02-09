@@ -2,6 +2,7 @@ package rebelalliance.smartcash;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import rebelalliance.smartcash.http.SmartCashHttpServer;
 import rebelalliance.smartcash.scene.SCScene;
 import rebelalliance.smartcash.scene.SceneManager;
 
@@ -18,6 +19,10 @@ public class SmartCash extends Application {
         SceneManager sceneManager = new SceneManager(stage);
         sceneManager.setScene(SCScene.OVERVIEW);
         stage.show();
+
+        // HTTP server.
+        SmartCashHttpServer httpServer = new SmartCashHttpServer();
+        httpServer.start();
     }
 
     public static void main(String[] args) {
