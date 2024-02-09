@@ -19,6 +19,7 @@ public class SmartCash extends Application {
         SceneManager sceneManager = new SceneManager(stage);
         sceneManager.setScene(SCScene.OVERVIEW);
         stage.show();
+        stage.setOnCloseRequest(e -> System.exit(0));
 
         // HTTP server.
         SmartCashHttpServer httpServer = new SmartCashHttpServer();
