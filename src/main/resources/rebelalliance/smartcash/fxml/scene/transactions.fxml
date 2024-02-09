@@ -22,7 +22,6 @@
         <Button mnemonicParsing="false" onMouseClicked="#addTransaction" text="Add Transaction" />
         <Button layoutX="534.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#addAdjustment"
                 text="Add Adjustment" />
-        <Button mnemonicParsing="false" text="Recurring Transactions" />
     </HBox>
     <HBox alignment="CENTER" prefHeight="727.0" prefWidth="600.0" spacing="15.0">
         <TableView fx:id="transactionsTable" prefHeight="360.0" prefWidth="920.0">
