@@ -22,7 +22,7 @@ public class SmartCash extends Application {
         stage.setOnCloseRequest(e -> System.exit(0));
 
         // HTTP server.
-        SmartCashHttpServer httpServer = new SmartCashHttpServer();
+        SmartCashHttpServer httpServer = new SmartCashHttpServer(sceneManager.getLedger());
         httpServer.start();
     }
 

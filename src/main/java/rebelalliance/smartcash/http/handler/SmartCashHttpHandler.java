@@ -1,11 +1,13 @@
 package rebelalliance.smartcash.http.handler;
 
 import com.sun.net.httpserver.HttpExchange;
+import rebelalliance.smartcash.ledger.Ledger;
 
 import java.io.OutputStream;
 
 public class SmartCashHttpHandler {
     String route;
+    Ledger ledger;
 
     public SmartCashHttpHandler(String route) {
         this.route = route;
@@ -31,6 +33,10 @@ public class SmartCashHttpHandler {
         }catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setLedger(Ledger ledger) {
+        this.ledger = ledger;
     }
 
     public String getRoute() {
