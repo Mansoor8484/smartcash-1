@@ -2,6 +2,7 @@ package rebelalliance.smartcash.http;
 
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import rebelalliance.smartcash.http.handler.CategoriesHandler;
 import rebelalliance.smartcash.http.handler.SmartCashHttpHandler;
 import rebelalliance.smartcash.http.handler.AccountsHandler;
 import rebelalliance.smartcash.ledger.Ledger;
@@ -12,7 +13,8 @@ public class SmartCashHttpServer {
     Ledger ledger;
 
     private final SmartCashHttpHandler[] HANDLERS = {
-            new AccountsHandler()
+            new AccountsHandler(),
+            new CategoriesHandler()
     };
 
     public SmartCashHttpServer(Ledger ledger) {
