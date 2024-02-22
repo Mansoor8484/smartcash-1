@@ -12,7 +12,6 @@ public class UserPreferences {
     public UserPreferences(String fileName) {
         this.filePath = System.getProperty("user.home") + "/" + fileName + ".properties";
         File file = new File(this.filePath);
-        System.out.println(filePath);
         try {
             if(!file.exists()) {
                 file.createNewFile();
