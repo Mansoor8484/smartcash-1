@@ -1,7 +1,7 @@
 module rebelalliance.smartcash {
     requires javafx.controls;
     requires javafx.fxml;
-    requires jdk.httpserver;
+    requires java.net.http;
 
     opens rebelalliance.smartcash to javafx.graphics;
 
