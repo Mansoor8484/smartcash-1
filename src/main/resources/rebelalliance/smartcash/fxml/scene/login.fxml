@@ -39,17 +39,17 @@
         <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
         </padding>
-        <PasswordField promptText="Enter your password" GridPane.columnIndex="1" GridPane.rowIndex="1"
-                       fx:id="passwordInput" />
         <Label text="Username:" textAlignment="RIGHT" />
         <TextField promptText="Enter your username" GridPane.columnIndex="1" fx:id="usernameInput" />
+        <Label text="Password:" textAlignment="RIGHT" GridPane.rowIndex="1" />
+        <PasswordField promptText="Enter your password" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                       fx:id="passwordInput" />
         <Button mnemonicParsing="false" style="-fx-background-color: #4CAF50; -fx-background-radius: 0px;"
                 text="Login" textFill="#3b3b3b" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="loginButton">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Button>
-        <Label text="Password:" textAlignment="RIGHT" GridPane.rowIndex="1" />
     </GridPane>
     <Hyperlink text="Don't have an account? Register Here" textFill="#dff0d8">
         <font>
