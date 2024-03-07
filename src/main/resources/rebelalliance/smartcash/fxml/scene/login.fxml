@@ -51,7 +51,7 @@
             </font>
         </Button>
     </GridPane>
-    <Hyperlink text="Don't have an account? Register Here" textFill="#dff0d8">
+    <Hyperlink text="Don't have an account? Register Here" textFill="#dff0d8" onMouseClicked="#onRegisterClick">
         <font>
             <Font name="System Bold" size="14.0" />
         </font>

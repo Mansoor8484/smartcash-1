@@ -25,7 +25,7 @@
                 <Font size="16.0" />
             </font>
         </Text>
-        <Text fill="#2079c7" strokeType="OUTSIDE" strokeWidth="0.0" text=" Log in">
+        <Text fill="#2079c7" strokeType="OUTSIDE" strokeWidth="0.0" text=" Log in" onMouseClicked="#onLoginClick">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>

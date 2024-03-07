@@ -7,6 +7,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.controller.IController;
+import rebelalliance.smartcash.scene.SCScene;
 
 public class LoginController extends BaseController implements IController {
     @FXML
@@ -15,6 +16,9 @@ public class LoginController extends BaseController implements IController {
     private PasswordField passwordInput;
     @FXML
     private Button loginButton;
+
     @FXML
-    private Hyperlink registerLink;
+    protected void onRegisterClick() {
+        this.sceneManager.setScene(SCScene.REGISTER);
+    }
 }

@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.controller.IController;
+import rebelalliance.smartcash.scene.SCScene;
 import rebelalliance.smartcash.util.EmailUtil;
 
 import java.util.Random;
@@ -86,5 +87,10 @@ public class RegisterController extends BaseController implements IController {
         System.out.println("Routing Number: " + routingNumber);
 
         // TODO: Call database function.
+    }
+
+    @FXML
+    protected void onLoginClick() {
+        this.sceneManager.setScene(SCScene.LOGIN);
     }
 }
