@@ -17,7 +17,7 @@ public class SmartCash extends Application {
         // Show.
         // TODO: Change default scene.
         SceneManager sceneManager = new SceneManager(stage);
-        sceneManager.setScene(SCScene.OVERVIEW);
+        sceneManager.setScene(SCScene.LOGIN);
         stage.show();
         stage.setOnCloseRequest(e -> System.exit(0));
 
