@@ -23,6 +23,7 @@ public class SceneManager {
 
     private final UserPreferences userPreferences;
 
+    private SCScene currentScene;
 
     public SceneManager(Stage stage, DatabaseManager databaseManager) {
         this.stage = stage;
@@ -35,6 +36,12 @@ public class SceneManager {
     }
 
     public void setScene(SCScene path) {
+        if(this.currentScene == path) {
+            return;
+        }
+
+        this.currentScene = path;
+
         FXMLLoader loader = new FXMLLoader(SmartCash.class.getResource("fxml/scene/" + path.getPath() + ".fxml"));
 
         Scene scene = scenes.get(path);
