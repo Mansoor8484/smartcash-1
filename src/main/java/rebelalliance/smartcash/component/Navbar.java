@@ -43,4 +43,17 @@ public class Navbar extends HBox {
     protected void onSecurityClick() {
         this.sceneManager.setScene(SCScene.SECURITY);
     }
+
+    @FXML
+    protected void onNotificationSettingsClick() {
+    }
+
+    @FXML
+    protected void onActivityClick() {
+    }
+
+    @FXML
+    protected void onSignOutClick() {
+        this.sceneManager.setScene(SCScene.LOGIN);
+    }
 }
