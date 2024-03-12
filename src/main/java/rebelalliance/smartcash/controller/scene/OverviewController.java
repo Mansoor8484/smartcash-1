@@ -7,6 +7,7 @@ import javafx.scene.chart.*;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
+import rebelalliance.smartcash.component.Navbar;
 import rebelalliance.smartcash.file.preferences.UserPreference;
 import rebelalliance.smartcash.ledger.Ledger;
 import rebelalliance.smartcash.ledger.container.Account;
@@ -43,6 +44,8 @@ public class OverviewController extends BaseController implements IController {
 
     @Override
     public void init() {
+        this.header.getChildren().add(new Navbar(this.sceneManager));
+
         this.ledgerStats = new LedgerStats(this.sceneManager.getLedger());
 
         // Load user preferences.

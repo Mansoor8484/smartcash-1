@@ -7,6 +7,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import rebelalliance.smartcash.Modal;
+import rebelalliance.smartcash.component.Navbar;
 import rebelalliance.smartcash.component.menuitem.ArchiveMenuItem;
 import rebelalliance.smartcash.component.menuitem.DeleteMenuItem;
 import rebelalliance.smartcash.ledger.container.Account;
@@ -56,6 +57,8 @@ public class TransactionsController extends BaseController implements IControlle
 
     @Override
     public void init() {
+        this.header.getChildren().add(new Navbar(this.sceneManager));
+
         // Table.
         this.transactionsTable.setRowFactory(table -> {
             final TableRow<TransactionTableItem> row = new TableRow<>();
@@ -333,9 +336,5 @@ public class TransactionsController extends BaseController implements IControlle
             this.categoryDisplay.put(category, true);
         }
         this.updateCategories();
-    }
-
-    public void testGoToOverview(ActionEvent actionEvent) {
-        this.sceneManager.setScene(SCScene.OVERVIEW);
     }
 }

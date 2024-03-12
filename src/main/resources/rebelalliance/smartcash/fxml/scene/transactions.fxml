@@ -11,14 +11,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="1200.0" spacing="5.0" xmlns="http://javafx.com/javafx/21"
+<VBox prefHeight="800.0" prefWidth="1200.0" spacing="5.0" xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="rebelalliance.smartcash.controller.scene.transactions.TransactionsController">
+    <VBox fx:id="header" prefHeight="40.0" prefWidth="1200.0" />
     <HBox alignment="BASELINE_CENTER" fillHeight="false" prefHeight="0.0" prefWidth="600.0" spacing="5.0">
         <VBox.margin>
             <Insets left="5.0" right="5.0" top="5.0" />
         </VBox.margin>
-        <Button mnemonicParsing="false" onAction="#testGoToOverview" text="Go to Overview" />
         <Button mnemonicParsing="false" onMouseClicked="#addTransaction" text="Add Transaction" />
         <Button layoutX="534.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#addAdjustment"
                 text="Add Adjustment" />
