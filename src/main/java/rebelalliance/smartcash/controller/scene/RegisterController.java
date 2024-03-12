@@ -87,6 +87,7 @@ public class RegisterController extends BaseController implements IController {
         System.out.println("Routing Number: " + routingNumber);
 
         // TODO: Call database function.
+        this.databaseManager.registerUser(email, password);
     }
 
     @FXML

@@ -2,13 +2,18 @@ package rebelalliance.smartcash;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import rebelalliance.smartcash.database.DatabaseManager;
 import rebelalliance.smartcash.http.SmartCashHttpServer;
 import rebelalliance.smartcash.scene.SCScene;
 import rebelalliance.smartcash.scene.SceneManager;
 
 public class SmartCash extends Application {
+    DatabaseManager databaseManager;
+
     @Override
     public void start(Stage stage) {
+        this.databaseManager = new DatabaseManager();
+
         // Window setup.
         stage.setWidth(1200);
         stage.setHeight(800);
@@ -16,7 +21,7 @@ public class SmartCash extends Application {
 
         // Show.
         // TODO: Change default scene.
-        SceneManager sceneManager = new SceneManager(stage);
+        SceneManager sceneManager = new SceneManager(stage, databaseManager);
         sceneManager.setScene(SCScene.LOGIN);
         stage.show();
         stage.setOnCloseRequest(e -> System.exit(0));
