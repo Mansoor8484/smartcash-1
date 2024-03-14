@@ -1,6 +1,7 @@
 package rebelalliance.smartcash.controller.scene;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -88,6 +89,17 @@ public class RegisterController extends BaseController implements IController {
 
         // TODO: Call database function.
         this.databaseManager.registerUser(email, password);
+
+        // Show success prompt.
+        // TODO: Remove this.
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText("Account Created");
+        alert.setContentText("Your account has been created. You may log in now.");
+        alert.showAndWait();
+
+        // Go to login.
+        this.sceneManager.setScene(SCScene.LOGIN);
     }
 
     @FXML
