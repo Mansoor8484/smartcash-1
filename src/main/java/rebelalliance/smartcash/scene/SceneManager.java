@@ -49,6 +49,7 @@ public class SceneManager {
             try {
                 Parent parent = loader.load();
                 scene = new Scene(parent);
+                scene.getRoot().setStyle("-fx-background-color: #3b3b3b");
 
                 BaseController baseController = loader.getController();
                 baseController.setSceneManager(this);
