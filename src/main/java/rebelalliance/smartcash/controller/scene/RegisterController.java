@@ -1,5 +1,4 @@
 package rebelalliance.smartcash.controller.scene;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -10,12 +9,14 @@ import javafx.scene.text.Text;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.controller.IController;
 import rebelalliance.smartcash.scene.SCScene;
-import rebelalliance.smartcash.util.EmailUtil;
-
+import rebelalliance.smartcash.util.EmailUtil; 
 import java.util.Random;
+import rebelalliance.smartcash.database.DatabaseConnections.src.AzureDatabaseConnection;
 
-public class RegisterController extends BaseController implements IController {
+
+public class RegisterController extends BaseController implements IController{
     Random random = new Random();
+    AzureDatabaseConnection databaseConnection = new AzureDatabaseConnection();
 
     @FXML
     private TextField emailInput;
@@ -50,7 +51,7 @@ public class RegisterController extends BaseController implements IController {
     }
 
     @FXML
-    protected void onRegisterClick() {
+    protected void onRegisterClick(){
         this.errors.getChildren().clear();
 
         String email = emailInput.getText();
@@ -78,21 +79,24 @@ public class RegisterController extends BaseController implements IController {
         }
 
         // These two lines should be moved to the backend.
-        int accountNumber = random.nextInt(100000, 1000000);
-        int routingNumber = random.nextInt(100000, 1000000);
+        // ...
 
-        // TODO: Remove this.
-        System.out.println("Email: " + email);
-        System.out.println("Password: " + password);
-        System.out.println("Account Number: " + accountNumber);
-        System.out.println("Routing Number: " + routingNumber);
+            int accountNumber = random.nextInt(100000, 1000000);
+            int routingNumber = random.nextInt(100000, 1000000);
 
-        // TODO: Call database function.
-        this.databaseManager.registerUser(email, password);
+            // TODO: Remove this.
+  
 
-        // Show success prompt.
-        // TODO: Remove this.
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            // TODO: Call database function.
+    
+            this.databaseManager.registerUser(email, password);
+
+            //Have to call the database function to register the user along with creating their user number and routing and account number
+            this.databaseConnection.DBregisterUser(email, password);
+
+            // Show success prompt.
+            // TODO: Remove this.
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success");
         alert.setHeaderText("Account Created");
         alert.setContentText("Your account has been created. You may log in now.");
@@ -106,4 +110,5 @@ public class RegisterController extends BaseController implements IController {
     protected void onLoginClick() {
         this.sceneManager.setScene(SCScene.LOGIN);
     }
+
 }
