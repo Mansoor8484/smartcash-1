@@ -13,6 +13,7 @@ import rebelalliance.smartcash.ledger.Ledger;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class SceneManager {
     Stage stage;
@@ -70,6 +71,9 @@ public class SceneManager {
         }else {
             controllers.get(path).update();
         }
+
+        // This fixes JFX's label stacking issue.
+        Objects.requireNonNull(scene).getRoot().layout();
 
         this.stage.setScene(scene);
         this.stage.setTitle(path.getTitle() + " - SmartCash");
