@@ -3,8 +3,10 @@ package rebelalliance.smartcash.component;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import rebelalliance.smartcash.SmartCash;
 import rebelalliance.smartcash.scene.SCScene;
 import rebelalliance.smartcash.scene.SceneManager;
@@ -26,6 +28,14 @@ public class Navbar extends HBox {
         }
 
         this.sceneManager = sceneManager;
+
+        this.setStyle("-fx-background-color: #777777");
+        this.setEffect(new DropShadow(
+                10,
+                0,
+                3,
+                new Color(0, 0, 0, 0.3)
+        ));
     }
 
     @FXML

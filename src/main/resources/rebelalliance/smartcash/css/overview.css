@@ -1,0 +1,24 @@
+.chart-title {
+    -fx-text-fill: #b4dcb0;
+}
+
+.chart-pie-label {
+    -fx-fill: #b4dcb0;
+
+    z-index: 1;
+}
+
+.chart-legend {
+    -fx-background-color: #b4dcb0;
+
+    -fx-border-color: #4caf50;
+    -fx-border-width: 2px;
+
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.axis {
+    -fx-tick-label-fill: #b4dcb0;
+    -fx-tick-label-font-size: 12px;
+}
