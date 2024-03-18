@@ -50,7 +50,7 @@ public class SceneManager {
         if(scene == null) {
             try {
                 Parent parent = loader.load();
-                scene = new Scene(parent);
+                scene = new Scene(parent, 1200, 800);
                 URL stylesheetUrl = SmartCash.class.getResource("css/" + path.getPath() + ".css");
                 if(stylesheetUrl != null) {
                     scene.getStylesheets().add(stylesheetUrl.toExternalForm());
