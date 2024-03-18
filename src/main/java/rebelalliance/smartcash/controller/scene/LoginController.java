@@ -9,13 +9,13 @@ import rebelalliance.smartcash.scene.SCScene;
 
 public class LoginController extends BaseController implements IController {
     @FXML
-    private TextField usernameInput;
+    private TextField emailInput;
     @FXML
     private PasswordField passwordInput;
 
     @FXML
     protected void onLoginClick() {
-        boolean isLoggedIn = this.databaseManager.isLoginSuccessful(usernameInput.getText(), passwordInput.getText());
+        boolean isLoggedIn = this.databaseManager.isLoginSuccessful(emailInput.getText(), passwordInput.getText());
 
         if(isLoggedIn) {
             this.sceneManager.setScene(SCScene.OVERVIEW);
