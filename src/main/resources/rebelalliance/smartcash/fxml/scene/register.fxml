@@ -12,22 +12,20 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="800" prefWidth="1200" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="rebelalliance.smartcash.controller.scene.RegisterController">
-    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-          prefHeight="800" prefWidth="1200">
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Register">
+<AnchorPane prefHeight="800" prefWidth="1200" style="-fx-background-color: #3b3b3b;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rebelalliance.smartcash.controller.scene.RegisterController">
+    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800" prefWidth="1200">
+        <Text fill="#dff0d8" strokeType="OUTSIDE" strokeWidth="0.0" text="Register">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>
         </Text>
         <TextFlow lineSpacing="2.0" textAlignment="CENTER">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account?">
+            <Text fill="#dff0d8" strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account?">
                 <font>
                     <Font size="16.0" />
                 </font>
             </Text>
-            <Text fill="#2079c7" strokeType="OUTSIDE" strokeWidth="0.0" text=" Log in" onMouseClicked="#onLoginClick">
+            <Text fill="#79c176" onMouseClicked="#onLoginClick" strokeType="OUTSIDE" strokeWidth="0.0" text=" Log in">
                 <cursor>
                     <Cursor fx:constant="HAND" />
                 </cursor>
@@ -36,8 +34,7 @@
                 </font>
             </Text>
         </TextFlow>
-        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="350.0"
-              spacing="5.0">
+        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="350.0" spacing="5.0">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
@@ -54,9 +51,7 @@
                 <VBox.margin>
                     <Insets top="10.0" />
                 </VBox.margin>
-                <Button fx:id="registerButton" alignment="CENTER_RIGHT" mnemonicParsing="false"
-                        onAction="#onRegisterClick"
-                        text="Register" textAlignment="CENTER" />
+                <Button fx:id="registerButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onRegisterClick" text="Register" textAlignment="CENTER" />
             </HBox>
             <VBox fx:id="errors" alignment="TOP_RIGHT" minHeight="-Infinity" prefHeight="25.0" prefWidth="350.0" />
         </VBox>
