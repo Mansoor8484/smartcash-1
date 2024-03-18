@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="rebelalliance.smartcash.controller.scene.SecurityController"
+      prefWidth="400" spacing="10">
+
+    <Label text="Email:"/>
+    <Label fx:id="emailLabel"/>
+
+    <Label text="Password:"/>
+    <Label fx:id="passwordLabel"/>
+
+    <Label text="Account Number:"/>
+    <HBox>
+        <Label fx:id="accountNumberLabel"/>
+        <Label text="i" onMouseClicked="#showAccountInfo"
+               style="-fx-text-fill: blue; -fx-underline: true; cursor: hand;"/>
+    </HBox>
+    <Label fx:id="accountInfoLabel" text="Account number is used to uniquely identify your account." visible="false"/>
+
+    <Label text="Routing Number:"/>
+    <HBox>
+        <Label fx:id="routingNumberLabel"/>
+        <Label text="i" onMouseClicked="#showRoutingInfo"
+               style="-fx-text-fill: blue; -fx-underline: true; cursor: hand;"/>
+    </HBox>
+    <Label fx:id="routingInfoLabel"
+           text="Routing number identifies the financial institution where your account is held." visible="false"/>
+
+</VBox>
