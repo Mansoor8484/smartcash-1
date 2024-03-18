@@ -22,7 +22,7 @@ public class SmartCash extends Application {
         // Show.
         // TODO: Change default scene.
         SceneManager sceneManager = new SceneManager(stage, databaseManager);
-        sceneManager.setScene(SCScene.LOGIN);
+        sceneManager.setScene(SCScene.OVERVIEW);
         stage.show();
         stage.setOnCloseRequest(e -> System.exit(0));
 
