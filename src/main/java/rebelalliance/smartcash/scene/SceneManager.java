@@ -11,6 +11,7 @@ import rebelalliance.smartcash.file.preferences.UserPreferences;
 import rebelalliance.smartcash.ledger.Ledger;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 
 public class SceneManager {
@@ -49,6 +50,10 @@ public class SceneManager {
             try {
                 Parent parent = loader.load();
                 scene = new Scene(parent);
+                URL stylesheetUrl = SmartCash.class.getResource("css/" + path.getPath() + ".css");
+                if(stylesheetUrl != null) {
+                    scene.getStylesheets().add(stylesheetUrl.toExternalForm());
+                }
                 scene.getRoot().setStyle("-fx-background-color: #3b3b3b");
 
                 BaseController baseController = loader.getController();
