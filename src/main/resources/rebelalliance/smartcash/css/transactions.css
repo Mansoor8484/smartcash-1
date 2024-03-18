@@ -1,0 +1,19 @@
+/* Text color. */
+.check-box {
+    -fx-text-fill: #b4dcb0;
+}
+
+/* Selected check. */
+.check-box:selected .mark {
+    -fx-background-color: #ffffff;
+}
+
+/* Selected box. */
+.check-box:selected .box {
+    -fx-background-color: #4caf50;
+}
+
+/* Unselected box. */
+.check-box .box {
+    -fx-background-color: #777777;
+}
