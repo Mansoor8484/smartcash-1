@@ -3,6 +3,7 @@ package rebelalliance.smartcash;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import rebelalliance.smartcash.database.DatabaseManager;
+import rebelalliance.smartcash.database.User;
 import rebelalliance.smartcash.http.SmartCashHttpServer;
 import rebelalliance.smartcash.scene.SCScene;
 import rebelalliance.smartcash.scene.SceneManager;
@@ -20,9 +21,14 @@ public class SmartCash extends Application {
         stage.setResizable(true);
 
         // Show.
-        // TODO: Change default scene.
         SceneManager sceneManager = new SceneManager(stage, databaseManager);
-        sceneManager.setScene(SCScene.OVERVIEW);
+        boolean testMode = true;
+        if(testMode) {
+            sceneManager.setScene(SCScene.OVERVIEW);
+            sceneManager.setLoggedInUser(new User("test@test.com", "testing123"));
+        }else {
+            sceneManager.setScene(SCScene.LOGIN);
+        }
         stage.show();
         stage.setOnCloseRequest(e -> System.exit(0));
 
