@@ -94,6 +94,10 @@ public class SceneManager {
         return this.loggedInUser;
     }
 
+    public Stage getStage() {
+        return this.stage;
+    }
+
     public void setLoggedInUser(User user) {
         this.loggedInUser = user;
     }

@@ -11,6 +11,18 @@ public class User {
         this.mfaSecret = null;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getMfaSecret() {
+        return mfaSecret;
+    }
+
     public boolean hasMfaEnabled() {
         return mfaSecret != null;
     }
