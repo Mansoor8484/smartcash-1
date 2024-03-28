@@ -57,7 +57,7 @@ public class TransactionsController extends BaseController implements IControlle
 
     @Override
     public void init() {
-        this.header.getChildren().add(new Navbar(this.sceneManager));
+        this.addHeader();
 
         // Table.
         this.transactionsTable.setRowFactory(table -> {

@@ -44,7 +44,7 @@ public class OverviewController extends BaseController implements IController {
 
     @Override
     public void init() {
-        this.header.getChildren().add(new Navbar(this.sceneManager));
+        this.addHeader();
 
         this.ledgerStats = new LedgerStats(this.sceneManager.getLedger());
 
