@@ -5,6 +5,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.controller.IController;
+import rebelalliance.smartcash.database.User;
 import rebelalliance.smartcash.scene.SCScene;
 
 public class LoginController extends BaseController implements IController {
@@ -16,6 +17,9 @@ public class LoginController extends BaseController implements IController {
     @FXML
     protected void onLoginClick() {
         boolean isLoggedIn = this.databaseManager.isLoginSuccessful(emailInput.getText(), passwordInput.getText());
+
+        // TODO: Change this. Get information from the database and construct the user object.
+        this.sceneManager.setLoggedInUser(new User(emailInput.getText(), passwordInput.getText()));
 
         if(isLoggedIn) {
             this.sceneManager.setScene(SCScene.OVERVIEW);

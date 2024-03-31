@@ -7,6 +7,6 @@ import rebelalliance.smartcash.controller.IController;
 public class BudgetingController extends BaseController implements IController {
     @Override
     public void init() {
-        this.header.getChildren().add(new Navbar(this.sceneManager));
+        this.addHeader();
     }
 }

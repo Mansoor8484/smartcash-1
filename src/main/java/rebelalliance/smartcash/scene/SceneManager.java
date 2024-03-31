@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import rebelalliance.smartcash.SmartCash;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.database.DatabaseManager;
+import rebelalliance.smartcash.database.User;
 import rebelalliance.smartcash.file.preferences.UserPreferences;
 import rebelalliance.smartcash.ledger.Ledger;
 
@@ -23,6 +24,7 @@ public class SceneManager {
     private final HashMap<SCScene, BaseController> controllers = new HashMap<>();
     private final Ledger ledger;
 
+    private User loggedInUser;
     private final UserPreferences userPreferences;
 
     private SCScene currentScene;
@@ -35,6 +37,7 @@ public class SceneManager {
         this.ledger = new Ledger();
 
         this.userPreferences = new UserPreferences("smartcash");
+        this.loggedInUser = null;
     }
 
     public void setScene(SCScene path) {
@@ -85,5 +88,17 @@ public class SceneManager {
 
     public UserPreferences getUserPreferences() {
         return this.userPreferences;
+    }
+
+    public User getLoggedInUser() {
+        return this.loggedInUser;
+    }
+
+    public Stage getStage() {
+        return this.stage;
+    }
+
+    public void setLoggedInUser(User user) {
+        this.loggedInUser = user;
     }
 }

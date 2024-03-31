@@ -49,7 +49,12 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>12.6.0.jre11</version>
         </dependency>
-        </dependencies>
+        <dependency>
+            <groupId>dev.samstevens.totp</groupId>
+            <artifactId>totp</artifactId>
+            <version>1.7.1</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>

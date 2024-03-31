@@ -3,6 +3,7 @@ module rebelalliance.smartcash {
     requires javafx.fxml;
     requires jdk.httpserver;
     requires java.sql;
+    requires totp;
 
     opens rebelalliance.smartcash to javafx.graphics;
 
