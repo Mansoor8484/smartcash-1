@@ -17,6 +17,10 @@ public class DatabaseManager {
         this.registeredUsers.put(email, new User(email, password, mfaSecret));
     }
 
+    public void disableMfa(User user) {
+        user.mfaSecret = null;
+    }
+
     public User login(String email, String password) {
         User user = this.registeredUsers.get(email);
         if(user != null && user.getPassword().equals(password)) {

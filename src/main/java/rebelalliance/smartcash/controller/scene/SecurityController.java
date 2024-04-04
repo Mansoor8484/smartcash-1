@@ -38,9 +38,16 @@ public class SecurityController extends BaseController implements IController {
     public void init() {
         this.addHeader();
 
+        this.update();
+    }
+
+    @Override
+    public void update() {
         // Update UI if user has MFA enabled.
         if(this.sceneManager.getLoggedInUser().hasMfaEnabled()) {
             this.mfaEnableButton.setText("Disable MFA");
+        }else {
+            this.mfaEnableButton.setText("Enable MFA");
         }
     }
 
@@ -49,6 +56,9 @@ public class SecurityController extends BaseController implements IController {
         User loggedInUser = this.sceneManager.getLoggedInUser();
         if(loggedInUser.hasMfaEnabled()) {
             // Disable MFA.
+            this.databaseManager.disableMfa(loggedInUser);
+
+            this.update();
         }else {
             // Enable MFA.
             SecretGenerator secretGenerator = new DefaultSecretGenerator();
