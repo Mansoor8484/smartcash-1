@@ -30,7 +30,7 @@ public class AzureDatabaseConnection{
  
 
 
-    public void DBregisterUser(int UserID, String user, String pass){ //review the relationship with AccountID
+    public void DBregisterUser(String user, String pass){ //review the relationship with AccountID
         //SQL Query to insert a new user into the database
         String sql = "INSERT INTO UserAuthentication (UserID, Email, UserName, Password) VALUES (?,?,?,?)";
         //SQLQuery to insert UserID to userDetails table
@@ -40,7 +40,7 @@ public class AzureDatabaseConnection{
         //Generates a new UserID
         try (Connection conn = DriverManager.getConnection(url)){
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-
+            int UserID = generateUserID();
             //UserAuthentication table input
             preparedStatement.setInt(1, UserID); // Fix: Change the argument type to String
             preparedStatement.setString(2, user);
