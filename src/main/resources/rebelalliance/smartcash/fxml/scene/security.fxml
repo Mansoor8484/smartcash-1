@@ -65,7 +65,7 @@
                             </font>
                         </Text>
                         <Text fill="#e1f0da" strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                              text="Verify your account with Google Authenticator or any other authenticator app."
                               wrappingWidth="375.5521545410156" VBox.vgrow="ALWAYS" />
                     </VBox>
                     <VBox alignment="CENTER" prefHeight="100.0" prefWidth="90.0">
