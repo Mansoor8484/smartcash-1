@@ -11,6 +11,12 @@ public class User {
         this.mfaSecret = null;
     }
 
+    public User(String email, String password, String mfaSecret) {
+        this.email = email;
+        this.password = password;
+        this.mfaSecret = mfaSecret;
+    }
+
     public String getEmail() {
         return email;
     }

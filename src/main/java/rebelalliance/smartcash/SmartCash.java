@@ -15,6 +15,10 @@ public class SmartCash extends Application {
     public void start(Stage stage) {
         this.databaseManager = new DatabaseManager();
 
+        // TODO: Remove this.
+        // this.databaseManager.registerUser("test@test.com", "test");
+        this.databaseManager.registerUser("test@test.com", "test", "JQPVUOX3WHBBOZILECL7SG4RKP5ZULS7");
+
         // Window setup.
         stage.setWidth(1200);
         stage.setHeight(800);
@@ -22,13 +26,7 @@ public class SmartCash extends Application {
 
         // Show.
         SceneManager sceneManager = new SceneManager(stage, databaseManager);
-        boolean testMode = true;
-        if(testMode) {
-            sceneManager.setScene(SCScene.OVERVIEW);
-            sceneManager.setLoggedInUser(new User("test@test.com", "testing123"));
-        }else {
-            sceneManager.setScene(SCScene.LOGIN);
-        }
+        sceneManager.setScene(SCScene.LOGIN);
         stage.show();
         stage.setOnCloseRequest(e -> System.exit(0));
 
