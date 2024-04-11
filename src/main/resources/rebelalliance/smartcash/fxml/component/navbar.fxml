@@ -12,25 +12,25 @@
          prefHeight="40.0" prefWidth="1200.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml">
     <HBox alignment="CENTER_LEFT" prefHeight="32.0" spacing="50.0" HBox.hgrow="ALWAYS">
-        <Button mnemonicParsing="false" onMouseClicked="#onOverviewClick" style="-fx-background-color: #DFF0D8;"
+        <Button mnemonicParsing="false" onMouseClicked="#onOverviewClick" style="-fx-background-color: #DFF0D8; -fx-font-weight: bold;"
                 text="Overview" textFill="#3b3b3b">
             <font>
-                <Font name="System Bold" size="14.0" />
+                <Font name="System Bold" size="14.0"  />
             </font>
         </Button>
-        <Button mnemonicParsing="false" onMouseClicked="#onTransactionsClick" style="-fx-background-color: #DFF0D8;"
+        <Button mnemonicParsing="false" onMouseClicked="#onTransactionsClick" style="-fx-background-color: #DFF0D8; -fx-font-weight: bold;"
                 text="Transactions" textFill="#3b3b3b">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Button>
-        <Button mnemonicParsing="false" onMouseClicked="#onBudgetingClick" style="-fx-background-color: #DFF0D8;"
+        <Button mnemonicParsing="false" onMouseClicked="#onBudgetingClick" style="-fx-background-color: #DFF0D8; -fx-font-weight: bold;"
                 text="Budgeting" textFill="#3b3b3b">
             <font>
-                <Font name="System Bold" size="14.0" />
+                <Font name="System Bold" size="14.0"/>
             </font>
         </Button>
-        <Button mnemonicParsing="false" onMouseClicked="#onSecurityClick" style="-fx-background-color: #DFF0D8;"
+        <Button mnemonicParsing="false" onMouseClicked="#onSecurityClick" style="-fx-background-color: #DFF0D8; -fx-font-weight: bold;"
                 text="Security" textFill="#3b3b3b">
             <font>
                 <Font name="System Bold" size="14.0" />
@@ -41,7 +41,7 @@
         </HBox.margin>
     </HBox>
     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-        <MenuButton mnemonicParsing="false" text="Settings">
+        <MenuButton mnemonicParsing="false" text="Settings" style="-fx-background-color: #DFF0D8;" textFill="#3b3b3b">
             <items>
                 <MenuItem mnemonicParsing="false" onAction="#onNotificationSettingsClick"
                           text="Change Notification Settings" />

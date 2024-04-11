@@ -33,6 +33,12 @@ public class LoginController extends BaseController implements IController {
         User user = this.databaseManager.login(emailInput.getText(), passwordInput.getText());
         if(user == null) {
             // Show error.
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid email or password.");
+            alert.setContentText("Please check your email and password and try again.");
+            alert.showAndWait();
+
             return;
         }
 

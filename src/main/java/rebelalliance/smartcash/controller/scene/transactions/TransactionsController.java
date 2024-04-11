@@ -1,28 +1,22 @@
 package rebelalliance.smartcash.controller.scene.transactions;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import rebelalliance.smartcash.Modal;
-import rebelalliance.smartcash.component.Navbar;
 import rebelalliance.smartcash.component.menuitem.ArchiveMenuItem;
 import rebelalliance.smartcash.component.menuitem.DeleteMenuItem;
+import rebelalliance.smartcash.controller.modal.*;
 import rebelalliance.smartcash.ledger.container.Account;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.controller.IController;
-import rebelalliance.smartcash.controller.modal.AccountCreationModalController;
-import rebelalliance.smartcash.controller.modal.AdjustmentModalController;
-import rebelalliance.smartcash.controller.modal.CategoryCreationModalController;
-import rebelalliance.smartcash.controller.modal.TransactionModalController;
 import rebelalliance.smartcash.ledger.item.Adjustment;
 import rebelalliance.smartcash.ledger.container.Category;
 import rebelalliance.smartcash.ledger.item.LedgerItem;
 import rebelalliance.smartcash.ledger.item.Transfer;
 import rebelalliance.smartcash.ledger.item.transaction.Transaction;
-import rebelalliance.smartcash.scene.SCScene;
 import rebelalliance.smartcash.util.DateUtil;
 import rebelalliance.smartcash.util.NumberUtil;
 
@@ -262,6 +256,28 @@ public class TransactionsController extends BaseController implements IControlle
             );
             transaction.setNotes(transactionModalController.getNotes());
             this.sceneManager.getLedger().add(transaction);
+        }
+        this.updateTable();
+    }
+
+    @FXML
+    public void addTransfer() {
+        Modal transferModal = new Modal("New Transfer", "create-transfer");
+        TransferModalController transferModalController = (TransferModalController) transferModal.getController();
+        transferModalController.setStage(transferModal.getStage());
+        transferModalController.setAccountOptions(this.sceneManager.getLedger().getAccounts());
+        transferModalController.init();
+
+        transferModal.showAndWait();
+        if(transferModalController.shouldSave()) {
+            Transfer transfer = new Transfer(
+                    transferModalController.getAmount(),
+                    transferModalController.getAccountFrom(),
+                    transferModalController.getAccountTo(),
+                    transferModalController.getDate()
+            );
+            transfer.setNotes(transferModalController.getNotes());
+            this.sceneManager.getLedger().add(transfer);
         }
         this.updateTable();
     }

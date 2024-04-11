@@ -1,24 +1,16 @@
 package rebelalliance.smartcash.controller.scene;
 
-
-
-
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import rebelalliance.smartcash.component.Navbar;
 import rebelalliance.smartcash.controller.BaseController;
 import rebelalliance.smartcash.controller.IController;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-
 
 public class BudgetingController extends BaseController implements IController {
 
