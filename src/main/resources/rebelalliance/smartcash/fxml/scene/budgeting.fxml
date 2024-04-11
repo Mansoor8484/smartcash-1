@@ -8,10 +8,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.shape.Circle?>
 
 <?import javafx.scene.chart.PieChart?>
-<VBox prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+<VBox prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
       fx:controller="rebelalliance.smartcash.controller.scene.BudgetingController">
     <children>
         <VBox fx:id="header" prefHeight="40.0" prefWidth="1200.0" />
@@ -42,14 +41,14 @@
             <xAxis>
                 <NumberAxis side="BOTTOM" label="Time">
                     <tickLabelFill>
-                        <Color fx:constant="WHITE"/>
+                        <Color fx:constant="WHITE" />
                     </tickLabelFill>
                 </NumberAxis>
             </xAxis>
             <yAxis>
                 <NumberAxis side="LEFT" label="Amount ($)">
                     <tickLabelFill>
-                        <Color fx:constant="WHITE"/>
+                        <Color fx:constant="WHITE" />
                     </tickLabelFill>
                 </NumberAxis>
             </yAxis>
