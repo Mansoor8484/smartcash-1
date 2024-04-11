@@ -14,6 +14,7 @@
                 <Insets left="5.0" right="5.0" top="5.0" />
             </VBox.margin>
             <Button mnemonicParsing="false" onMouseClicked="#addTransaction" text="Add Transaction" />
+            <Button mnemonicParsing="false" onMouseClicked="#addTransfer" text="Add Transfer" />
             <Button layoutX="534.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#addAdjustment"
                     text="Add Adjustment" />
         </HBox>
