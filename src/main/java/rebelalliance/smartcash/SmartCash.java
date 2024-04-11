@@ -25,7 +25,7 @@ public class SmartCash extends Application {
 
         // Show.
         SceneManager sceneManager = new SceneManager(stage, databaseManager);
-        sceneManager.setScene(SCScene.TRANSACTIONS);
+        sceneManager.setScene(SCScene.LOGIN);
         stage.show();
         stage.setOnCloseRequest(e -> System.exit(0));
 
