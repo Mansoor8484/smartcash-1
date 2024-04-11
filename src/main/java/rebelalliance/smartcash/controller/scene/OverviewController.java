@@ -7,7 +7,7 @@ import javafx.scene.chart.*;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
-import rebelalliance.smartcash.component.Navbar;
+import javafx.scene.text.Text;
 import rebelalliance.smartcash.file.preferences.UserPreference;
 import rebelalliance.smartcash.ledger.Ledger;
 import rebelalliance.smartcash.ledger.container.Account;
@@ -35,6 +35,8 @@ public class OverviewController extends BaseController implements IController {
     private NumberAxis historicalLineChartXAxis;
     @FXML
     private PieChart spendPieChart;
+    @FXML
+    private Text welcomeText;
 
     private LedgerStats ledgerStats;
 
@@ -81,6 +83,9 @@ public class OverviewController extends BaseController implements IController {
         this.updateCompositionPieChart();
         this.updateHistoricalLineChart();
         this.updateSpendPieChart();
+
+        // Welcome text.
+        this.welcomeText.setText("Good " + DateUtil.getPartOfDay() + ".");
     }
 
     public String getHiddenContainers(HashMap<Container, Boolean> hashMap) {
