@@ -1,0 +1,25 @@
+.axis {
+    -fx-tick-label-fill: #b4dcb0;
+    -fx-tick-label-font-size: 12px;
+}
+
+.line-chart, .axis-label, .line-chart, .axis, .axis-label {
+    -fx-text-fill: #b4dcb0; /* Apply your custom color */
+}
+
+.chart-series-line {
+    -fx-stroke-width: 4px;
+    -fx-effect: null;
+}
+
+.default-color0.chart-series-line { -fx-stroke: #b4cdb0; }
+
+.chart-legend {
+    -fx-background-color: #b4dcb0;
+
+    -fx-border-color: #4caf50;
+    -fx-border-width: 2px;
+
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}

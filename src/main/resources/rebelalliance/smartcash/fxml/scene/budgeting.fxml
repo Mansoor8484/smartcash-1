@@ -15,42 +15,33 @@
       fx:controller="rebelalliance.smartcash.controller.scene.BudgetingController">
     <children>
         <VBox fx:id="header" prefHeight="40.0" prefWidth="1200.0" />
-        <Label text="Budgeting Tool" underline="true">
+        <Label text="Budgeting Tool" underline="true" textFill="#b4dcb0">
             <font>
-                <Font name="Arial" size="24" />
+                <Font name="System Bold" size="24" />
             </font>
-            <textFill>
-                <Color fx:constant="WHITE" />
-            </textFill>
         </Label>
-        <Label text="Current Balance: $" textFill="WHITE" />
-        <Label fx:id="balanceLabel" text="" textFill="WHITE" />
-        <Label text="Add Income Amount: $" textFill="WHITE" />
+        <Label text="Current Balance: $" textFill="#b4dcb0" />
+        <Label fx:id="balanceLabel" text="" textFill="#b4dcb0" />
+        <Label text="Add Income Amount: $" textFill="#b4dcb0" />
         <TextField fx:id="incomeAmountTextField" />
-        <Label text="Add Income Description:" textFill="WHITE" />
+        <Label text="Add Income Description:" textFill="#b4dcb0" />
         <TextField fx:id="incomeDescriptionTextField" />
         <Button text="Add Income" onAction="#addIncome" />
-        <Label text="Add Expense Amount: $" textFill="WHITE" />
+        <Label text="Add Expense Amount: $" textFill="#b4dcb0" />
         <TextField fx:id="expenseAmountTextField" />
-        <Label text="Add Expense Description:" textFill="WHITE" />
+        <Label text="Add Expense Description:" textFill="#b4dcb0" />
         <TextField fx:id="expenseDescriptionTextField" />
         <Button text="Add Expense" onAction="#addExpense" />
         <Button text="View Budget Summary" onAction="#viewBudgetSummary" />
 
         <!-- LineChart -->
-        <LineChart fx:id="budgetLineChart">
+        <LineChart fx:id="budgetLineChart" styleClass="axis-label">
             <xAxis>
-                <NumberAxis side="BOTTOM" label="Time">
-                    <tickLabelFill>
-                        <Color fx:constant="WHITE"/>
-                    </tickLabelFill>
+                <NumberAxis side="BOTTOM" label="Time" >
                 </NumberAxis>
             </xAxis>
             <yAxis>
                 <NumberAxis side="LEFT" label="Amount ($)">
-                    <tickLabelFill>
-                        <Color fx:constant="WHITE"/>
-                    </tickLabelFill>
                 </NumberAxis>
             </yAxis>
         </LineChart>
