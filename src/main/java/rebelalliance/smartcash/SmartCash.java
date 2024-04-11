@@ -22,7 +22,7 @@ public class SmartCash extends Application {
         // Window setup.
         stage.setWidth(1200);
         stage.setHeight(800);
-        stage.setResizable(true);
+        stage.setResizable(false);
 
         // Show.
         SceneManager sceneManager = new SceneManager(stage, databaseManager);
