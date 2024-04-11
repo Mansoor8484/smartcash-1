@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Random;
 import java.util.Date;
-import rebelalliance.smartcash.database.User;
-import rebelalliance.smartcash.ledger.container.Account;
 
 public class AzureDatabaseConnection{
      public static void main(String[] args){

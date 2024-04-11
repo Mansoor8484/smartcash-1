@@ -1,13 +1,11 @@
 package rebelalliance.smartcash.controller.scene.transactions;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import rebelalliance.smartcash.Modal;
-import rebelalliance.smartcash.component.Navbar;
 import rebelalliance.smartcash.component.menuitem.ArchiveMenuItem;
 import rebelalliance.smartcash.component.menuitem.DeleteMenuItem;
 import rebelalliance.smartcash.controller.modal.*;
@@ -19,7 +17,6 @@ import rebelalliance.smartcash.ledger.container.Category;
 import rebelalliance.smartcash.ledger.item.LedgerItem;
 import rebelalliance.smartcash.ledger.item.Transfer;
 import rebelalliance.smartcash.ledger.item.transaction.Transaction;
-import rebelalliance.smartcash.scene.SCScene;
 import rebelalliance.smartcash.util.DateUtil;
 import rebelalliance.smartcash.util.NumberUtil;
 
