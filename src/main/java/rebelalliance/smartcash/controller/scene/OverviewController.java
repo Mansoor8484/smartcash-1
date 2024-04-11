@@ -19,12 +19,26 @@ import rebelalliance.smartcash.ledger.container.Container;
 import rebelalliance.smartcash.scene.SCScene;
 import rebelalliance.smartcash.ledger.statistic.LedgerStats;
 import rebelalliance.smartcash.util.DateUtil;
+import rebelalliance.smartcash.util.RandomUtil;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 
 public class OverviewController extends BaseController implements IController {
+    private static final String[] TIPS = {
+            "Did you know you can archive accounts and categories?",
+            "Did you know you can hide accounts and categories from the overview page?",
+            "Every decision has a cost, so be sure to consider your options.",
+            "Setting financial goals helps you to determine where you should be prioritizing your money every month.",
+            "Your credit score represents your creditworthiness.",
+            "Did you know, only one in three Americans can comfortably cover a $400 emergency expense. Can you?",
+            "Food is one of the biggest monthly expenses for many families.",
+            "Sometimes your lender might be willing to lower your interest rate for a variety of reasons.",
+            "Did you know, the average American household has $6,295 in credit card debt?",
+            "Don't close credit cards! The length of your credit history also determines your credit score."
+    };
+
     @FXML
     private VBox accountsBox;
     @FXML
@@ -37,6 +51,8 @@ public class OverviewController extends BaseController implements IController {
     private PieChart spendPieChart;
     @FXML
     private Text welcomeText;
+    @FXML
+    private Text tipText;
 
     private LedgerStats ledgerStats;
 
@@ -86,6 +102,9 @@ public class OverviewController extends BaseController implements IController {
 
         // Welcome text.
         this.welcomeText.setText("Good " + DateUtil.getPartOfDay() + ".");
+
+        // Tip text.
+        this.tipText.setText(RandomUtil.randomOf(TIPS));
     }
 
     public String getHiddenContainers(HashMap<Container, Boolean> hashMap) {
