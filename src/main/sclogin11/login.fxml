@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="rebelalliance.smartcash.controller.scene.LoginController">
+    <VBox alignment="CENTER" prefHeight="800.0" prefWidth="1200.0" spacing="20.0"
+          style="-fx-background-color: #3b3b3b;">
+        <ImageView fitHeight="150" fitWidth="200">
+            <Image url="@/SmartCashLogo.png"/>
+        </ImageView>
+        <Label text="Sign In to Your Account" textFill="#dff0d8">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <GridPane alignment="CENTER" hgap="15.0"
+                  style="-fx-background-color: #DFF0D8; -fx-border-color: #4CAF50; -fx-border-width: 2px; -fx-border-radius: 5px;"
+                  vgap="15.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="60.0" />
+                <ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="10.0" prefWidth="150.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <Label text="Email:" textAlignment="RIGHT" />
+            <TextField fx:id="emailInput" promptText="Enter your email" GridPane.columnIndex="1" />
+            <Label text="Password:" textAlignment="RIGHT" GridPane.rowIndex="1" />
+            <PasswordField fx:id="passwordInput" promptText="Enter your password" GridPane.columnIndex="1"
+                           GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onMouseClicked="#onLoginClick"
+                    style="-fx-background-color: #4CAF50; -fx-background-radius: 0px;" text="Login" textFill="#3b3b3b"
+                    GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font>
+            </Button>
+        </GridPane>
+        <Hyperlink onMouseClicked="#onRegisterClick" text="Don't have an account? Register Here" textFill="#dff0d8">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Hyperlink>
+    </VBox>
+</AnchorPane>
