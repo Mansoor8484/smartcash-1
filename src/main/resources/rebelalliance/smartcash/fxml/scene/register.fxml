@@ -45,12 +45,13 @@
             <VBox.margin>
                 <Insets top="20.0" />
             </VBox.margin>
-            <TextField fx:id="emailInput" onKeyPressed="#onEmailChange" promptText="Email">
+            <TextField fx:id="emailInput" onKeyPressed="#onEmailChange" promptText="Email" onAction="#onRegisterClick">
                 <opaqueInsets>
                     <Insets />
                 </opaqueInsets>
             </TextField>
-            <PasswordField fx:id="passwordInput" onKeyPressed="#onPasswordChange" promptText="Password" />
+            <PasswordField fx:id="passwordInput" onKeyPressed="#onPasswordChange" promptText="Password"
+                           onAction="#onRegisterClick" />
             <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="238.0">
                 <VBox.margin>
                     <Insets top="10.0" />

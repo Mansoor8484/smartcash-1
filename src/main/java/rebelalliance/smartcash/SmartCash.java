@@ -3,7 +3,6 @@ package rebelalliance.smartcash;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import rebelalliance.smartcash.database.DatabaseManager;
-import rebelalliance.smartcash.database.User;
 import rebelalliance.smartcash.http.SmartCashHttpServer;
 import rebelalliance.smartcash.scene.SCScene;
 import rebelalliance.smartcash.scene.SceneManager;

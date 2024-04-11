@@ -33,10 +33,11 @@
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
             <Label text="Email:" textAlignment="RIGHT" />
-            <TextField fx:id="emailInput" promptText="Enter your email" GridPane.columnIndex="1" />
+            <TextField fx:id="emailInput" promptText="Enter your email" GridPane.columnIndex="1"
+                       onAction="#onLoginClick" />
             <Label text="Password:" textAlignment="RIGHT" GridPane.rowIndex="1" />
             <PasswordField fx:id="passwordInput" promptText="Enter your password" GridPane.columnIndex="1"
-                           GridPane.rowIndex="1" />
+                           GridPane.rowIndex="1" onAction="#onLoginClick" />
             <Button mnemonicParsing="false" onMouseClicked="#onLoginClick"
                     style="-fx-background-color: #4CAF50; -fx-background-radius: 0px;" text="Login" textFill="#3b3b3b"
                     GridPane.columnIndex="1" GridPane.rowIndex="2">

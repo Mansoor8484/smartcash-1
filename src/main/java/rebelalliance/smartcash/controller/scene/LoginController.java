@@ -47,6 +47,7 @@ public class LoginController extends BaseController implements IController {
             root.setAlignment(Pos.CENTER);
             Text prompt = new Text("Enter your 2FA code:");
             TextField inputBox = new TextField();
+            inputBox.setOnAction(e -> popup.close());
             Button submitButton = new Button("Submit");
             submitButton.setOnAction(e -> popup.close());
             root.getChildren().addAll(prompt, inputBox, submitButton);
