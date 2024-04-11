@@ -1,8 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Circle?>
 
-<VBox prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<?import javafx.scene.chart.PieChart?>
+<VBox prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="rebelalliance.smartcash.controller.scene.BudgetingController">
-    <VBox fx:id="header" prefHeight="40.0" prefWidth="1200.0" />
+    <children>
+        <VBox fx:id="header" prefHeight="40.0" prefWidth="1200.0" />
+        <Label text="Budgeting Tool" underline="true">
+            <font>
+                <Font name="Arial" size="24" />
+            </font>
+            <textFill>
+                <Color fx:constant="WHITE" />
+            </textFill>
+        </Label>
+        <Label text="Current Balance: $" textFill="WHITE" />
+        <Label fx:id="balanceLabel" text="" textFill="WHITE" />
+        <Label text="Add Income Amount: $" textFill="WHITE" />
+        <TextField fx:id="incomeAmountTextField" />
+        <Label text="Add Income Description:" textFill="WHITE" />
+        <TextField fx:id="incomeDescriptionTextField" />
+        <Button text="Add Income" onAction="#addIncome" />
+        <Label text="Add Expense Amount: $" textFill="WHITE" />
+        <TextField fx:id="expenseAmountTextField" />
+        <Label text="Add Expense Description:" textFill="WHITE" />
+        <TextField fx:id="expenseDescriptionTextField" />
+        <Button text="Add Expense" onAction="#addExpense" />
+        <Button text="View Budget Summary" onAction="#viewBudgetSummary" />
+
+        <!-- LineChart -->
+        <LineChart fx:id="budgetLineChart">
+            <xAxis>
+                <NumberAxis side="BOTTOM" label="Time">
+                    <tickLabelFill>
+                        <Color fx:constant="WHITE"/>
+                    </tickLabelFill>
+                </NumberAxis>
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" label="Amount ($)">
+                    <tickLabelFill>
+                        <Color fx:constant="WHITE"/>
+                    </tickLabelFill>
+                </NumberAxis>
+            </yAxis>
+        </LineChart>
+
+        <!-- PieChart -->
+        <PieChart fx:id="budgetPieChart" />
+    </children>
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
 </VBox>
+
