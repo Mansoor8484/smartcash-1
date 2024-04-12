@@ -147,4 +147,81 @@ public class SecurityController extends BaseController implements IController {
             }
         }
     }
+
+
+      @FXML
+    protected TabPane tabPane;
+
+    @FXML
+    private Tab accountDetailsTab;
+
+    @FXML
+    protected Button viewDetailsButton;
+
+    @FXML
+    private void onAccountDetailsClick() {
+        Dialog<String> dialogPass = new Dialog<>();
+        dialogPass.getDialogPane().setMinWidth(400);
+        dialogPass.getDialogPane().setMinHeight(200);
+        dialogPass.setTitle("Password Verification");
+        dialogPass.setHeaderText("Enter Password");
+
+        PasswordField passwordField = new PasswordField();
+        dialogPass.getDialogPane().setContent(passwordField);
+
+        ButtonType enterButtonType = new ButtonType("Enter", ButtonBar.ButtonData.OK_DONE);
+        dialogPass.getDialogPane().getButtonTypes().setAll(enterButtonType, ButtonType.CANCEL);
+
+        dialogPass.setResultConverter(dialogButton -> {
+            if (dialogButton == enterButtonType) {
+                return passwordField.getText();
+            }
+            return null;
+        });
+
+        Optional<String> result = dialogPass.showAndWait();
+
+        if (result.isPresent()) {
+            try {
+                if (isPasswordCorrect(result.get())) {
+                    // allow user to see the account details
+                    viewDetailsButton.setDisable(false);
+                    accountDetailsTab.setDisable(false);
+                    // switch to the accountDetailsTab
+                    tabPane.getSelectionModel().select(accountDetailsTab);
+                } else {
+                    // Deselect the accountDetailsTab and show an error message
+                    accountDetailsTab.setDisable(true);
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Invalid Password");
+                    alert.setContentText("The password you entered is incorrect. Please try again.");
+                    alert.showAndWait();
+                    accountDetailsTab.setDisable(false);
+                }
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private boolean isPasswordCorrect(String password) throws NoSuchAlgorithmException {
+        String correctPassword = "correctPassword";
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        byte[] correctPasswordBytes = correctPassword.getBytes(StandardCharsets.UTF_8);
+        md.update(correctPasswordBytes);
+        byte[] correctPasswordHash = md.digest();
+
+        byte[] enteredPasswordBytes = password.getBytes(StandardCharsets.UTF_8);
+        md.update(enteredPasswordBytes);
+        byte[] enteredPasswordHash = md.digest();
+
+        for (int i = 0; i < correctPasswordHash.length; i++) {
+            if (correctPasswordHash[i] != enteredPasswordHash[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
