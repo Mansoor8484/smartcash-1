@@ -2,78 +2,50 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.effect.Blend?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #DFF0D8;"
-            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="rebelalliance.smartcash.controller.scene.SecurityController">
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #DFF0D8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rebelalliance.smartcash.controller.scene.SecurityController">
     <VBox fx:id="header" prefHeight="40.0" prefWidth="1200.0" />
-    <Label alignment="CENTER" ellipsisString="" layoutX="14.0" layoutY="40.0" text="SECURITY" textAlignment="CENTER"
-           textFill="#e1f0da" underline="true" BorderPane.alignment="CENTER">
+    <Label alignment="CENTER" layoutX="526.0" layoutY="46.0" text="SECURITY" textAlignment="CENTER" textFill="#dff0d8" underline="true">
         <font>
-            <Font name="Kohinoor Bangla Bold" size="18.0" />
+            <Font name="Kohinoor Telugu Bold" size="32.0" />
         </font>
-        <opaqueInsets>
-            <Insets top="5.0" />
-        </opaqueInsets>
     </Label>
-    <TabPane layoutX="14.0" layoutY="67.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-             minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="334.0" prefWidth="497.0"
-             BorderPane.alignment="BOTTOM_LEFT">
-        <Tab style="-fx-background-color: #DFF0D8; -fx-font-weight: Bold;" text="Authentication">
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="303.0" prefWidth="590.0">
-                <PasswordField layoutX="14.0" layoutY="46.0" maxHeight="-Infinity" maxWidth="-Infinity"
-                               minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="142.0"
-                               promptText="Passsword">
-                    <font>
-                        <Font size="12.0" />
-                    </font>
-                </PasswordField>
-                <Button layoutX="162.0" layoutY="48.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                        minWidth="-Infinity" mnemonicParsing="false" prefHeight="21.0" prefWidth="46.0"
-                        style="-fx-background-color: #DFF0D8; -fx-font-weight: bold;" text="Enter"
-                        textAlignment="CENTER">
-                    <font>
-                        <Font size="11.0" />
-                    </font>
-                </Button>
-                <Label layoutX="51.0" layoutY="14.0" text="Enter Account Password" textFill="#dff0d8" />
-            </AnchorPane>
-        </Tab>
-        <Tab style="-fx-background-color: #DFF0D8; -fx-font-weight: bold;" text="Account Details">
-            <AnchorPane accessibleRole="TAB_PANE" minHeight="0.0" minWidth="0.0" prefHeight="303.0" prefWidth="286.0" />
-        </Tab>
-        <Tab style="-fx-background-color: #DFF0D8; -fx-font-weight: bold;" text="2FA">
+    <TabPane layoutX="14.0" layoutY="111.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="380.0" prefWidth="1180.0" BorderPane.alignment="BOTTOM_LEFT">
+        <Tab closable="false" style="-fx-background-color: #DFF0D8; -fx-font-weight: bold;" text="2FA">
             <AnchorPane accessibleRole="TAB_PANE" minHeight="0.0" minWidth="0.0" prefHeight="303.0" prefWidth="286.0">
                 <HBox layoutX="14.0" layoutY="14.0" prefHeight="100.0" prefWidth="469.0">
                     <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                        <Text fill="#e1f0da" strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="Authenticator App">
+                        <Text fill="#e1f0da" strokeType="OUTSIDE" strokeWidth="0.0" text="Authenticator App">
                             <font>
                                 <Font name="System Bold" size="20.0" />
                             </font>
                         </Text>
-                        <Text fill="#e1f0da" strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="Verify your account with Google Authenticator or any other authenticator app."
-                              wrappingWidth="375.5521545410156" VBox.vgrow="ALWAYS" />
+                        <Text fill="#e1f0da" strokeType="OUTSIDE" strokeWidth="0.0" text="Verify your account with Google Authenticator or any other authenticator app." wrappingWidth="375.5521545410156" VBox.vgrow="ALWAYS" />
                     </VBox>
                     <VBox alignment="CENTER" prefHeight="100.0" prefWidth="90.0">
-                        <Button mnemonicParsing="false" text="Enable 2FA" fx:id="mfaEnableButton"
-                                onMouseClicked="#onMfaButtonClick" />
+                        <Button fx:id="mfaEnableButton" mnemonicParsing="false" onMouseClicked="#onMfaButtonClick" style="-fx-background-color: #DFF0D8;" text="Enable 2FA">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font></Button>
                     </VBox>
                 </HBox>
             </AnchorPane>
+        </Tab>
+        <Tab fx:id="accountDetailsTab" closable="false" style="-fx-background-color: #DFF0D8; -fx-font-weight: Bold;" text="Account Details">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="408.0" prefWidth="1180.0">
+                <children>
+                    <VBox layoutX="349.0" layoutY="83.0" prefHeight="190.0" prefWidth="505.0" />
+                    <Button fx:id="viewDetailsButton" layoutX="449.0" layoutY="149.0" mnemonicParsing="false" onMouseClicked="#onAccountDetailsClick" prefHeight="48.0" prefWidth="312.0" style="-fx-background-color: #DFF0D8;" text="Click to View Account Information">
+                        <font>
+                            <Font name="Kohinoor Bangla Bold" size="16.0" />
+                        </font>
+                    </Button>
+                </children></AnchorPane>
         </Tab>
         <opaqueInsets>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
