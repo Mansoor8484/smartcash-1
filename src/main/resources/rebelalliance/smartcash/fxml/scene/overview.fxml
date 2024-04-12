@@ -8,21 +8,27 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rebelalliance.smartcash.controller.scene.OverviewController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="rebelalliance.smartcash.controller.scene.OverviewController">
     <VBox fx:id="header" prefHeight="40.0" prefWidth="1200.0" />
-    <Text fx:id="welcomeText" fill="#b4dcb0" layoutX="14.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome!">
+    <Text fx:id="welcomeText" fill="#b4dcb0" layoutX="14.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Welcome!">
         <font>
             <Font name="System Bold" size="36.0" />
         </font>
     </Text>
-    <Text fx:id="tipText" fill="#b4dcb0" layoutX="14.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+    <Text fx:id="tipText" fill="#b4dcb0" layoutX="14.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Text">
         <font>
             <Font size="18.0" />
         </font>
     </Text>
     <VBox fx:id="accountsBox" layoutX="14.0" layoutY="125.0" prefHeight="400.0" prefWidth="300.0" spacing="10" />
-    <PieChart fx:id="compositionPieChart" labelLineLength="0" layoutX="314.0" layoutY="120.0" prefHeight="273.0" prefWidth="369.0" title="Account Composition" />
-    <LineChart fx:id="historicalLineChart" layoutX="689.0" layoutY="116.0" prefHeight="400.0" prefWidth="497.0" title="Accounts Over Time">
+    <PieChart fx:id="compositionPieChart" labelLineLength="0" layoutX="314.0" layoutY="120.0" prefHeight="273.0"
+              prefWidth="369.0" title="Account Composition" />
+    <LineChart fx:id="historicalLineChart" layoutX="689.0" layoutY="116.0" prefHeight="400.0" prefWidth="497.0"
+               title="Accounts Over Time">
         <xAxis>
             <NumberAxis fx:id="historicalLineChartXAxis" side="BOTTOM" />
         </xAxis>
@@ -30,5 +36,6 @@
             <NumberAxis side="LEFT" />
         </yAxis>
     </LineChart>
-    <PieChart fx:id="spendPieChart" labelLineLength="0" layoutX="314.0" layoutY="435.0" prefHeight="273.0" prefWidth="369.0" title="Spend" />
+    <PieChart fx:id="spendPieChart" labelLineLength="0" layoutX="314.0" layoutY="435.0" prefHeight="273.0"
+              prefWidth="369.0" title="Spend" />
 </AnchorPane>
