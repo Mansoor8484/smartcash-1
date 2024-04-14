@@ -152,8 +152,30 @@ public class SecurityController extends BaseController implements IController {
     }
 
 
-      @FXML
-    protected TabPane tabPane;
+     @FXML
+    protected Label personalInfo;
+
+    @FXML
+    protected Label accountNumber;
+    @FXML
+    protected Label routingNumber;
+    @FXML
+    protected Label accountType;
+    @FXML
+    protected Label debitNumber;
+    @FXML
+    protected Label pinNumber;
+
+    @FXML
+    protected Label lastLogin;
+    @FXML
+    protected Label changePass;
+
+
+
+    @FXML
+    protected VBox containsDetailsButton;
+
 
     @FXML
     private Tab accountDetailsTab;
@@ -161,8 +183,11 @@ public class SecurityController extends BaseController implements IController {
     @FXML
     protected Button viewDetailsButton;
 
+
     @FXML
-    private void onAccountDetailsClick() {
+    private void onAccountInfoButtonClick() {
+
+
         Dialog<String> dialogPass = new Dialog<>();
         dialogPass.getDialogPane().setMinWidth(400);
         dialogPass.getDialogPane().setMinHeight(200);
@@ -187,29 +212,42 @@ public class SecurityController extends BaseController implements IController {
         if (result.isPresent()) {
             try {
                 if (isPasswordCorrect(result.get())) {
-                    // allow user to see the account details
-                    viewDetailsButton.setDisable(false);
-                    accountDetailsTab.setDisable(false);
-                    // switch to the accountDetailsTab
-                    tabPane.getSelectionModel().select(accountDetailsTab);
+
+                    // hide button
+                    viewDetailsButton.setVisible(false);
+
+                    // show details
+                    personalInfo.setVisible(true);
+
+                    accountNumber.setVisible(true);
+                    routingNumber.setVisible(true);
+                    accountType.setVisible(true);
+                    debitNumber.setVisible(true);
+                    pinNumber.setVisible(true);
+
+                    lastLogin.setVisible(true);
+                    changePass.setVisible(true);
+
+
                 } else {
-                    // Deselect the accountDetailsTab and show an error message
-                    accountDetailsTab.setDisable(true);
+                    accountDetailsTab.setDisable(false);
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Invalid Password");
                     alert.setContentText("The password you entered is incorrect. Please try again.");
                     alert.showAndWait();
-                    accountDetailsTab.setDisable(false);
+                    //accountDetailsTab.setDisable(false);
                 }
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }
         }
+
     }
 
-    private boolean isPasswordCorrect(String password) throws NoSuchAlgorithmException {
-        String correctPassword = "correctPassword";
+
+   private boolean isPasswordCorrect(String password) throws NoSuchAlgorithmException {
+        String correctPassword = "testing";
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         byte[] correctPasswordBytes = correctPassword.getBytes(StandardCharsets.UTF_8);
         md.update(correctPasswordBytes);
@@ -226,5 +264,5 @@ public class SecurityController extends BaseController implements IController {
         }
 
         return true;
-    }
+   }
 }
