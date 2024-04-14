@@ -7,20 +7,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #DFF0D8;"
-            xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="rebelalliance.smartcash.controller.scene.SecurityController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #DFF0D8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rebelalliance.smartcash.controller.scene.SecurityController">
     <VBox fx:id="header" prefHeight="40.0" prefWidth="1200.0" />
-    <Label alignment="CENTER" layoutX="526.0" layoutY="46.0" text="SECURITY" textAlignment="CENTER" textFill="#dff0d8"
-           underline="true">
+    <Label alignment="CENTER" layoutX="526.0" layoutY="46.0" text="SECURITY" textAlignment="CENTER" textFill="#dff0d8" underline="true">
         <font>
             <Font name="Kohinoor Telugu Bold" size="32.0" />
         </font>
     </Label>
-    <TabPane layoutX="14.0" layoutY="111.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-             minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="380.0" prefWidth="1180.0"
-             BorderPane.alignment="BOTTOM_LEFT">
+    <TabPane layoutX="14.0" layoutY="111.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="380.0" prefWidth="1180.0" BorderPane.alignment="BOTTOM_LEFT">
         <Tab closable="false" style="-fx-background-color: #DFF0D8; -fx-font-weight: bold;" text="2FA">
             <AnchorPane accessibleRole="TAB_PANE" minHeight="0.0" minWidth="0.0" prefHeight="303.0" prefWidth="286.0">
                 <HBox layoutX="14.0" layoutY="14.0" prefHeight="100.0" prefWidth="469.0">
@@ -30,35 +24,96 @@
                                 <Font name="System Bold" size="20.0" />
                             </font>
                         </Text>
-                        <Text fill="#e1f0da" strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="Verify your account with Google Authenticator or any other authenticator app."
-                              wrappingWidth="375.5521545410156" VBox.vgrow="ALWAYS" />
+                        <Text fill="#e1f0da" strokeType="OUTSIDE" strokeWidth="0.0" text="Verify your account with Google Authenticator or any other authenticator app." wrappingWidth="375.5521545410156" VBox.vgrow="ALWAYS" />
                     </VBox>
                     <VBox alignment="CENTER" prefHeight="100.0" prefWidth="90.0">
-                        <Button fx:id="mfaEnableButton" mnemonicParsing="false" onMouseClicked="#onMfaButtonClick"
-                                style="-fx-background-color: #DFF0D8;" text="Enable 2FA">
+                        <Button fx:id="mfaEnableButton" mnemonicParsing="false" onMouseClicked="#onMfaButtonClick" style="-fx-background-color: #DFF0D8;" text="Enable 2FA">
                             <font>
                                 <Font name="System Bold" size="13.0" />
-                            </font>
-                        </Button>
+                            </font></Button>
                     </VBox>
                 </HBox>
             </AnchorPane>
         </Tab>
-        <Tab fx:id="accountDetailsTab" closable="false" style="-fx-background-color: #DFF0D8; -fx-font-weight: Bold;"
-             text="Account Details">
+        <Tab fx:id="accountDetailsTab" closable="false" style="-fx-background-color: #DFF0D8; -fx-font-weight: Bold;" text="Account Details">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="408.0" prefWidth="1180.0">
                 <children>
-                    <VBox layoutX="349.0" layoutY="83.0" prefHeight="190.0" prefWidth="505.0" />
-                    <Button fx:id="viewDetailsButton" layoutX="449.0" layoutY="149.0" mnemonicParsing="false"
-                            onMouseClicked="#onAccountDetailsClick" prefHeight="48.0" prefWidth="312.0"
-                            style="-fx-background-color: #DFF0D8;" text="Click to View Account Information">
+                    <VBox fx:id="containsDetailsButton" layoutX="16.0" layoutY="16.0" prefHeight="322.0" prefWidth="1145.0">
+                  <children>
+                     <Label fx:id="personalInfo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="214.0" text="Personal Account Information" textAlignment="CENTER" textFill="#dff0d8" underline="true" visible="false">
+                        <font>
+                           <Font name="Kohinoor Bangla Semibold" size="14.0" />
+                        </font>
+                        <opaqueInsets>
+                           <Insets left="15.0" />
+                        </opaqueInsets>
+                        <VBox.margin>
+                           <Insets left="30.0" />
+                        </VBox.margin>
+                     </Label>
+                     <Label fx:id="accountNumber" text="Account Number: 102938475661" textFill="#dff0d8" visible="false">
+                        <font>
+                           <Font name="Kohinoor Bangla" size="12.0" />
+                        </font>
+                        <VBox.margin>
+                           <Insets left="10.0" />
+                        </VBox.margin>
+                     </Label>
+                     <Label fx:id="routingNumber" text="Routing Number: 002918374" textFill="#dff0d8" visible="false">
+                        <font>
+                           <Font name="Kohinoor Bangla" size="12.0" />
+                        </font>
+                        <VBox.margin>
+                           <Insets left="10.0" top="20.0" />
+                        </VBox.margin>
+                     </Label>
+                     <Label fx:id="accountType" text="Account Type: CHECKING" textFill="#dff0d8" visible="false">
+                        <font>
+                           <Font name="Kohinoor Bangla" size="12.0" />
+                        </font>
+                        <padding>
+                           <Insets left="10.0" top="20.0" />
+                        </padding>
+                     </Label>
+                     <Label fx:id="debitNumber" text="Debit Card Number: 0908-2131-4657-7902" textFill="#dff0d8" visible="false">
+                        <font>
+                           <Font name="Kohinoor Bangla" size="12.0" />
+                        </font>
+                        <VBox.margin>
+                           <Insets left="10.0" top="20.0" />
+                        </VBox.margin>
+                     </Label>
+                     <Label fx:id="pinNumber" text="PIN: 0991" textFill="#dff0d8" visible="false">
+                        <font>
+                           <Font name="Kohinoor Bangla" size="12.0" />
+                        </font>
+                        <VBox.margin>
+                           <Insets left="10.0" top="5.0" />
+                        </VBox.margin>
+                     </Label>
+                     <Label fx:id="lastLogin" text="Last Login: 2 hours ago" textFill="#dff0d8" visible="false">
+                        <font>
+                           <Font name="Kohinoor Bangla" size="11.0" />
+                        </font>
+                        <VBox.margin>
+                           <Insets left="1000.0" top="30.0" />
+                        </VBox.margin>
+                     </Label>
+                     <Label fx:id="changePass" text="Change Password: in 27 days" textFill="#dff0d8" visible="false">
+                        <font>
+                           <Font name="Kohinoor Bangla" size="11.0" />
+                        </font>
+                        <VBox.margin>
+                           <Insets left="1000.0" top="10.0" />
+                        </VBox.margin>
+                     </Label>
+                  </children></VBox>
+                    <Button fx:id="viewDetailsButton" layoutX="449.0" layoutY="149.0" mnemonicParsing="false" onMouseClicked="#onAccountInfoButtonClick" prefHeight="48.0" prefWidth="312.0" style="-fx-background-color: #DFF0D8;" text="Click to View Account Information" visible="true">
                         <font>
                             <Font name="Kohinoor Bangla Bold" size="16.0" />
                         </font>
                     </Button>
-                </children>
-            </AnchorPane>
+                </children></AnchorPane>
         </Tab>
         <opaqueInsets>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
