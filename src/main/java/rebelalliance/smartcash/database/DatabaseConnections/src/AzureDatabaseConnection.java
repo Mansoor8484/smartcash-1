@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.Random;
 import rebelalliance.smartcash.database.User;
 import rebelalliance.smartcash.ledger.container.Account;
+import rebelalliance.smartcash.database.HashSalt;
 
 public class AzureDatabaseConnection{
      public static void main(String[] args){
@@ -34,7 +35,7 @@ public class AzureDatabaseConnection{
         String sql2 = "INSERT INTO UserDetails (UserID, Email) VALUES (?,?)";
         //Connection URL to the Azure SQL Database
         String url = String.format("jdbc:sqlserver://smartcash.database.windows.net:1433;database=SmartCash;user=SmartCash@smartcash;password=Winter2024@!;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;");
-
+        HashSalt Hash = new HashSalt();
         //Generates a new UserID
         try (Connection conn = DriverManager.getConnection(url)){
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -45,7 +46,7 @@ public class AzureDatabaseConnection{
             preparedStatement.setString(3, user);
 
             //would the hash function go here? since this is where the password would be? 
-            preparedStatement.setString(4, pass);
+            preparedStatement.setString(4, Hash.hashPassword(pass));
 
             //userDetails table input
             //Most likely have to add the username/email as well
@@ -278,7 +279,5 @@ public class AzureDatabaseConnection{
         Random random = new Random();       
         AccountNumber = random.nextInt(maxAccountNumber - minAccountNumber) + minAccountNumber;
         return AccountNumber;
-    }
-    
-    
+    }    
 }
