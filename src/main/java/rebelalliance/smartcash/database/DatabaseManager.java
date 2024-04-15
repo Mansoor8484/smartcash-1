@@ -17,6 +17,10 @@ public class DatabaseManager {
         this.registeredUsers.put(email, new User(email, password, mfaSecret));
     }
 
+    public void enableMfa(User user, String mfaSecret) {
+        user.mfaSecret = mfaSecret;
+    }
+
     public void disableMfa(User user) {
         user.mfaSecret = null;
     }

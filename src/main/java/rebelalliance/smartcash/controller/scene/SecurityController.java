@@ -131,6 +131,10 @@ public class SecurityController extends BaseController implements IController {
 
                     // TODO: Store secret in database.
                     // TODO: Update UI to reflect that MFA is enabled.
+
+                    this.databaseManager.enableMfa(loggedInUser, secret);
+                    popup.close();
+                    this.update();
                 });
                 root.getChildren().addAll(
                         title,
